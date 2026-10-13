@@ -33,6 +33,10 @@ export type Project = {
   approach: string[];
   result: string[];
   links?: { label: string; href: string }[];
+  // 사진: public/projects/ 폴더에 넣고 '/projects/파일명.png' 처럼 적습니다.
+  images?: { src: string; caption?: string }[];
+  // 영상: YouTube 주소를 그대로 붙여넣습니다.
+  video?: string;
 };
 
 export const projects: Project[] = [
@@ -56,6 +60,10 @@ export const projects: Project[] = [
       '총 90,170개 명령 PASS, Functional Coverage 99.56% (미달 조합 3개를 찾아 보강 계획 수립)',
       'Basys3 FPGA에서 ILA로 APB 트랜잭션을 관찰하며 스위치 → LED/FND 출력 동작 확인',
     ],
+    images: [
+      { src: '/projects/rv32i-apb-block.png', caption: 'RV32I CPU + APB 버스 · 주변장치 블록 다이어그램' },
+      { src: '/projects/rv32i-uvm-result.png', caption: 'UVM 결과: 90,170개 명령 PASS, Coverage 99.56%' },
+    ],
   },
   {
     title: 'FIFO UVM 테스트벤치',
@@ -71,9 +79,11 @@ export const projects: Project[] = [
       'full/empty 상태가 설계 의도대로 동작하는지 coverage로 확인',
     ],
     result: [
-      '10,000회 랜덤 트랜잭션 자동 검사 통과',
+      'Scoreboard 비교 5,355건 중 불일치 0건',
+      'push · pop · full · empty 및 교차(cross) 커버리지 포함 Functional Coverage 100%',
       '다른 테스트벤치에서도 재사용 가능한 컴포넌트 구조 확보',
     ],
+    images: [{ src: '/projects/fifo-uvm-result.png', caption: 'Coverage 100% · Scoreboard 불일치 0건' }],
   },
   {
     title: 'UART 기반 센서 통신 시스템 (DHT11 · SR04)',
@@ -95,6 +105,7 @@ export const projects: Project[] = [
       '시뮬레이션의 이상 상태 천이를 echo 하강과 clk 상승이 겹치는 race condition으로 진단해 테스트벤치 수정',
       '비동기 입력에 synchronizer가 왜 필요한지 실제로 체감',
     ],
+    images: [{ src: '/projects/sensor-block.png', caption: 'UART · 센서 · Stopwatch 통합 블록 다이어그램' }],
   },
   {
     title: 'UART 제어 Stopwatch / Watch',
@@ -112,7 +123,7 @@ export const projects: Project[] = [
       '12개 시나리오 시뮬레이션 및 보드 동작 확인',
       'UART 제어 대상은 토글 방식보다 명시적 상태 명령이 낫다는 설계 교훈 정리',
     ],
-    links: [{ label: '동작 영상', href: 'https://youtu.be/lRf44Yrbjak' }],
+    video: 'https://youtu.be/lRf44Yrbjak',
   },
 ];
 

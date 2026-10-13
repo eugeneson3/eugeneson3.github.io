@@ -1,22 +1,35 @@
 # Portfolio
 
-Astro 기반 정적 포트폴리오 사이트입니다.
+Astro 기반 정적 포트폴리오 사이트입니다. → https://eugeneson3.github.io
 
 ## 내용 수정
 
-`src/data/profile.ts` 파일 하나만 고치면 이름, 소개, 기술 스택, 프로젝트, 경력, 연락처가 모두 바뀝니다.
-이력서 PDF는 `public/resume.pdf`에 넣으세요.
+`src/data/profile.ts` 파일 하나만 고치면 이름, 소개, 기술 스택, 프로젝트, 과제, 경력, 연락처가 모두 바뀝니다.
 
-## 로컬 실행
+### 사진 넣기
+1. 이미지 파일을 `public/projects/` 폴더에 넣습니다. (예: `public/projects/fifo-wave.png`)
+2. `profile.ts`의 해당 프로젝트에 추가합니다.
+   ```ts
+   images: [{ src: '/projects/fifo-wave.png', caption: 'FIFO 파형' }],
+   ```
 
-```bash
-npm install
-npm run dev
+### 동영상 넣기
+YouTube에 올린 뒤(일부 공개 가능) 주소를 붙여넣습니다. 영상 파일을 레포에 직접 넣지 마세요.
+```ts
+video: 'https://youtu.be/영상ID',
 ```
 
-## GitHub Pages 배포
+## 반영(배포)
+```bash
+git add -A
+git commit -m "내용 수정"
+git push
+```
+push 후 1~2분 뒤 사이트에 자동 반영됩니다.
 
-1. GitHub에 `<your-id>.github.io` 이름으로 레포를 만들고 push 합니다.
-2. 레포 **Settings → Pages → Source** 를 **GitHub Actions** 로 바꿉니다.
-3. `astro.config.mjs` 의 `site` 를 본인 주소로 바꿉니다.
-4. `main` 브랜치에 push 하면 `.github/workflows/deploy.yml` 이 자동으로 배포합니다.
+GitHub 웹사이트에서 `src/data/profile.ts` → 연필 아이콘으로 직접 고치고 Commit해도 똑같이 반영됩니다.
+
+## 로컬 미리보기
+```bash
+npm run dev
+```

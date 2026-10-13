@@ -6,6 +6,9 @@ interface Props {
   project: Project;
 }
 const { project: p } = Astro.props;
+
+// youtu.be/ID, youtube.com/watch?v=ID, youtube.com/shorts/ID 형식을 모두 지원
+const videoId = p.video?.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)?.[1];
 ---
 
 <details class="project" name="project">
@@ -35,6 +38,33 @@ const { project: p } = Astro.props;
     <ul>{p.approach.map((a) => <li>{a}</li>)}</ul>
     <h4>결과</h4>
     <ul>{p.result.map((r) => <li>{r}</li>)}</ul>
+    {
+      videoId && (
+        <div class="video">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+            title={`${p.title} 동작 영상`}
+            loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      )
+    }
+    {
+      p.images && p.images.length > 0 && (
+        <div class="gallery">
+          {p.images.map((img) => (
+            <figure>
+              <a href={img.src} target="_blank">
+                <img src={img.src} alt={img.caption ?? p.title} loading="lazy" />
+              </a>
+              {img.caption && <figcaption>{img.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )
+    }
     {
       p.links && p.links.length > 0 && (
         <div class="links">
@@ -91,6 +121,39 @@ const { project: p } = Astro.props;
   }
   ul {
     padding-left: 1.2em;
+  }
+  .video {
+    margin-top: 16px;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+  }
+  .video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  figure {
+    margin: 0;
+  }
+  figure img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: block;
+    background: #fff;
+  }
+  figcaption {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 4px;
   }
   .links {
     display: flex;
