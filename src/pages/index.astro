@@ -280,3 +280,21 @@ import { profile, skills, projects, coursework, experience, certs } from '../dat
     border-top: 1px solid var(--border);
   }
 </style>
+
+<script>
+  // name 그룹은 한 번에 하나만 열린다. 위쪽 카드가 접히면서 줄어든 높이만큼
+  // 방금 연 카드가 화면 위로 밀려나므로, 접힘 애니메이션이 끝난 뒤 카드 상단으로 다시 맞춘다.
+  const COLLAPSE_MS = 300; // global.css의 ::details-content block-size transition 시간과 맞춤
+  const HEADER_OFFSET = 72; // html의 scroll-padding-top과 맞춤
+
+  document.querySelectorAll<HTMLDetailsElement>('details[name="project"]').forEach((d) => {
+    d.addEventListener('toggle', () => {
+      if (!d.open) return;
+      setTimeout(() => {
+        if (d.getBoundingClientRect().top < HEADER_OFFSET) {
+          d.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+      }, COLLAPSE_MS + 20);
+    });
+  });
+</script>
