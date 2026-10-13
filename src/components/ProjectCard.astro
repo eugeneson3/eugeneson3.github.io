@@ -13,7 +13,7 @@ const { project: p } = Astro.props;
     <div>
       <div class="head">
         <h3>{p.title}</h3>
-        <span class="period">{p.period}</span>
+        <span class="period">{p.period} · {p.team}</span>
       </div>
       <p class="summary">{p.summary}</p>
       <div class="tags">{p.stack.map((s) => <span class="tag">{s}</span>)}</div>
@@ -21,6 +21,14 @@ const { project: p } = Astro.props;
     <Chevron />
   </summary>
   <div class="details-body">
+    {
+      p.role && (
+        <>
+          <h4>내 역할</h4>
+          <p>{p.role}</p>
+        </>
+      )
+    }
     <h4>문제</h4>
     <p>{p.problem}</p>
     <h4>접근</h4>
