@@ -1,0 +1,93 @@
+---
+import type { Project } from '../data/profile';
+import Chevron from './Chevron.astro';
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+---
+
+<details class="project" name="project">
+  <summary>
+    <div>
+      <div class="head">
+        <h3>{p.title}</h3>
+        <span class="period">{p.period}</span>
+      </div>
+      <p class="summary">{p.summary}</p>
+      <div class="tags">{p.stack.map((s) => <span class="tag">{s}</span>)}</div>
+    </div>
+    <Chevron />
+  </summary>
+  <div class="details-body">
+    <h4>문제</h4>
+    <p>{p.problem}</p>
+    <h4>접근</h4>
+    <ul>{p.approach.map((a) => <li>{a}</li>)}</ul>
+    <h4>결과</h4>
+    <ul>{p.result.map((r) => <li>{r}</li>)}</ul>
+    {
+      p.links && p.links.length > 0 && (
+        <div class="links">
+          {p.links.map((l) => (
+            <a href={l.href} target="_blank" rel="noopener noreferrer">
+              {l.label} ↗
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</details>
+
+<style>
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .period {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .summary {
+    margin: 4px 0 10px;
+    color: var(--muted);
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  h4 {
+    margin: 16px 0 4px;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+  .details-body {
+    border-top: 1px dashed var(--border);
+    padding-top: 4px;
+    margin: 0 20px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  p,
+  ul {
+    margin: 0;
+  }
+  ul {
+    padding-left: 1.2em;
+  }
+  .links {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    font-weight: 600;
+  }
+</style>
