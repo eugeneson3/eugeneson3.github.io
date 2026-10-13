@@ -288,7 +288,19 @@ import { profile, skills, projects, coursework, experience, certs } from '../dat
   const HEADER_OFFSET = 72; // html의 scroll-padding-top과 맞춤
 
   document.querySelectorAll<HTMLDetailsElement>('details[name="project"]').forEach((d) => {
+    const iframe = d.querySelector<HTMLIFrameElement>('.video iframe');
+
     d.addEventListener('toggle', () => {
+      // 접히면 iframe을 비워서 유튜브 재생(소리 포함)을 멈추고, 다시 펼치면 원래 주소로 복원
+      if (iframe) {
+        if (!d.open) {
+          iframe.dataset.src ??= iframe.src;
+          iframe.src = 'about:blank';
+        } else if (iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+        }
+      }
+
       if (!d.open) return;
       setTimeout(() => {
         if (d.getBoundingClientRect().top < HEADER_OFFSET) {
