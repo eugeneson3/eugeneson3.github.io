@@ -449,5 +449,16 @@
     "path": "Sources/exercises/adder_verilog",
     "slide": "https://docs.google.com/presentation/d/1bAKGHaU1DfLlr_M73gfxUy4EVTilmHWkN4SpVBTLLFw/edit",
     "evidence": "발표 자료 및 제출 기록"
+  },
+  {
+    "id": "mlp-cnn",
+    "title": "MLP·CNN 분류 모델 실습",
+    "date": "2026.09",
+    "category": "임베디드",
+    "summary": "Keras를 사용한 분류 모델 실습 기록입니다.",
+    "repo": "embedded-coursework",
+    "path": "",
+    "slide": "",
+    "evidence": "기존 포트폴리오 기재 내용"
   }
 ]
