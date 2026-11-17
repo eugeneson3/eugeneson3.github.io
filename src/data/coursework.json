@@ -5,10 +5,11 @@
     "date": "2026.11.11",
     "category": "임베디드",
     "summary": "DC 모터의 방향과 PWM 듀티 제어를 구성하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261111_DC_Motor_Controller",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261111_DC_Motor_Controller",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261111_DC_Motor_Controller.md"
   },
   {
     "id": "20261111_RTOS_DC_Motor",
@@ -16,10 +17,11 @@
     "date": "2026.11.11",
     "category": "임베디드",
     "summary": "모터 제어를 RTOS 작업 구조에 연결하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261111_RTOS_DC_Motor",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261111_RTOS_DC_Motor",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261111_RTOS_DC_Motor.md"
   },
   {
     "id": "20261110_RTOS_Test",
@@ -27,10 +29,11 @@
     "date": "2026.11.10",
     "category": "임베디드",
     "summary": "RTOS Task 생성 및 주기 실행을 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261110_RTOS_Test",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261110_RTOS_Test",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261110_RTOS_Test.md"
   },
   {
     "id": "20261104_uart_protocol",
@@ -38,10 +41,11 @@
     "date": "2026.11.04",
     "category": "임베디드",
     "summary": "프레임 시작·길이·체크섬을 검사하는 수신 FSM을 구성하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261104_uart_protocol",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261104_uart_protocol",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261104_uart_protocol.md"
   },
   {
     "id": "20261103_ADC",
@@ -49,10 +53,11 @@
     "date": "2026.11.03",
     "category": "임베디드",
     "summary": "아날로그 입력 측정과 조이스틱 값 처리를 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261103_ADC",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261103_ADC",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261103_ADC.md"
   },
   {
     "id": "20261101_HW11",
@@ -60,10 +65,11 @@
     "date": "2026.11.02",
     "category": "임베디드",
     "summary": "Smart Watch 과제 이후의 통합 복습 소스를 정리하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261102_SmartWatch_HW_Review",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261102_SmartWatch_HW_Review",
     "slide": "",
-    "evidence": "Classroom 과제 기록 및 11월 2일 로컬 복습 소스"
+    "evidence": "Classroom 과제 기록 및 11월 2일 로컬 복습 소스",
+    "document": "coursework-sources/embedded/docs/20261101_HW11.md"
   },
   {
     "id": "20261030_buzzer",
@@ -71,10 +77,11 @@
     "date": "2026.10.30",
     "category": "임베디드",
     "summary": "PWM을 사용한 부저 출력 및 주기 제어를 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261030_buzzer",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261030_buzzer",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261030_buzzer.md"
   },
   {
     "id": "20261029_SR04_3",
@@ -82,10 +89,11 @@
     "date": "2026.10.29",
     "category": "임베디드",
     "summary": "복수 센서의 거리 측정 경로를 구성하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261029_SR04_3",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261029_SR04_3",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261029_SR04_3.md"
   },
   {
     "id": "20261028_DHT11_SR04",
@@ -93,10 +101,11 @@
     "date": "2026.10.28",
     "category": "임베디드",
     "summary": "온습도 및 초음파 거리 측정 모듈을 연결하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261028_DHT11_SR04",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261028_DHT11_SR04",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261028_DHT11_SR04.md"
   },
   {
     "id": "20261027_dht11",
@@ -104,10 +113,11 @@
     "date": "2026.10.27",
     "category": "임베디드",
     "summary": "온습도 센서 통신과 측정 데이터 처리를 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261027_dht11",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261027_dht11",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261027_dht11.md"
   },
   {
     "id": "20261023_StepMotor",
@@ -115,10 +125,11 @@
     "date": "2026.10.23",
     "category": "임베디드",
     "summary": "모터 구동 순서와 방향 제어를 구성하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261023_StepMotor",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261023_StepMotor",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261023_StepMotor.md"
   },
   {
     "id": "20261022_HW7_SOL",
@@ -126,10 +137,11 @@
     "date": "2026.10.22",
     "category": "임베디드",
     "summary": "RTC 시각 읽기와 LCD 표시를 연결하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261022_HW7_SOL",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261022_HW7_SOL",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261022_HW7_SOL.md"
   },
   {
     "id": "20261020_I2C_LCD",
@@ -137,10 +149,11 @@
     "date": "2026.10.20",
     "category": "임베디드",
     "summary": "I2C 기반 LCD 명령과 문자열 출력을 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261020_I2C_LCD",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261020_I2C_LCD",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261020_I2C_LCD.md"
   },
   {
     "id": "20261019_stopwatch",
@@ -148,10 +161,11 @@
     "date": "2026.10.19",
     "category": "임베디드",
     "summary": "스톱워치 Application과 표시 모듈을 통합하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261019_stopwatch",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261019_stopwatch",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261019_stopwatch.md"
   },
   {
     "id": "20261016_LED_Button",
@@ -159,10 +173,11 @@
     "date": "2026.10.16",
     "category": "임베디드",
     "summary": "버튼 상태와 LED 출력 동작을 연결하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261016_LED_Button",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261016_LED_Button",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261016_LED_Button.md"
   },
   {
     "id": "20261016_stopwatch_upcounter",
@@ -170,10 +185,11 @@
     "date": "2026.10.16",
     "category": "임베디드",
     "summary": "타이머 기반 시간 증가 및 표시를 구성하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261016_stopwatch_upcounter",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261016_stopwatch_upcounter",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261016_stopwatch_upcounter.md"
   },
   {
     "id": "20261015_bearmetal_GPIO",
@@ -181,10 +197,11 @@
     "date": "2026.10.15",
     "category": "임베디드",
     "summary": "GPIO 레지스터를 사용하는 입출력 제어를 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261015_bearmetal_GPIO",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261015_bearmetal_GPIO",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261015_bearmetal_GPIO.md"
   },
   {
     "id": "20261014_hw3",
@@ -192,10 +209,11 @@
     "date": "2026.10.14",
     "category": "임베디드",
     "summary": "Classroom 과제 3의 제출 기록과 대응하는 CubeIDE 소스를 수록하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261014_hw3",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261014_hw3",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261014_hw3.md"
   },
   {
     "id": "20261013_fnd",
@@ -203,10 +221,11 @@
     "date": "2026.10.13",
     "category": "임베디드",
     "summary": "숫자 표시와 자리 선택을 위한 GPIO 출력을 구성하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261013_fnd",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261013_fnd",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261013_fnd.md"
   },
   {
     "id": "20261012_hw_sol",
@@ -214,10 +233,11 @@
     "date": "2026.10.12",
     "category": "임베디드",
     "summary": "GPIO 초기화 및 LED 출력 제어를 실습하였습니다.",
-    "repo": "embedded-coursework",
-    "path": "20261012_hw_sol",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/embedded/20261012_hw_sol",
     "slide": "",
-    "evidence": "Classroom 제출 목록 및 로컬 실습 소스"
+    "evidence": "Classroom 제출 목록 및 로컬 실습 소스",
+    "document": "coursework-sources/embedded/docs/20261012_hw_sol.md"
   },
   {
     "id": "rv32-b",
@@ -225,10 +245,11 @@
     "date": "2026.09.08",
     "category": "디지털 설계·검증",
     "summary": "분기 조건과 PC 제어를 확장한 RTL 실습 소스입니다.",
-    "repo": "digital-design-coursework",
-    "path": "labs/2026_09_08_rv32i_btype",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/labs/2026_09_08_rv32i_btype",
     "slide": "",
-    "evidence": "로컬 실습 소스"
+    "evidence": "로컬 실습 소스",
+    "document": "coursework-sources/digital-design/docs/rv32-b.md"
   },
   {
     "id": "rv32-r",
@@ -236,10 +257,11 @@
     "date": "2026.09.04",
     "category": "디지털 설계·검증",
     "summary": "opcode·funct3·funct7 인코딩과 산술·논리·시프트 연산을 분석하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "labs/2026_09_04_HW15_rv32i",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/labs/2026_09_04_HW15_rv32i",
     "slide": "https://docs.google.com/presentation/d/1HRg9oGjBngW4CcCfcrVCskclYNxah9EPKzK9Mqwhv4w/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/rv32-r.md"
   },
   {
     "id": "rv32-rs",
@@ -247,10 +269,11 @@
     "date": "2026.09.04",
     "category": "디지털 설계·검증",
     "summary": "레지스터 연산과 SB·SH·SW 저장 결과를 파형으로 비교하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "labs/2026_09_04_HW15_rv32i",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/labs/2026_09_04_HW15_rv32i",
     "slide": "https://docs.google.com/presentation/d/1Uehk6H6V7_pmtInKLA9azaw-cTlteKF7E3I83zeCZhk/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/rv32-rs.md"
   },
   {
     "id": "rv32-i",
@@ -258,10 +281,11 @@
     "date": "2026.09.04",
     "category": "디지털 설계·검증",
     "summary": "즉시값을 사용하는 명령어의 RTL 및 시뮬레이션 소스입니다.",
-    "repo": "digital-design-coursework",
-    "path": "labs/2026_09_04_I_type_instruction",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/labs/2026_09_04_I_type_instruction",
     "slide": "",
-    "evidence": "로컬 실습 소스"
+    "evidence": "로컬 실습 소스",
+    "document": "coursework-sources/digital-design/docs/rv32-i.md"
   },
   {
     "id": "rtl-generic-cpu",
@@ -269,10 +293,11 @@
     "date": "2026.09.02",
     "category": "디지털 설계·검증",
     "summary": "Register File, Datapath 및 FSM으로 1부터 10까지 합산하는 실행 순서를 확인하였습니다.",
-    "repo": "digital-design-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "https://docs.google.com/presentation/d/1l9av2UAAUwp8nRe1qK7q6bJ-J-5YNy2cpYrukZqX2YE/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/rtl-generic-cpu.md"
   },
   {
     "id": "rtl-sum",
@@ -280,10 +305,11 @@
     "date": "2026.09.01",
     "category": "디지털 설계·검증",
     "summary": "카운터·Accumulator·ALU와 제어 FSM으로 누적합 동작을 분석하였습니다.",
-    "repo": "digital-design-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "https://docs.google.com/presentation/d/11choKJdP9fjWMInkkzri0KfUaBDyMNYfFM8a1KuacjQ/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/rtl-sum.md"
   },
   {
     "id": "uvm-counter",
@@ -291,10 +317,11 @@
     "date": "2026.08.28",
     "category": "디지털 설계·검증",
     "summary": "Counter RTL과 UVM 테스트벤치를 구성하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "labs/2026_08_28_counter_uvm",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/labs/2026_08_28_counter_uvm",
     "slide": "",
-    "evidence": "로컬 실습 소스"
+    "evidence": "로컬 실습 소스",
+    "document": "coursework-sources/digital-design/docs/uvm-counter.md"
   },
   {
     "id": "uvm-adder",
@@ -302,10 +329,11 @@
     "date": "2026.08.24",
     "category": "디지털 설계·검증",
     "summary": "Adder를 대상으로 UVM 검증 컴포넌트 구성을 실습하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "labs/2026_08_24_adder_UVM",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/labs/2026_08_24_adder_UVM",
     "slide": "",
-    "evidence": "로컬 실습 소스"
+    "evidence": "로컬 실습 소스",
+    "document": "coursework-sources/digital-design/docs/uvm-adder.md"
   },
   {
     "id": "sv-timing",
@@ -313,10 +341,11 @@
     "date": "2026.08.19",
     "category": "디지털 설계·검증",
     "summary": "posedge 이후 구동과 negedge 관측을 분리한 실습입니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/exercises/register_systemverilog",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/exercises/register_systemverilog",
     "slide": "https://docs.google.com/presentation/d/1O1oYmMEL3grRXKZefqK92nDjAoo4LT-uDgjG-nAj5WQ/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/sv-timing.md"
   },
   {
     "id": "sv-fork",
@@ -324,10 +353,11 @@
     "date": "2026.08.19",
     "category": "디지털 설계·검증",
     "summary": "join·join_any·join_none 및 중첩 fork의 실행 순서를 비교하였습니다.",
-    "repo": "digital-design-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "https://docs.google.com/presentation/d/1pIpjU2zKyrzYLA0tVMOt7bzAZaZTCJzaes09yv3V-U4/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/sv-fork.md"
   },
   {
     "id": "hdl-loopback",
@@ -335,10 +365,11 @@
     "date": "2026.08.11",
     "category": "디지털 설계·검증",
     "summary": "수신 FIFO와 송신 경로를 연결하고 데이터 반환을 확인하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/projects/uart_fifo_loopback",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/projects/uart_fifo_loopback",
     "slide": "https://docs.google.com/presentation/d/1xxEU1rD8X518GMzmarOjzdL1EhnnRCzv72B9eHILSng/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-loopback.md"
   },
   {
     "id": "hdl-fifo",
@@ -346,10 +377,11 @@
     "date": "2026.08.10",
     "category": "디지털 설계·검증",
     "summary": "읽기·쓰기 포인터, full·empty 및 동시 push/pop 동작을 분석하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/projects/fifo_basic",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/projects/fifo_basic",
     "slide": "https://docs.google.com/presentation/d/15fOxIIAfu7EROMsgasx2QrwnrjOOXiSpwqIq54WtPKc/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-fifo.md"
   },
   {
     "id": "hdl-uart",
@@ -357,10 +389,11 @@
     "date": "2026.08.07",
     "category": "디지털 설계·검증",
     "summary": "9600 baud 송신 FSM과 터미널 출력을 확인하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/projects/uart_basic",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/projects/uart_basic",
     "slide": "https://docs.google.com/presentation/d/1zZsJuh9XAfUmAZr4tK9dH-tBBneYvSbhVpacGQFmuSE/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-uart.md"
   },
   {
     "id": "hdl-detector",
@@ -368,10 +401,11 @@
     "date": "2026.07.28",
     "category": "디지털 설계·검증",
     "summary": "Mealy FSM으로 입력 패턴을 검출하고 예외 입력에 대한 상태 전이를 분석하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/exercises/detector_0101",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/exercises/detector_0101",
     "slide": "https://docs.google.com/presentation/d/1ha32h2T8RQyNoOaaZXhZ20s2WtGwKk5zZA2S_FT2ILY/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-detector.md"
   },
   {
     "id": "hdl-debounce",
@@ -379,10 +413,11 @@
     "date": "2026.07.28",
     "category": "디지털 설계·검증",
     "summary": "배열 기반 버튼 필터와 단일 Tick 출력 파형을 확인하였습니다.",
-    "repo": "digital-design-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "https://docs.google.com/presentation/d/1sI7AcXeZ5OUOrovFjCvZ1l8t34uOuKt1fRxd3rOW87E/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-debounce.md"
   },
   {
     "id": "hdl-counter-control",
@@ -390,10 +425,11 @@
     "date": "2026.07.25",
     "category": "디지털 설계·검증",
     "summary": "Run·Clear 입력 우선순위와 상태에 따른 카운터 동작을 확인하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/projects/stopwatch_only",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/projects/stopwatch_only",
     "slide": "https://docs.google.com/presentation/d/1qM6Ll5xvg8XLhCLKRiAu3riaKTvsNC63suFrjsEvHEY/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-counter-control.md"
   },
   {
     "id": "hdl-fsm",
@@ -401,10 +437,11 @@
     "date": "2026.07.23",
     "category": "디지털 설계·검증",
     "summary": "상태 레지스터, 다음 상태 및 LED 출력 로직을 분리하여 상태 전이를 확인하였습니다.",
-    "repo": "digital-design-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "https://docs.google.com/presentation/d/1LYwBujb5UzGKALApSx8TjF6FpSISLIy-sYJlWgME5wE/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-fsm.md"
   },
   {
     "id": "hdl-counter",
@@ -412,10 +449,11 @@
     "date": "2026.07.22",
     "category": "디지털 설계·검증",
     "summary": "Tick generator와 카운터를 연결하고 정지·감소·초기화 동작을 확인하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/exercises/counter_10000",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/exercises/counter_10000",
     "slide": "https://docs.google.com/presentation/d/1zpa6TUsBzYTv1AnzwBeYv8tCf3RPLJpVoSQR6jgNLgc/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-counter.md"
   },
   {
     "id": "hdl-adder-fnd",
@@ -423,10 +461,11 @@
     "date": "2026.07.21",
     "category": "디지털 설계·검증",
     "summary": "합산 결과의 자리 분리, MUX 및 7-segment 디코더를 구성하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/exercises/adder_fnd_v1",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/exercises/adder_fnd_v1",
     "slide": "https://docs.google.com/presentation/d/1C99JWi4JhAXoHVjUp9-rP2rmb72q3mwuHexBhd2QvNo/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-adder-fnd.md"
   },
   {
     "id": "hdl-clock",
@@ -434,10 +473,11 @@
     "date": "2026.07.21",
     "category": "디지털 설계·검증",
     "summary": "2·4·6·12분주 및 Duty cycle 변경 파형을 분석하였습니다.",
-    "repo": "digital-design-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "https://docs.google.com/presentation/d/1AE4FHQjnKbjxw_CHoLZAStUH2DlqiMy1NHfiIjrOBZ8/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-clock.md"
   },
   {
     "id": "hdl-adder",
@@ -445,10 +485,11 @@
     "date": "2026.07.16",
     "category": "디지털 설계·검증",
     "summary": "Full Adder의 Carry 연결, 시뮬레이션 및 Basys3 출력을 확인하였습니다.",
-    "repo": "digital-design-coursework",
-    "path": "Sources/exercises/adder_verilog",
+    "repo": "eugeneson3.github.io",
+    "path": "coursework-sources/digital-design/Sources/exercises/adder_verilog",
     "slide": "https://docs.google.com/presentation/d/1bAKGHaU1DfLlr_M73gfxUy4EVTilmHWkN4SpVBTLLFw/edit",
-    "evidence": "발표 자료 및 제출 기록"
+    "evidence": "발표 자료 및 제출 기록",
+    "document": "coursework-sources/digital-design/docs/hdl-adder.md"
   },
   {
     "id": "mlp-cnn",
@@ -456,9 +497,10 @@
     "date": "2026.09",
     "category": "임베디드",
     "summary": "Keras를 사용한 분류 모델 실습 기록입니다.",
-    "repo": "embedded-coursework",
+    "repo": "eugeneson3.github.io",
     "path": "",
     "slide": "",
-    "evidence": "기존 포트폴리오 기재 내용"
+    "evidence": "기존 포트폴리오 기재 내용",
+    "document": "coursework-sources/embedded/docs/mlp-cnn.md"
   }
 ]

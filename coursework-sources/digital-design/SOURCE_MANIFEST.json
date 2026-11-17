@@ -1,0 +1,1050 @@
+{
+  "snapshot_date": "2026-11-18",
+  "files": [
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/ascii_decoder.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/ascii_decoder.v",
+      "sha256": "8b302a11ed6906f2d7a7942a61280b6e4675edce3248356779ee8d5d78fdde16"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/btn_debounce.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/btn_debounce.v",
+      "sha256": "49fc9f16d5167a1107a26b7f57884b4c7d52c4c2eca182ecb00431e55e62393a"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/constraint_TeamPJ.xdc",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/constraint_TeamPJ.xdc",
+      "sha256": "66fdc077fe47efa266f860e283a560dffbd279cc2b5040a02705c027349bca79"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/control_unit.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/control_unit.v",
+      "sha256": "7b109009a0087253e6bfe4381494ad9c6ef94792fc5bf4063c1695b443791bc7"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/demux_1x2.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/demux_1x2.v",
+      "sha256": "abbe8cef88e5a9d61d73d0f8232edebd2b0796e9de106da0cf86e5bf5a4c53ad"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/dht11.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/dht11.v",
+      "sha256": "686a83c631d675f5d836ad7045b9999dc355fbf4dd9e0a8c36b83c3f81812fe5"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/fnd_controller.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/fnd_controller.v",
+      "sha256": "ccd09ae15183c19d69e913c196ddd485ede9899e959dd8dd342c7fa49bc6ade2"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/sr04_controller.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/sr04_controller.v",
+      "sha256": "b985a85825691924a516a83ecaf5a3c7bb7063d088311ebc7f5216c1daebb9da"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/stopwatch.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/stopwatch.v",
+      "sha256": "b5b7eec16fa2d4416fb8c43e836720cb9358218845dd48ed4918c44c91dce94a"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/top_watch_stopwatch.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/top_watch_stopwatch.v",
+      "sha256": "ffc74ab98be1f21087bf666cc21b1437619023862714ed469a168b775d1f214d"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/uart.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/uart.v",
+      "sha256": "a55c4dc63b73a2c6bdd36a91e52dc29185b55eb67126c8c7df3ff51da3c7b39b"
+    },
+    {
+      "path": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/watch.v",
+      "source": "Sources/2026_08_16 TEAMPJ2_김민석_손승원/watch.v",
+      "sha256": "eb142efb01ad88394e0c865bf0d91feef39d584390955111aabf558f3a369ebb"
+    },
+    {
+      "path": "Sources/apb_ram.sv",
+      "source": "Sources/apb_ram.sv",
+      "sha256": "4de4b7e44fd22d2da58fdf0d39e4daa44174f953ab4b9a44868eec8f6712cfb4"
+    },
+    {
+      "path": "Sources/apb_requester.sv",
+      "source": "Sources/apb_requester.sv",
+      "sha256": "02013027a4ef8a4b0bae7471588e1597ced01b7172ce2d20debaa2e3f8acf66b"
+    },
+    {
+      "path": "Sources/exercises/adder_fnd_v1/constraints/Basys-3-Master.xdc",
+      "source": "Sources/exercises/adder_fnd_v1/constraints/Basys-3-Master.xdc",
+      "sha256": "dfa27e45850edbc7b3747a9127e1d95df26a7497c7cdaac38c7626a52d6c93e0"
+    },
+    {
+      "path": "Sources/exercises/adder_fnd_v1/src/Adder.v",
+      "source": "Sources/exercises/adder_fnd_v1/src/Adder.v",
+      "sha256": "e919a58c9a2c2634dbc35d766d830cbd91215d3a91dbf8dc2cf67f5ad38f763f"
+    },
+    {
+      "path": "Sources/exercises/adder_fnd_v1/src/fnd_controller.v",
+      "source": "Sources/exercises/adder_fnd_v1/src/fnd_controller.v",
+      "sha256": "ee0cfde293d4a86af401b5e23fd36719fe6955f365f6c34d3290223d155fe930"
+    },
+    {
+      "path": "Sources/exercises/adder_fnd_v2/sim/tb_clkdiv.v",
+      "source": "Sources/exercises/adder_fnd_v2/sim/tb_clkdiv.v",
+      "sha256": "16e44dfae83a5cd8ba1d9a6f01c4128a0031c73aa4d12e8acf209f7ce7388b5f"
+    },
+    {
+      "path": "Sources/exercises/adder_fnd_v2/src/Adder.v",
+      "source": "Sources/exercises/adder_fnd_v2/src/Adder.v",
+      "sha256": "48eb38df37c788db01115acc1a507a5fe48a4288283d398dae3a1d506753407e"
+    },
+    {
+      "path": "Sources/exercises/adder_systemverilog/sim/tb_adder.sv",
+      "source": "Sources/exercises/adder_systemverilog/sim/tb_adder.sv",
+      "sha256": "12a8b8be161480058abbdfcb963df467bddecaa15e24d4ebce83d41d548d2694"
+    },
+    {
+      "path": "Sources/exercises/adder_systemverilog/src/adder.sv",
+      "source": "Sources/exercises/adder_systemverilog/src/adder.sv",
+      "sha256": "a68e365c4f1bc2607aa004aff48d37b9ebea4e50f241264a274e8b6f420b2394"
+    },
+    {
+      "path": "Sources/exercises/adder_verilog/constraints/Basys-3-Master.xdc",
+      "source": "Sources/exercises/adder_verilog/constraints/Basys-3-Master.xdc",
+      "sha256": "4bbb4eba3d2a87d9407e2eab40ea38997c24e359d0c3310c5eb9e7bd429841f6"
+    },
+    {
+      "path": "Sources/exercises/adder_verilog/sim/tb_adder.v",
+      "source": "Sources/exercises/adder_verilog/sim/tb_adder.v",
+      "sha256": "ac771c6dcacd82c4bb5b35f07670dec51c77bd332f80962ba632782fe5a3dbad"
+    },
+    {
+      "path": "Sources/exercises/adder_verilog/src/Adder.v",
+      "source": "Sources/exercises/adder_verilog/src/Adder.v",
+      "sha256": "23f06b80ac7b2305f35da949f37eea87e90d4c31666d950440f901ed24dc7d28"
+    },
+    {
+      "path": "Sources/exercises/counter_10000/sim/tb_10000_counter.v",
+      "source": "Sources/exercises/counter_10000/sim/tb_10000_counter.v",
+      "sha256": "30102eb47a60bacea91dc560e08675f14050481d97ddae7b4ab32ff6ac886c45"
+    },
+    {
+      "path": "Sources/exercises/counter_10000/src/counter_10000.v",
+      "source": "Sources/exercises/counter_10000/src/counter_10000.v",
+      "sha256": "746cb81fe141725fbc6a188332acd1f265169154e0c72c4a62afcb04d62b1e19"
+    },
+    {
+      "path": "Sources/exercises/detector_0101/sim/tb_detector_0101.v",
+      "source": "Sources/exercises/detector_0101/sim/tb_detector_0101.v",
+      "sha256": "0ecaa3ec287abd0a3543807390c0d3536e5a2a57786f8d73b224ef2f31f80757"
+    },
+    {
+      "path": "Sources/exercises/detector_0101/src/detector_0101.v",
+      "source": "Sources/exercises/detector_0101/src/detector_0101.v",
+      "sha256": "2113b4ab9235ebb71291342213f99fd4441820a2b53d929e2415976105f923c6"
+    },
+    {
+      "path": "Sources/exercises/gates/constraints/gates.xdc",
+      "source": "Sources/exercises/gates/constraints/gates.xdc",
+      "sha256": "7f2a89f890f5684b445a6a673e7808cafc3cce3d761fb9c94c1557af988c895f"
+    },
+    {
+      "path": "Sources/exercises/gates/sim/tb_gates.v",
+      "source": "Sources/exercises/gates/sim/tb_gates.v",
+      "sha256": "175c550e4b899cf12aba35bd34d607cdfc8a9e43994a79b4b83730fb03c4d4d9"
+    },
+    {
+      "path": "Sources/exercises/gates/src/gates.v",
+      "source": "Sources/exercises/gates/src/gates.v",
+      "sha256": "dc7efb3bfcf6009394214ef98ff537dd310b2737f5de3a840e3e4cf931d3d7ae"
+    },
+    {
+      "path": "Sources/exercises/ram/sim/tb_ram.v",
+      "source": "Sources/exercises/ram/sim/tb_ram.v",
+      "sha256": "e357da2b2e5c95f17563a9f5f61c35c008194b9b935d21bc31bb2fd3fccd7c00"
+    },
+    {
+      "path": "Sources/exercises/ram/src/ram_ip.v",
+      "source": "Sources/exercises/ram/src/ram_ip.v",
+      "sha256": "15f8b0e1de10a2d915eee160488422a26b12479cd59def3cddcd0ffae140d073"
+    },
+    {
+      "path": "Sources/exercises/ram/src/register_8.v",
+      "source": "Sources/exercises/ram/src/register_8.v",
+      "sha256": "30d32de69d13dc881cc1663c9040a939df00ceb35adcc3fc048748c074702308"
+    },
+    {
+      "path": "Sources/exercises/register_systemverilog/sim/tb_register_sv.sv",
+      "source": "Sources/exercises/register_systemverilog/sim/tb_register_sv.sv",
+      "sha256": "7d7dc43d4e4ca8c2333096f5fe6c003ac3fd1cb53a2602aa95b51c74a394b4d2"
+    },
+    {
+      "path": "Sources/exercises/register_systemverilog/src/register_sv.sv",
+      "source": "Sources/exercises/register_systemverilog/src/register_sv.sv",
+      "sha256": "860ce343b18dfe66787a0d05fd14b590092f6d07488da2a2cf268e8bf1c6bfff"
+    },
+    {
+      "path": "Sources/manifests/fifo_basic.f",
+      "source": "Sources/manifests/fifo_basic.f",
+      "sha256": "3ffc14c24eba6d3e05bac2833e19de60fe4850351c4435fdc8878f985a75685c"
+    },
+    {
+      "path": "Sources/manifests/sensors_sr04_dht11.f",
+      "source": "Sources/manifests/sensors_sr04_dht11.f",
+      "sha256": "49a3ab22d99d989fec11f33b78a2f707c12edad0152b0c2afb8a109c0d89a7d7"
+    },
+    {
+      "path": "Sources/manifests/stopwatch_only.f",
+      "source": "Sources/manifests/stopwatch_only.f",
+      "sha256": "ef2333b6d14262fce667689298500983bd433ac8da1c536e536e7b9ff9b48a81"
+    },
+    {
+      "path": "Sources/manifests/stopwatch_watch_basic.f",
+      "source": "Sources/manifests/stopwatch_watch_basic.f",
+      "sha256": "5d8e26b59c93b58b3faeac1352a2944df019672092ada58a0921c927cc4fea30"
+    },
+    {
+      "path": "Sources/manifests/stopwatch_watch_revised.f",
+      "source": "Sources/manifests/stopwatch_watch_revised.f",
+      "sha256": "3e2b7003d399541caf868e9c14ee2d28a0826fcf2ea30f70c967c6cbf37c8135"
+    },
+    {
+      "path": "Sources/manifests/uart_basic.f",
+      "source": "Sources/manifests/uart_basic.f",
+      "sha256": "4af46c29743630bc98c017c4c316832cb3964730239146319a6a4ede138f1747"
+    },
+    {
+      "path": "Sources/manifests/uart_fifo_loopback.f",
+      "source": "Sources/manifests/uart_fifo_loopback.f",
+      "sha256": "88c4dd26945e2d673db338edd8a626a9f91ca5d646bc77f6f2064b3591cb9703"
+    },
+    {
+      "path": "Sources/manifests/uart_sensor_stopwatch_current.f",
+      "source": "Sources/manifests/uart_sensor_stopwatch_current.f",
+      "sha256": "c86547ad8b796fd3de8ee06f2ef0bc3ae6bbe4ddc0df622a1a95dd4b2781515e"
+    },
+    {
+      "path": "Sources/manifests/uart_sensor_stopwatch_team_submission.f",
+      "source": "Sources/manifests/uart_sensor_stopwatch_team_submission.f",
+      "sha256": "3a8a48d08460c2cd25d1d201f982afb9ae9b0fa6ef17448be746c000d4e7fa30"
+    },
+    {
+      "path": "Sources/manifests/uart_stopwatch.f",
+      "source": "Sources/manifests/uart_stopwatch.f",
+      "sha256": "9c23f5bf9f06f13faa87f295761c8914b8a385109067b6c95d95e7e41e6ace38"
+    },
+    {
+      "path": "Sources/projects/fifo_basic/sim/tb_fifo.v",
+      "source": "Sources/projects/fifo_basic/sim/tb_fifo.v",
+      "sha256": "4c76f64d3b92a3fb9e139180b212e8543fc14a97b5b3c7509b49b4576efe2f26"
+    },
+    {
+      "path": "Sources/projects/fifo_basic/src/fifo.v",
+      "source": "Sources/projects/fifo_basic/src/fifo.v",
+      "sha256": "a772ed74b4f6d186f5f76d0247943a956a899662f39f1b6e33578111ac4000f5"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/constraints/constraint_TeamPJ.xdc",
+      "source": "Sources/projects/sensors_sr04_dht11/constraints/constraint_TeamPJ.xdc",
+      "sha256": "3e30d0f8a177acd74d8cf33f895b30bb6d9c8d40b799e441a2d4cf7210844840"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/ip/ila_0.xci",
+      "source": "Sources/projects/sensors_sr04_dht11/ip/ila_0.xci",
+      "sha256": "ba0cee3e4173813a1db1ec5cb13bf58da943e3e580d08bf5ec8bf1a273b995e1"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/sim/tb_dht11.v",
+      "source": "Sources/projects/sensors_sr04_dht11/sim/tb_dht11.v",
+      "sha256": "a5215e295f72be401a5743acd8727ec05baeeceab3b93e4c3d5b3d75f4ee1504"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/sim/tb_sr04.v",
+      "source": "Sources/projects/sensors_sr04_dht11/sim/tb_sr04.v",
+      "sha256": "2d76d5542b67bf17d91cf9d776ec3696301d9ae2311b8b46adf4b724d43ee5ba"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/src/dht11.v",
+      "source": "Sources/projects/sensors_sr04_dht11/src/dht11.v",
+      "sha256": "cf8bea66f98546dcdbfdf6b77be7dfdcfb0efaf94ab83923384bc57ccaadd3ee"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/src/fnd_controller.v",
+      "source": "Sources/projects/sensors_sr04_dht11/src/fnd_controller.v",
+      "sha256": "7cc884b92f27e7531ceb184b693372e53b33fa7f797558ecf6ef4d1a592774e7"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/src/sr04_controller.v",
+      "source": "Sources/projects/sensors_sr04_dht11/src/sr04_controller.v",
+      "sha256": "0b6281920930b80675bdeaca08c23a8f6176547fd555fb9de96e74f28f2e1686"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/src/top_dht11.v",
+      "source": "Sources/projects/sensors_sr04_dht11/src/top_dht11.v",
+      "sha256": "f88dd82c4e065d4cebad38e72c47b3725e353b718913cba19e7bd460c9d6fe95"
+    },
+    {
+      "path": "Sources/projects/sensors_sr04_dht11/src/top_sr04.v",
+      "source": "Sources/projects/sensors_sr04_dht11/src/top_sr04.v",
+      "sha256": "e23d14e1ab58632bc13d50b37f9f28a1bc0ca0a7f476c5bb18d6d30fbc9b6ebe"
+    },
+    {
+      "path": "Sources/projects/sr04_standalone/src/sr04_controller.v",
+      "source": "Sources/projects/sr04_standalone/src/sr04_controller.v",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Sources/projects/stopwatch_only/constraints/constraint_TeamPJ.xdc",
+      "source": "Sources/projects/stopwatch_only/constraints/constraint_TeamPJ.xdc",
+      "sha256": "d761712d00f3ec62a96b07bd84b4bf049a68a20be34c78e528613c483bf32449"
+    },
+    {
+      "path": "Sources/projects/stopwatch_only/sim/tb_stopwatch.v",
+      "source": "Sources/projects/stopwatch_only/sim/tb_stopwatch.v",
+      "sha256": "977780caf88a8b1dd361850232581de4a19da7b282326914f6b7eefc17e81f9f"
+    },
+    {
+      "path": "Sources/projects/stopwatch_only/src/btn_debounce.v",
+      "source": "Sources/projects/stopwatch_only/src/btn_debounce.v",
+      "sha256": "248fc437e5d905cb1f9f20780120ab7d02bfa83afd0fd0419cf60efe23a16a19"
+    },
+    {
+      "path": "Sources/projects/stopwatch_only/src/control_unit.v",
+      "source": "Sources/projects/stopwatch_only/src/control_unit.v",
+      "sha256": "920d5bcf6fb781700544ced7ae20de3615dd13e2644b26d920e1d42624b4ed0a"
+    },
+    {
+      "path": "Sources/projects/stopwatch_only/src/fnd_con.v",
+      "source": "Sources/projects/stopwatch_only/src/fnd_con.v",
+      "sha256": "5d23eec1411cee77854ca94b41047fb31a9bf4bb30bdf7415a2014ed808bf5a1"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/constraints/constraint_TeamPJ.xdc",
+      "source": "Sources/projects/stopwatch_watch_basic/constraints/constraint_TeamPJ.xdc",
+      "sha256": "56851e754df454d1245cddfe3263d6ae074c2c83069225aadb23a12827d9cf5e"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/sim/testbench.v",
+      "source": "Sources/projects/stopwatch_watch_basic/sim/testbench.v",
+      "sha256": "4126aa06f1087ee11e3ce57836914aa700a6f50f5462a5da8019c862dd11cd1b"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/btn_debounce.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/btn_debounce.v",
+      "sha256": "89cbbaa800378871d66f9b036149ba73e8582dc7b222002a307216548baf0509"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/control_unit.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/control_unit.v",
+      "sha256": "37edf50593e7e2ebcbed48ca76138035ce35fcd2cccae5f1d49b5f97d256fb9e"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/demux_1x2.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/demux_1x2.v",
+      "sha256": "abbe8cef88e5a9d61d73d0f8232edebd2b0796e9de106da0cf86e5bf5a4c53ad"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/fnd_controller.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/fnd_controller.v",
+      "sha256": "d6626fe562ad506fd442b9b56dfc27fb8261dbeaac38480ac743e7ec96886ceb"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/stopwatch.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/stopwatch.v",
+      "sha256": "b5b7eec16fa2d4416fb8c43e836720cb9358218845dd48ed4918c44c91dce94a"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/top_watch_stopwatch.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/top_watch_stopwatch.v",
+      "sha256": "459b1681345ccfebe006fbe7414a4f18b50735171e4a44561d9d8b35a9550184"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_basic/src/watch.v",
+      "source": "Sources/projects/stopwatch_watch_basic/src/watch.v",
+      "sha256": "eb142efb01ad88394e0c865bf0d91feef39d584390955111aabf558f3a369ebb"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_revised/sim/testbench.v",
+      "source": "Sources/projects/stopwatch_watch_revised/sim/testbench.v",
+      "sha256": "5066d453865ea3572be79d8945cad1d839cdbcd04fd3fa3fcdf29482e9bda18f"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_revised/src/btn_debounce.v",
+      "source": "Sources/projects/stopwatch_watch_revised/src/btn_debounce.v",
+      "sha256": "268db106dba84b1bc314f9cb56c7fc8230931dd49fd901ef150a504d8453a838"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_revised/src/control_unit.v",
+      "source": "Sources/projects/stopwatch_watch_revised/src/control_unit.v",
+      "sha256": "9539ceef4ac29e0e0087daf2116918dcfd243270212e01b875b6bbdb6ab61bd4"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_revised/src/stopwatch.v",
+      "source": "Sources/projects/stopwatch_watch_revised/src/stopwatch.v",
+      "sha256": "debfafae13ac8195af1d81b74f2143e488c23ceb5124e97c829d5b802e0c7fd0"
+    },
+    {
+      "path": "Sources/projects/stopwatch_watch_revised/src/top_watch_stopwatch.v",
+      "source": "Sources/projects/stopwatch_watch_revised/src/top_watch_stopwatch.v",
+      "sha256": "a74f648a2dd3886bbd9fb9feb0c7903a7a162e8a280852e39bd0aae27a52d3b5"
+    },
+    {
+      "path": "Sources/projects/uart_basic/constraints/constraint_TeamPJ.xdc",
+      "source": "Sources/projects/uart_basic/constraints/constraint_TeamPJ.xdc",
+      "sha256": "305bd992ba2108ae3d0bc8ecc89a12da1b9af1a1cdfd87d0142c6acd638dcbd9"
+    },
+    {
+      "path": "Sources/projects/uart_basic/sim/tb_uart.v",
+      "source": "Sources/projects/uart_basic/sim/tb_uart.v",
+      "sha256": "da6caf8aae08fb7f30c94a0c27674eca21eeef989efb467fca5dadb2522d4e4a"
+    },
+    {
+      "path": "Sources/projects/uart_basic/src/uart.v",
+      "source": "Sources/projects/uart_basic/src/uart.v",
+      "sha256": "bea71147d3ea821b124bbfa474bd1ee325bd9ad4d8fa34702b4ee494c58407f4"
+    },
+    {
+      "path": "Sources/projects/uart_basic/src/uart_loop_back.v",
+      "source": "Sources/projects/uart_basic/src/uart_loop_back.v",
+      "sha256": "434ed2e86fab98fe44fcff61e04c755fe8dbfd5072010c794f1ae4c0e3b7ef84"
+    },
+    {
+      "path": "Sources/projects/uart_fifo_loopback/sim/tb_fifo_loopback.v",
+      "source": "Sources/projects/uart_fifo_loopback/sim/tb_fifo_loopback.v",
+      "sha256": "ace71c9fd56ea05a0dd8c2c180892b0a03a60ef190ffe3302bd767d84078d0db"
+    },
+    {
+      "path": "Sources/projects/uart_fifo_loopback/src/fifo.v",
+      "source": "Sources/projects/uart_fifo_loopback/src/fifo.v",
+      "sha256": "52eb1b4be00bd772a17e37d15de3b6869bb8aa5b5aacf1acc1042c9aef41c989"
+    },
+    {
+      "path": "Sources/projects/uart_fifo_loopback/src/top_fifo_loopback.v",
+      "source": "Sources/projects/uart_fifo_loopback/src/top_fifo_loopback.v",
+      "sha256": "937a7a55189630e206ff2f5e303a4be8b34810bbbe6a5e1ab2233046d97eafae"
+    },
+    {
+      "path": "Sources/projects/uart_fifo_loopback/src/uart.v",
+      "source": "Sources/projects/uart_fifo_loopback/src/uart.v",
+      "sha256": "dd1f327777c3827ede4a8b9feb23b807ab49db4052a6f5740304ed0e88a7c5ce"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/constraints/constraint_TeamPJ.xdc",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/constraints/constraint_TeamPJ.xdc",
+      "sha256": "66fdc077fe47efa266f860e283a560dffbd279cc2b5040a02705c027349bca79"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/ascii_decoder.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/ascii_decoder.v",
+      "sha256": "8b302a11ed6906f2d7a7942a61280b6e4675edce3248356779ee8d5d78fdde16"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/btn_debounce.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/btn_debounce.v",
+      "sha256": "49fc9f16d5167a1107a26b7f57884b4c7d52c4c2eca182ecb00431e55e62393a"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/control_unit.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/control_unit.v",
+      "sha256": "693f6a06ca55ae1af6dad1c30bc8607c18b7deea24187d12af5d922b11d934e1"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/dht11.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/dht11.v",
+      "sha256": "686a83c631d675f5d836ad7045b9999dc355fbf4dd9e0a8c36b83c3f81812fe5"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/fnd_controller.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/fnd_controller.v",
+      "sha256": "ccd09ae15183c19d69e913c196ddd485ede9899e959dd8dd342c7fa49bc6ade2"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/sr04_controller.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/sr04_controller.v",
+      "sha256": "b985a85825691924a516a83ecaf5a3c7bb7063d088311ebc7f5216c1daebb9da"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/top_watch_stopwatch.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/top_watch_stopwatch.v",
+      "sha256": "3e8c7e96283dc015f4ad04d4e56ae551736cd0fd7be4d11ef475bb1a52199ba0"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_current/src/uart.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_current/src/uart.v",
+      "sha256": "a55c4dc63b73a2c6bdd36a91e52dc29185b55eb67126c8c7df3ff51da3c7b39b"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/DHT11.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/DHT11.v",
+      "sha256": "28b20fa095446e9f9880b415161cc099b48bcddb7cf641302e90f413cc243b07"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/lec_sr04_controller.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/lec_sr04_controller.v",
+      "sha256": "f772f83b5cc56bd2edeb049eb13c12d3f0352148ae4714e5cd329db5714c4365"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/SR04.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/SR04.v",
+      "sha256": "112c8602114f7f6f55cda7e9e45d662d4be6dfb1775f55fd43f1abee1e7cda3c"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/TOP_DHT11.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/sensor/src/TOP_DHT11.v",
+      "sha256": "82137b1bf1fdb5d96db0677029ee0ad60e4c85db5c46ebc66e3435355953bd0b"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/btn_debounce.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/btn_debounce.v",
+      "sha256": "14959564f00bf92154a086b3e12654628f0b7a88f73ac5015f2361ecb3a8981f"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/fnd_controller.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/fnd_controller.v",
+      "sha256": "40290f23fb51ec3a91ce5814d42967f40b2c5ed9fcac92e564778b0a7cb8cdeb"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/stopwatch_control_unit.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/stopwatch_control_unit.v",
+      "sha256": "8b2cc7a1177a3ac19ca8ad4cf16fb2f6f54aba1f22bc7f8276bdf02925db8cbd"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/top_module_sw_w.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/top_module_sw_w.v",
+      "sha256": "a37bab39783732a85195a5fa5760258cc28a0a9b75cb1fb0cc7e05b0d3e8aee2"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/top_stopwatch.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/top_stopwatch.v",
+      "sha256": "8349df180428d19df07cc9df6f488a844da8734796fe578a9bd6c7b636c6b1e0"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/top_watch.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/top_watch.v",
+      "sha256": "de8ce374ef645ba6975e048b7781b8a67ffd6c58fa7afd8d56f21b706159d7a3"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/watch_control_unit.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/stopwatch_watch/src/watch_control_unit.v",
+      "sha256": "d79f78670eb61d3fcafbffcac47b9a295060559ebeb63dbbeb0ba9fe6b1c0b82"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/uart/src/uart.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/uart/src/uart.v",
+      "sha256": "146949df8a52e33a0a0266fd939edc60d909f57da9d34874ac31b7f819def851"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/uart/src/uart_decoder.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/uart/src/uart_decoder.v",
+      "sha256": "cc8ea71e9ab2754ec359d9a5d224143152204f9f6b8aed0b7a4134730e47f768"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/uart/src/uart_loop_back.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_minseok_prototype/uart/src/uart_loop_back.v",
+      "sha256": "6a7a1df085eb31c8a6f15b2f826c93a3e5437dba933a1bc8533bdaf2ff050faf"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_prototype2_variant/src/dht11.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_prototype2_variant/src/dht11.v",
+      "sha256": "2b27275e3f115614fa3312e63a37c13ebf31288a57c043f6b6b47c76ca907a70"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_prototype2_variant/src/fnd_controller.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_prototype2_variant/src/fnd_controller.v",
+      "sha256": "d25fba173b7bf6e65fa3933cb4639b98899c28dea5b9301190f9a999de322de9"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_prototype2_variant/src/top_watch_stopwatch.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_prototype2_variant/src/top_watch_stopwatch.v",
+      "sha256": "7892fd79158e92e81dbbc3bee4a9420ec6b1bca6d0faa7fafb47590acf3435de"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_team_submission/src/fifo.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_team_submission/src/fifo.v",
+      "sha256": "1632f16def152deb2fce62d6013586e77a0fe029ba6b5198d89d65d0765fbb53"
+    },
+    {
+      "path": "Sources/projects/uart_sensor_stopwatch_team_submission/src/top_watch_stopwatch.v",
+      "source": "Sources/projects/uart_sensor_stopwatch_team_submission/src/top_watch_stopwatch.v",
+      "sha256": "0bc733f5c4a0aff865c334f65bdd6d56db40fef5d0158aea06e11933617aac3e"
+    },
+    {
+      "path": "Sources/projects/uart_stopwatch/constraints/constraint_TeamPJ.xdc",
+      "source": "Sources/projects/uart_stopwatch/constraints/constraint_TeamPJ.xdc",
+      "sha256": "afe63a41ec7a096e2f98d38970b8f347cc5ce41f041b0fa4c7ab197cd07f3c58"
+    },
+    {
+      "path": "Sources/projects/uart_stopwatch/sim/tb_uart_stopwatch.v",
+      "source": "Sources/projects/uart_stopwatch/sim/tb_uart_stopwatch.v",
+      "sha256": "d57b836fff0f47d2f43c63d2fa2735d614bb662d3ac70d3de46e6bb553610b18"
+    },
+    {
+      "path": "Sources/projects/uart_stopwatch/src/fnd_controller.v",
+      "source": "Sources/projects/uart_stopwatch/src/fnd_controller.v",
+      "sha256": "b743c586198ed68c94b3a9192a6ba5d15f49f1d5a60405fac17bf3381bb17bbc"
+    },
+    {
+      "path": "Sources/projects/uart_stopwatch/src/top_watch_stopwatch.v",
+      "source": "Sources/projects/uart_stopwatch/src/top_watch_stopwatch.v",
+      "sha256": "43f6c7c03178af16ac9a3da7e92da4aecec22296938c8322f0d313537a5936f2"
+    },
+    {
+      "path": "Sources/projects/uart_stopwatch/src/uart.v",
+      "source": "Sources/projects/uart_stopwatch/src/uart.v",
+      "sha256": "945432e1a6b7bb1e12cc73595d917ce5b790f59726f71a28974cb872b3680b9f"
+    },
+    {
+      "path": "Sources/projects/uart_stopwatch/src/uart_loop_back.v",
+      "source": "Sources/projects/uart_stopwatch/src/uart_loop_back.v",
+      "sha256": "64de7deff4e042e96412bce78e091d338049f273ff072dbd8f3ea46630b47305"
+    },
+    {
+      "path": "Sources/projects/watch_only/sim/testbench.v",
+      "source": "Sources/projects/watch_only/sim/testbench.v",
+      "sha256": "b4f648346e91fdc36ed079dcad92eea05e2481e6f72f8560603e7b4c218fb7aa"
+    },
+    {
+      "path": "Sources/projects/watch_only/src/control_unit.v",
+      "source": "Sources/projects/watch_only/src/control_unit.v",
+      "sha256": "f8879238b7990b5d56f4143f5714de5780a88737dc0f097e743e2e2aa7efd223"
+    },
+    {
+      "path": "Sources/projects/watch_only/src/fnd_controller.v",
+      "source": "Sources/projects/watch_only/src/fnd_controller.v",
+      "sha256": "b6af8d60d395d0d6729c29272e6477c0e0afd5fcdbb2581c242032c07221d7e6"
+    },
+    {
+      "path": "Sources/projects/watch_only/src/watch.v",
+      "source": "Sources/projects/watch_only/src/watch.v",
+      "sha256": "6aae0b2e5a3e0e2ad846c21bbc9d7845597fdb049c6e40a037ba96ec8359b967"
+    },
+    {
+      "path": "Sources/projects/watch_only/src/watch_fnd_controller.v",
+      "source": "Sources/projects/watch_only/src/watch_fnd_controller.v",
+      "sha256": "f121401161730688ea3e62a72fbb008aeebdef574b833d9580e1c148e8de6ea5"
+    },
+    {
+      "path": "Sources/README.md",
+      "source": "Sources/README.md",
+      "sha256": "2836215ae481d05cf2ec6e5c3dbbea677913c8bd8c74bfd5ef56228d589025f9"
+    },
+    {
+      "path": "Sources/shared/constraints/Basys-3-Master.xdc",
+      "source": "Sources/shared/constraints/Basys-3-Master.xdc",
+      "sha256": "ce50cb375e51e4bccbaaf1dad578b8d19d7e3dd435263d434e1bc749959a8d48"
+    },
+    {
+      "path": "Sources/shared/fnd_controller_clock/fnd_controller.v",
+      "source": "Sources/shared/fnd_controller_clock/fnd_controller.v",
+      "sha256": "ec798ff7f9052e717810cd259ed4ddf855c1aeb2fc1817e44bfcd52cc52201fa"
+    },
+    {
+      "path": "labs/2026_08_18_adder_sv/tb_adder_behav.wcfg",
+      "source": "2026_08_18_adder_sv/tb_adder_behav.wcfg",
+      "sha256": "f645e55518662c9f4e946113dbae7961eb79752426bb8238163cfbab315b32f9"
+    },
+    {
+      "path": "labs/2026_08_19__register_sv/2026_08_19__register_sv.srcs/sim_1/new/tb_register_sv.sv",
+      "source": "2026_08_19__register_sv/2026_08_19__register_sv.srcs/sim_1/new/tb_register_sv.sv",
+      "sha256": "7d7dc43d4e4ca8c2333096f5fe6c003ac3fd1cb53a2602aa95b51c74a394b4d2"
+    },
+    {
+      "path": "labs/2026_08_19__register_sv/2026_08_19__register_sv.srcs/sources_1/new/register_sv.sv",
+      "source": "2026_08_19__register_sv/2026_08_19__register_sv.srcs/sources_1/new/register_sv.sv",
+      "sha256": "860ce343b18dfe66787a0d05fd14b590092f6d07488da2a2cf268e8bf1c6bfff"
+    },
+    {
+      "path": "labs/2026_08_19__register_sv/tb_register_sv_behav.wcfg",
+      "source": "2026_08_19__register_sv/tb_register_sv_behav.wcfg",
+      "sha256": "0cdb887d8865c1581c8ede72e91dd651206795b2937565bba100e72087a62be9"
+    },
+    {
+      "path": "labs/2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/imports/CHATGPT_SV/tb_adder_uvm_chatgpt.sv",
+      "source": "2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/imports/CHATGPT_SV/tb_adder_uvm_chatgpt.sv",
+      "sha256": "faa87ce2c05313a5910105c103c8ae3afb2d7116fc8025b359fe75a13d0a904d"
+    },
+    {
+      "path": "labs/2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/imports/new/tb_adder_uvm.sv",
+      "source": "2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/imports/new/tb_adder_uvm.sv",
+      "sha256": "c1e1e7fffdc55a7d40f44527081c3687c21ba897d406c5d143b13b908236c8c2"
+    },
+    {
+      "path": "labs/2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/new/CHATGPT_SV/tb_adder_uvm_chatgpt.sv",
+      "source": "2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/new/CHATGPT_SV/tb_adder_uvm_chatgpt.sv",
+      "sha256": "faa87ce2c05313a5910105c103c8ae3afb2d7116fc8025b359fe75a13d0a904d"
+    },
+    {
+      "path": "labs/2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/new/tb_adder_uvm.sv",
+      "source": "2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sim_1/new/tb_adder_uvm.sv",
+      "sha256": "c1e1e7fffdc55a7d40f44527081c3687c21ba897d406c5d143b13b908236c8c2"
+    },
+    {
+      "path": "labs/2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sources_1/new/adder.sv",
+      "source": "2026_08_24_adder_UVM/2026_08_24_adder_UVM.srcs/sources_1/new/adder.sv",
+      "sha256": "444df4d580adedd9dd22e1914355e17b486d867bcbb7b50daefa83c8265665e8"
+    },
+    {
+      "path": "labs/2026_08_24_adder_UVM/tb_adder_uvm_behav.wcfg",
+      "source": "2026_08_24_adder_UVM/tb_adder_uvm_behav.wcfg",
+      "sha256": "093ef0b68a82ab3fdf54a06d81a23f134c77be79fb3701481dadccbc0c9eb731"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/imports/new/tb_practice_oop_ex4_package.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/imports/new/tb_practice_oop_ex4_package.sv",
+      "sha256": "82938e3627a2c0d43999140b47c8017e889740d0f02736a073ef039af3540575"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/2026_08_24_adder_uvm.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/2026_08_24_adder_uvm.sv",
+      "sha256": "db6eb53cf92f10c614fe4e2fb80ec9f455cde799ce3647390a2765fddd86f92c"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/adder.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/adder.sv",
+      "sha256": "5d7f554636d507106eb342e447b4fd5ab7b83b74774ecbbd4ccd589c74e413df"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex1.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex1.sv",
+      "sha256": "2ffee85755d1c57913e4dce92aec579830ca86de6d80c359e1ca934cc6a1f852"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex2.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex2.sv",
+      "sha256": "8c33dbb4508ca88e0beee94b4d644eba80a25a6e7e950c481ed0d139a21e1768"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex3.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex3.sv",
+      "sha256": "2b05db2b7ac25a7e024b3abf707bdb4243f763f27958a6d8b2841ab74562c1c6"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex4_.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex4_.sv",
+      "sha256": "20a16049808dda993953560ad2072f6800d4003e3d79fb057be76d9ffbe87281"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex4_package.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex4_package.sv",
+      "sha256": "82938e3627a2c0d43999140b47c8017e889740d0f02736a073ef039af3540575"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex5.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex5.sv",
+      "sha256": "3adb2c9901622eeb04d6a3d983faaffcc884971ddc82b8db29747f166236d977"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex6.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex6.sv",
+      "sha256": "6671a97b13f966c83ff5d683f52f993d53425afea1b43ebc697621f6d1e1dfd3"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex7.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex7.sv",
+      "sha256": "5a65209dee81c137bc998985f8959ea38cdebd9176a2aad01636aed95c266ec6"
+    },
+    {
+      "path": "labs/2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex8.sv",
+      "source": "2026_08_24_sv_oop/2026-08-24_sv_oop.srcs/sim_1/new/tb_practice_oop_ex8.sv",
+      "sha256": "30479d6a8a8749a00ea992613d374300f5899c34e31f94b89ecf66850e1fbfee"
+    },
+    {
+      "path": "labs/2026_08_28_counter_uvm/tb_counter.sv",
+      "source": "2026_08_28_counter_uvm/tb_counter.sv",
+      "sha256": "ffaa078c9e00f5fa6c51b044f509262f8aa306cc195be68934597b9f3d42c612"
+    },
+    {
+      "path": "labs/2026_08_28_counter_uvm/tb_counter_practice.sv",
+      "source": "2026_08_28_counter_uvm/tb_counter_practice.sv",
+      "sha256": "7d568bdc7a95b6c8c7348f111f3e2a3bb56fad1564b2d057d1ad69aa55eddb0a"
+    },
+    {
+      "path": "labs/2026_09_04_HW15_rv32i/control_unit.sv",
+      "source": "2026_09_04_HW15_rv32i/control_unit.sv",
+      "sha256": "8647238a930508bde6d1b3e7333019342b1a99b5d312602b70ae54656179828d"
+    },
+    {
+      "path": "labs/2026_09_04_HW15_rv32i/data_memory.sv",
+      "source": "2026_09_04_HW15_rv32i/data_memory.sv",
+      "sha256": "40431fdb9e6e8b322bca4244175b819a3bebd1b1fe990dbb7e7b1561fc55b47e"
+    },
+    {
+      "path": "labs/2026_09_04_HW15_rv32i/datapath.sv",
+      "source": "2026_09_04_HW15_rv32i/datapath.sv",
+      "sha256": "864f1066f90eaf6c70768e78782c24afc8ed8538433baa05dab50e6df4ba2939"
+    },
+    {
+      "path": "labs/2026_09_04_HW15_rv32i/instruction_rom.sv",
+      "source": "2026_09_04_HW15_rv32i/instruction_rom.sv",
+      "sha256": "b843b49b8aad27f15c817669c8896c565fa0f861d666461b28ccc052d2c5e84a"
+    },
+    {
+      "path": "labs/2026_09_04_HW15_rv32i/rv32i_cpu.sv",
+      "source": "2026_09_04_HW15_rv32i/rv32i_cpu.sv",
+      "sha256": "041ee3438c0b7d9d8eb9c0529ff3550d8347149586a16efaa85ae32530a1d922"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/control_unit.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/control_unit.sv",
+      "sha256": "20d2cd8033149c81d50424ad9e5ab4ce70e291d5ed1adf40076241c2f999f8f9"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/data_memory.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/data_memory.sv",
+      "sha256": "2f5a649353203d0356bac1e4b65d5f6393df2909fa5a5249798e603534080e93"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/datapath.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/datapath.sv",
+      "sha256": "349ed4a22887c638173f50925f7ece036787d359ccc2736951899f7032a713fe"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/instruction_rom.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/instruction_rom.sv",
+      "sha256": "7fce651a8eb542f3211f62abf8a4b9818c0baedabc72ed25428d8cb723e3f2be"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/rv32_pkg.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/rv32_pkg.sv",
+      "sha256": "582fac2c3d3acd776602431b4bf73d93aadb2ad57a07c1f1bf10f53c5a337ec6"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/rv32i_cpu.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/rv32i_cpu.sv",
+      "sha256": "764b70519d99642c7ba13fb57bf4aa3cd57ca8505c81ca398399e25943c7fc1a"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/simv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/simv",
+      "sha256": "012e60d4a76a90ebacbb1367c437a82e007eb59b41feb36e6049500f2ff35106"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.iverilog_tmp/tb_rv32i_cpu.sv",
+      "source": "2026_09_04_I_type_instruction/.iverilog_tmp/tb_rv32i_cpu.sv",
+      "sha256": "d554372036c42b60c3099e93853e0d3c4d54b6f32b0054d56db74ea8876d930b"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/control_unit.sv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/control_unit.sv",
+      "sha256": "20d2cd8033149c81d50424ad9e5ab4ce70e291d5ed1adf40076241c2f999f8f9"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/data_memory.sv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/data_memory.sv",
+      "sha256": "2f5a649353203d0356bac1e4b65d5f6393df2909fa5a5249798e603534080e93"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/datapath.sv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/datapath.sv",
+      "sha256": "349ed4a22887c638173f50925f7ece036787d359ccc2736951899f7032a713fe"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/instruction_rom.sv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/instruction_rom.sv",
+      "sha256": "8849642cad5226fb2475dd57b1f881e4376a7397afae4c89454252c7d01ba71c"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/rv32_pkg.sv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/rv32_pkg.sv",
+      "sha256": "582fac2c3d3acd776602431b4bf73d93aadb2ad57a07c1f1bf10f53c5a337ec6"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/rv32i_cpu.sv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/rv32i_cpu.sv",
+      "sha256": "764b70519d99642c7ba13fb57bf4aa3cd57ca8505c81ca398399e25943c7fc1a"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/.r_type_verify/simv",
+      "source": "2026_09_04_I_type_instruction/.r_type_verify/simv",
+      "sha256": "d8de5c44e579938bdfbb84f89c2fb1271b2dc7706bf96d1b227deb6a9a08fcb4"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/control_unit.sv",
+      "source": "2026_09_04_I_type_instruction/control_unit.sv",
+      "sha256": "20d2cd8033149c81d50424ad9e5ab4ce70e291d5ed1adf40076241c2f999f8f9"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/data_memory.sv",
+      "source": "2026_09_04_I_type_instruction/data_memory.sv",
+      "sha256": "8e1bdd6d527e9470e0df70514e2df3c9d4196f83353ddc9d2b3117f2c1078305"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/datapath.sv",
+      "source": "2026_09_04_I_type_instruction/datapath.sv",
+      "sha256": "cc51b5ef86c295d2c1c2ae9c85db1726dd765998e4869a7ddec4f70edc878a6b"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/instruction_rom.sv",
+      "source": "2026_09_04_I_type_instruction/instruction_rom.sv",
+      "sha256": "05828a762499004d99033563956479a3986300f1659a74a2ff426bf890bb6a7b"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/rv32_pkg.sv",
+      "source": "2026_09_04_I_type_instruction/rv32_pkg.sv",
+      "sha256": "582fac2c3d3acd776602431b4bf73d93aadb2ad57a07c1f1bf10f53c5a337ec6"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/rv32i_cpu.sv",
+      "source": "2026_09_04_I_type_instruction/rv32i_cpu.sv",
+      "sha256": "bfd73257d0d7bff616fb753f6701839b28324ecbc72325455955108fd5a07d45"
+    },
+    {
+      "path": "labs/2026_09_04_I_type_instruction/tb_rv32i_cpu.sv",
+      "source": "2026_09_04_I_type_instruction/tb_rv32i_cpu.sv",
+      "sha256": "19e3209daf95275716091f1a4695177ff47d906f40c1888c302a4245a1404135"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/control_unit.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/control_unit.sv",
+      "sha256": "20d2cd8033149c81d50424ad9e5ab4ce70e291d5ed1adf40076241c2f999f8f9"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/data_memory.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/data_memory.sv",
+      "sha256": "2f5a649353203d0356bac1e4b65d5f6393df2909fa5a5249798e603534080e93"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/datapath.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/datapath.sv",
+      "sha256": "349ed4a22887c638173f50925f7ece036787d359ccc2736951899f7032a713fe"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/instruction_rom.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/instruction_rom.sv",
+      "sha256": "7fce651a8eb542f3211f62abf8a4b9818c0baedabc72ed25428d8cb723e3f2be"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/rv32_pkg.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/rv32_pkg.sv",
+      "sha256": "582fac2c3d3acd776602431b4bf73d93aadb2ad57a07c1f1bf10f53c5a337ec6"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/rv32i_cpu.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/rv32i_cpu.sv",
+      "sha256": "764b70519d99642c7ba13fb57bf4aa3cd57ca8505c81ca398399e25943c7fc1a"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/simv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/simv",
+      "sha256": "012e60d4a76a90ebacbb1367c437a82e007eb59b41feb36e6049500f2ff35106"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.iverilog_tmp/tb_rv32i_cpu.sv",
+      "source": "2026_09_07_B_type_instruction_src/.iverilog_tmp/tb_rv32i_cpu.sv",
+      "sha256": "d554372036c42b60c3099e93853e0d3c4d54b6f32b0054d56db74ea8876d930b"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/control_unit.sv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/control_unit.sv",
+      "sha256": "20d2cd8033149c81d50424ad9e5ab4ce70e291d5ed1adf40076241c2f999f8f9"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/data_memory.sv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/data_memory.sv",
+      "sha256": "2f5a649353203d0356bac1e4b65d5f6393df2909fa5a5249798e603534080e93"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/datapath.sv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/datapath.sv",
+      "sha256": "349ed4a22887c638173f50925f7ece036787d359ccc2736951899f7032a713fe"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/instruction_rom.sv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/instruction_rom.sv",
+      "sha256": "8849642cad5226fb2475dd57b1f881e4376a7397afae4c89454252c7d01ba71c"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/rv32_pkg.sv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/rv32_pkg.sv",
+      "sha256": "582fac2c3d3acd776602431b4bf73d93aadb2ad57a07c1f1bf10f53c5a337ec6"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/rv32i_cpu.sv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/rv32i_cpu.sv",
+      "sha256": "764b70519d99642c7ba13fb57bf4aa3cd57ca8505c81ca398399e25943c7fc1a"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/.r_type_verify/simv",
+      "source": "2026_09_07_B_type_instruction_src/.r_type_verify/simv",
+      "sha256": "d8de5c44e579938bdfbb84f89c2fb1271b2dc7706bf96d1b227deb6a9a08fcb4"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/control_unit.sv",
+      "source": "2026_09_07_B_type_instruction_src/control_unit.sv",
+      "sha256": "20d2cd8033149c81d50424ad9e5ab4ce70e291d5ed1adf40076241c2f999f8f9"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/data_memory.sv",
+      "source": "2026_09_07_B_type_instruction_src/data_memory.sv",
+      "sha256": "8e1bdd6d527e9470e0df70514e2df3c9d4196f83353ddc9d2b3117f2c1078305"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/datapath.sv",
+      "source": "2026_09_07_B_type_instruction_src/datapath.sv",
+      "sha256": "cc51b5ef86c295d2c1c2ae9c85db1726dd765998e4869a7ddec4f70edc878a6b"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/instruction_rom.sv",
+      "source": "2026_09_07_B_type_instruction_src/instruction_rom.sv",
+      "sha256": "05828a762499004d99033563956479a3986300f1659a74a2ff426bf890bb6a7b"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/rv32_pkg.sv",
+      "source": "2026_09_07_B_type_instruction_src/rv32_pkg.sv",
+      "sha256": "582fac2c3d3acd776602431b4bf73d93aadb2ad57a07c1f1bf10f53c5a337ec6"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/rv32i_cpu.sv",
+      "source": "2026_09_07_B_type_instruction_src/rv32i_cpu.sv",
+      "sha256": "bfd73257d0d7bff616fb753f6701839b28324ecbc72325455955108fd5a07d45"
+    },
+    {
+      "path": "labs/2026_09_07_B_type_instruction_src/tb_rv32i_cpu.sv",
+      "source": "2026_09_07_B_type_instruction_src/tb_rv32i_cpu.sv",
+      "sha256": "19e3209daf95275716091f1a4695177ff47d906f40c1888c302a4245a1404135"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sim_1/imports/2026_09_07_B_type_instruction/tb_rv32i_cpu.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sim_1/imports/2026_09_07_B_type_instruction/tb_rv32i_cpu.sv",
+      "sha256": "30e3db9bfdbe720923e06cf4500ac885eeef798a9ca6ccfd22e4a881581c56a1"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_06_FIFO_UVM/fifo.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_06_FIFO_UVM/fifo.sv",
+      "sha256": "503944b03a19a522440ae365cdad27d80a8562eaa17fe2b36fd5d1217d1e8f2b"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/control_unit.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/control_unit.sv",
+      "sha256": "df5a89e201eb245f1a245bc2c0332a412611fd36a9151699573469ea7a579afe"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/data_memory.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/data_memory.sv",
+      "sha256": "8e1bdd6d527e9470e0df70514e2df3c9d4196f83353ddc9d2b3117f2c1078305"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/datapath.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/datapath.sv",
+      "sha256": "f57a28dbb6d22a907248c41ff8396eaf0475ce1b45b009477c60831c4ae569ce"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/instruction_rom.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/instruction_rom.sv",
+      "sha256": "56fb5abf7297a300898831280a509b6ab02872a52e5076572ab09c9d3a6ee18b"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/rom_code.mem",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/rom_code.mem",
+      "sha256": "a9bb5cf28d5ee75db69862a95fcab593909ed0493f0516e34f8a7f1b69d16b28"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/rv32_pkg.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/rv32_pkg.sv",
+      "sha256": "8d7586589561e40dd2b7bd3635c4a9b4823a14e7c719ff7af826927df9f6eb17"
+    },
+    {
+      "path": "labs/2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/rv32i_cpu.sv",
+      "source": "2026_09_08_rv32i_btype/2026_09_08_rv32i_btype.srcs/sources_1/imports/2026_09_07_B_type_instruction/rv32i_cpu.sv",
+      "sha256": "8d84f5fd8a364e652403e18b7aab8faadc8a6922a7662e868c5e96469184390b"
+    }
+  ]
+}

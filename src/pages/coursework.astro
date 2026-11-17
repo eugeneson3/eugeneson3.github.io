@@ -11,7 +11,26 @@ const groups = ['디지털 설계·검증', '임베디드'];
     <a class="back-link" href="/">← 포트폴리오</a>
     <header class="project-heading"><p class="eyebrow">Coursework · 2026.07–11</p><h1>설계 과제 모음</h1><p class="lead">Classroom 제출 기록과 발표 자료를 기준으로 정리한 과제 및 후속 실습 {coursework.length}개입니다. 각 과제의 요약 문서와 확인된 소스코드를 연결하였습니다.</p></header>
     <nav class="course-nav" aria-label="과제 분야">{groups.map((group, index) => <a href={'#course-group-' + index}>{group}</a>)}</nav>
-    {groups.map((group, index) => <section id={'course-group-' + index} class="section"><div class="section-heading"><h2>{group}</h2><a href={'https://github.com/eugeneson3/' + (index === 0 ? 'digital-design-coursework' : 'embedded-coursework')} target="_blank" rel="noopener noreferrer">과제 저장소 ↗</a></div><div class="course-list">{coursework.filter(item => item.category === group).map(item => <article class="course-row"><p class="meta">{item.date}</p><div><h3>{item.title}</h3><p>{item.summary}</p></div><div class="course-links"><a href={'https://github.com/eugeneson3/' + item.repo + '/blob/main/docs/' + item.id + '.md'} target="_blank" rel="noopener noreferrer">요약 문서 ↗</a>{item.path && <a href={'https://github.com/eugeneson3/' + item.repo + '/tree/main/' + item.path} target="_blank" rel="noopener noreferrer">소스코드 ↗</a>}</div></article>)}</div></section>)}
+    {groups.map((group, index) => (
+      <section id={'course-group-' + index} class="section">
+        <div class="section-heading">
+          <h2>{group}</h2>
+          <a href={'https://github.com/eugeneson3/eugeneson3.github.io/tree/main/coursework-sources/' + (index === 0 ? 'digital-design' : 'embedded')} target="_blank" rel="noopener noreferrer">과제 소스 모음 ↗</a>
+        </div>
+        <div class="course-list">
+          {coursework.filter(item => item.category === group).map(item => (
+            <article class="course-row">
+              <p class="meta">{item.date}</p>
+              <div><h3>{item.title}</h3><p>{item.summary}</p></div>
+              <div class="course-links">
+                <a href={'https://github.com/eugeneson3/' + item.repo + '/blob/main/' + item.document} target="_blank" rel="noopener noreferrer">요약 문서 ↗</a>
+                {item.path && <a href={'https://github.com/eugeneson3/' + item.repo + '/tree/main/' + item.path} target="_blank" rel="noopener noreferrer">소스코드 ↗</a>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
   </main>
   <Footer />
 </BaseLayout>

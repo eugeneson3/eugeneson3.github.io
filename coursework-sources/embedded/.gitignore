@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+Debug/
+Release/
+.Xil/
+*.vcd
+*.fsdb
+*.log
+*.jou
+node_modules/

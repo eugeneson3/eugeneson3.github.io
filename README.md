@@ -30,3 +30,10 @@ npm run dev
 ```
 
 프로젝트 소스는 각 개별 저장소에서 관리합니다. 사이트의 설명과 실제 소스 버전이 일치하는지 확인한 후 수정합니다.
+
+## 과제 소스
+
+- [디지털 설계 및 검증](coursework-sources/digital-design/README.md)
+- [STM32 임베디드 실습](coursework-sources/embedded/README.md)
+
+과제 소스는 위 폴더에 수록하였습니다. 프로젝트별 소스는 각 프로젝트 페이지에서 독립 저장소로 연결됩니다.
