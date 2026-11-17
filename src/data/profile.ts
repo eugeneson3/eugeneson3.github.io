@@ -2,8 +2,8 @@
 
 export const profile = {
   name: '손승원',
-  role: 'Digital Design & Verification Engineer (신입)',
-  tagline: '시스템베릴로그 RTL 설계, UVM검증, 임베디드C 프로그래밍을 합니다.',
+  role: 'Digital Design & Verification Engineer',
+  tagline: 'Systemverilog RTL 설계, UVM검증, 임베디드C 프로그래밍을 합니다.',
   location: 'Korea',
   email: 'davison2500@gmail.com',
   links: [{ label: 'GitHub', href: 'https://github.com/eugeneson3' }],
@@ -145,7 +145,7 @@ export const experience: {
   {
     company: 'AI 캠퍼스 반도체설계 1기',
     role: '교육 과정',
-    period: '2026.07 – 현재',
+    period: '2026.07. – 2027.02.',
     details: [
       'Verilog/SystemVerilog RTL 설계, FPGA 구현, UVM 검증',
       'RISC-V CPU 설계 및 APB 버스 시스템 팀 프로젝트',
