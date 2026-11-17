@@ -12,12 +12,7 @@ export const profile = {
   
 };
 
-export const skills: { group: string; items: string[] }[] = [
-  { group: 'RTL', items: ['Verilog', 'SystemVerilog', 'FSM 설계', 'RISC-V RV32I', 'APB', 'UART'] },
-  { group: 'Verification', items: ['UVM', 'Constrained Random', 'Functional Coverage', 'Scoreboard'] },
-  { group: 'FPGA / Tools', items: ['Basys3', 'Vivado', 'ILA', 'Waveform 디버깅'] },
-  { group: 'Etc', items: ['C', 'Python', 'Keras (On-device AI)', 'Git'] },
-];
+export const skills: { group: string; items: string[] }[] = [];
 
 export type Project = {
   title: string;
