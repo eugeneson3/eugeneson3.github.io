@@ -8,6 +8,7 @@ export const profile = {
   email: 'davison2500@gmail.com',
   links: [{ label: 'GitHub', href: 'https://github.com/eugeneson3' }],
   resume: '', // public/resume.pdf 를 넣고 '/resume.pdf' 로 바꾸면 이력서 버튼이 생깁니다.
+  about: [],
   
 };
 
@@ -175,3 +176,4 @@ export const experience: {
 ];
 
 ;
+export const certs: { title: string; date: string }[] = [];
