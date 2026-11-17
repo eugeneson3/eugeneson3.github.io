@@ -1,164 +1,22 @@
 ---
 import type { Project } from '../data/profile';
-import Chevron from './Chevron.astro';
-
-interface Props {
-  project: Project;
-}
-const { project: p } = Astro.props;
-
-// youtu.be/ID, youtube.com/watch?v=ID, youtube.com/shorts/ID 형식을 모두 지원
-const videoId = p.video?.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)?.[1];
+interface Props { project: Project }
+const { project } = Astro.props;
 ---
-
-<details class="project" name="project">
-  <summary>
-    <div>
-      <div class="head">
-        <h3>{p.title}</h3>
-        <span class="period">{p.period} · {p.team}</span>
-      </div>
-      <p class="summary">{p.summary}</p>
-      <div class="tags">{p.stack.map((s) => <span class="tag">{s}</span>)}</div>
+<article class="project-card" data-project-category={project.category}>
+  <div class="card-meta"><span>{project.category}</span><span>{project.period} · {project.team}</span></div>
+  <h3><a href={'/projects/' + project.slug + '/'}>{project.title}</a></h3>
+  <div class="tags">{project.stack.map(tag => <span class="tag">{tag}</span>)}</div>
+  <p class="card-description">{project.summary}</p>
+  <details class="card-summary">
+    <summary>요약 보기 <span aria-hidden="true">＋</span></summary>
+    <div class="summary-content">
+      <p><strong>담당 범위</strong> {project.role}</p>
+      <ul>{project.highlights.map(item => <li>{item}</li>)}</ul>
     </div>
-    <Chevron />
-  </summary>
-  <div class="details-body">
-    {
-      p.role && (
-        <>
-          <h4>내 역할</h4>
-          <p>{p.role}</p>
-        </>
-      )
-    }
-    <h4>문제</h4>
-    <p>{p.problem}</p>
-    <h4>접근</h4>
-    <ul>{p.approach.map((a) => <li>{a}</li>)}</ul>
-    <h4>결과</h4>
-    <ul>{p.result.map((r) => <li>{r}</li>)}</ul>
-    {
-      videoId && (
-        <div class="video">
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${videoId}`}
-            title={`${p.title} 동작 영상`}
-            loading="lazy"
-            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
-        </div>
-      )
-    }
-    {
-      p.images && p.images.length > 0 && (
-        <div class="gallery">
-          {p.images.map((img) => (
-            <figure>
-              <a href={img.src} target="_blank">
-                <img src={img.src} alt={img.caption ?? p.title} loading="lazy" />
-              </a>
-              {img.caption && <figcaption>{img.caption}</figcaption>}
-            </figure>
-          ))}
-        </div>
-      )
-    }
-    {
-      p.links && p.links.length > 0 && (
-        <div class="links">
-          {p.links.map((l) => (
-            <a href={l.href} target="_blank" rel="noopener noreferrer">
-              {l.label} ↗
-            </a>
-          ))}
-        </div>
-      )
-    }
+  </details>
+  <div class="card-actions">
+    <a class="detail-link" href={'/projects/' + project.slug + '/'} aria-label={project.title + ' 상세 페이지'}>상세 페이지 <span aria-hidden="true">↗</span></a>
+    <a class="source-link" href={project.repo} target="_blank" rel="noopener noreferrer" aria-label={project.title + ' GitHub 소스코드'}>GitHub</a>
   </div>
-</details>
-
-<style>
-  .head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 12px;
-  }
-  h3 {
-    margin: 0;
-    font-size: 1.1rem;
-  }
-  .period {
-    font-size: 0.82rem;
-    color: var(--muted);
-  }
-  .summary {
-    margin: 4px 0 10px;
-    color: var(--muted);
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  h4 {
-    margin: 16px 0 4px;
-    font-size: 0.85rem;
-    color: var(--accent);
-  }
-  .details-body {
-    border-top: 1px dashed var(--border);
-    padding-top: 4px;
-    margin: 0 20px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  p,
-  ul {
-    margin: 0;
-  }
-  ul {
-    padding-left: 1.2em;
-  }
-  .video {
-    margin-top: 16px;
-    aspect-ratio: 16 / 9;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #000;
-  }
-  .video iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-  }
-  figure {
-    margin: 0;
-  }
-  figure img {
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    display: block;
-    background: #fff;
-  }
-  figcaption {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-  .links {
-    display: flex;
-    gap: 16px;
-    margin-top: 16px;
-    font-weight: 600;
-  }
-</style>
+</article>

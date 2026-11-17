@@ -1,34 +1,33 @@
 ---
 import '../styles/global.css';
 import { profile } from '../data/profile';
-
-const title = `${profile.name} — ${profile.role}`;
-const description = profile.tagline;
+interface Props { title?: string; description?: string }
+const { title = profile.name + ' | RTL 설계·검증·임베디드', description = profile.tagline } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
-
 <!doctype html>
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <script is:inline>
       try {
-        const t = localStorage.getItem('theme');
-        if (t) document.documentElement.dataset.theme = t;
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
       } catch {}
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main">본문으로 이동</a>
     <slot />
   </body>
 </html>

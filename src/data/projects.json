@@ -1,0 +1,895 @@
+[
+  {
+    "slug": "rv32i-cpu",
+    "title": "RV32I Multi-cycle CPU",
+    "category": "RTL 설계·검증",
+    "period": "2026.09",
+    "team": "4인 팀",
+    "role": "CPU Datapath·Control Unit RTL 설계 및 C 누적합 프로그램 동작 확인",
+    "summary": "RV32I 명령어 실행 경로를 설계하고 누적합 프로그램의 레지스터·메모리 변화를 확인하였습니다. 팀 단위로 UVM 검증과 APB 주변장치 확장을 수행하였습니다.",
+    "stack": [
+      "SystemVerilog",
+      "RISC-V",
+      "UVM",
+      "APB"
+    ],
+    "highlights": [
+      "누적합 프로그램의 최종 값 i=10, sum=55 확인",
+      "팀 UVM 발표 결과 90,170개 명령 PASS"
+    ],
+    "goal": "RISC-V 기본 정수 명령어를 실행하는 Multi-cycle CPU를 설계하고, 소프트웨어 실행과 버스 연결을 통해 RTL 동작을 확인하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "Datapath에 PC, 레지스터 파일, ALU, 즉시값 생성 및 중간 결과 레지스터를 구성하였습니다.",
+      "Control Unit FSM에서 명령어 종류에 따른 실행·메모리 접근·Write-back 순서를 제어하였습니다.",
+      "C 누적합 프로그램의 어셈블리 흐름을 분석하고, 반복문과 함수 호출이 RTL 파형에 반영되는 과정을 확인하였습니다.",
+      "팀 통합 단계에서 APB의 IDLE·SETUP·ACCESS 상태와 ready 응답을 사용하여 메모리 및 GPIO 접근을 구성하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "시프트 연산의 이동량 해석",
+        "observation": "팀 UVM 검증에서 SLL·SRL·SRA 연산의 기대값과 실제값이 불일치하였습니다.",
+        "cause": "발표 자료는 rs2 데이터 전체를 이동량으로 사용한 RTL을 원인으로 기록하고 있습니다.",
+        "action": "팀 수정본에서 이동량을 rs2[4:0]로 제한하였습니다. SLL의 rs1=5, rs2=0xffffffff 사례에서 기대값 0x80000000을 확인하였습니다.",
+        "result": "발표 기록에서 FAIL 4,072건이 0건으로 감소하였습니다. 공개된 CPU 스냅샷에는 수정 전 연산식이 보존되어 있습니다."
+      },
+      {
+        "title": "미실행 커버리지 조합",
+        "observation": "팀 UVM 발표 결과의 Functional Coverage는 99.56%입니다.",
+        "cause": "ADD의 첫 번째 피연산자 최댓값 조건과 AND·XOR의 두 번째 피연산자 최댓값 조건이 남아 있습니다.",
+        "action": "발표 자료에 준비 레지스터를 유지한 Directed 시나리오 3개 및 주기적 레지스터 재초기화 방안을 정리하였습니다.",
+        "result": "보강 방안은 후속 검증 항목으로 기록하였습니다."
+      }
+    ],
+    "results": [
+      "본인 담당 결과는 CPU RTL 및 누적합 프로그램 동작 확인입니다.",
+      "김민석은 UVM 검증, 강건은 APB 연결, 정성하는 소프트웨어 흐름 설명을 담당하였습니다.",
+      "팀 UVM 검증 범위는 R형 10개와 I형 ALU 9개입니다. 준비 명령 144개, Directed 26개, Random 90,000개를 포함하여 총 90,170개를 검사하였습니다.",
+      "팀 발표 자료에 APB를 통한 Load/Store와 Basys3 ILA 관측 결과가 수록되어 있습니다."
+    ],
+    "sourceNote": "cpu/는 TEAMPJ4_rv32i의 RTL 및 클럭·리셋 테스트벤치 스냅샷입니다. apb/는 GPIO 프로젝트에서 확인한 버전입니다. 발표의 CPU UVM 테스트벤치와 최종 시프트 수정본은 현재 공개 소스에서 확인되지 않아, 발표 수치는 팀 수행 기록으로 표기하였습니다.",
+    "structure": [
+      {
+        "path": "cpu/rtl/datapath.sv",
+        "description": "ALU, 레지스터 파일 및 Datapath"
+      },
+      {
+        "path": "cpu/rtl/control_unit.sv",
+        "description": "명령어별 상태 제어"
+      },
+      {
+        "path": "cpu/rtl/instruction_rom.sv",
+        "description": "누적합 프로그램 및 테스트 명령"
+      },
+      {
+        "path": "cpu/tb/tb_rv32i.sv",
+        "description": "클럭·리셋 기반 시뮬레이션 진입점"
+      },
+      {
+        "path": "apb/rtl/",
+        "description": "APB 및 GPIO 연결 버전"
+      },
+      {
+        "path": "apb/rom_code_2.mem",
+        "description": "APB 버전의 명령어 메모리"
+      }
+    ],
+    "run": [
+      "CPU 시뮬레이션은 cpu/를 작업 디렉터리로 사용하고 files.f를 컴파일 목록으로 지정합니다.",
+      "최상위 테스트벤치는 tb_rv32i_cpu입니다. 기존 테스트벤치는 파형 관측 방식입니다.",
+      "APB 버전은 apb/를 작업 디렉터리로 사용하고 files.f와 rom_code_2.mem을 함께 사용합니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/rv32i-apb-block.png",
+        "caption": "팀 발표 자료의 CPU·APB 시스템 구성"
+      },
+      {
+        "src": "/projects/rv32i-uvm-result.png",
+        "caption": "팀 UVM 발표 결과. 공개 소스 스냅샷과 실행 버전이 다릅니다."
+      }
+    ],
+    "videos": [],
+    "references": [
+      {
+        "label": "팀 최종 발표 자료 r9",
+        "href": "https://docs.google.com/presentation/d/1rQOqn0zb5K-6F9mSDNCq0MLXzXdX3Gpm/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/rv32i-cpu"
+  },
+  {
+    "slug": "fifo-uvm",
+    "title": "FIFO UVM 테스트벤치",
+    "category": "RTL 설계·검증",
+    "period": "2026.09",
+    "team": "개인",
+    "role": "UVM 환경 구성, Queue 참조 모델 및 기능 커버리지 작성",
+    "summary": "동기식 FIFO의 데이터 순서와 full·empty 상태를 Scoreboard로 비교하고, Directed 및 Random 시나리오를 구성하였습니다.",
+    "stack": [
+      "SystemVerilog",
+      "UVM",
+      "Scoreboard",
+      "Coverage"
+    ],
+    "highlights": [
+      "Push 17회·Pop 17회로 16-depth 경계 자극",
+      "Queue 참조 모델과 기능·교차 커버리지 구성"
+    ],
+    "goal": "동기식 FIFO의 데이터 보존, 출력 순서, full·empty 상태 및 동시 push/pop 동작을 자동으로 비교하는 검증 환경을 구성하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "Sequence·Sequencer·Driver·Monitor·Scoreboard·Coverage를 UVM 컴포넌트로 구성하였습니다.",
+      "현재 소스는 Reset 3회, Push 17회, Pop 17회, Random 1,000회 시나리오를 수행합니다.",
+      "Scoreboard는 수락된 쓰기 데이터를 Queue에 저장하고 읽기 데이터 및 플래그를 예상 상태와 비교합니다.",
+      "push, pop, full, empty, 데이터 및 push×pop·push×full·pop×empty 커버리지를 수집합니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "구동·관측 타이밍",
+        "observation": "DUT 갱신 시점과 테스트벤치 구동·관측 시점을 정의해야 합니다.",
+        "cause": "같은 클럭 에지에서 신호 구동과 샘플링을 수행하면 시뮬레이션 스케줄링의 영향을 받을 수 있습니다.",
+        "action": "소스에서 Driver의 output #1과 Monitor의 input #1step clocking block을 사용하였습니다.",
+        "result": "구동·관측 시점과 Scoreboard의 이전 상태 기반 비교 순서를 명시하였습니다."
+      },
+      {
+        "title": "X 상태 처리와 검사 범위",
+        "observation": "현재 Scoreboard는 reset 또는 full·empty의 X 상태에서 예상 Queue를 초기화합니다.",
+        "cause": "초기 상태 처리 경로에 실행 중 X 상태가 포함되어 있습니다.",
+        "action": "실행 중 X 발생의 독립 오류 판정과 종료 시 잔여 데이터 검사를 후속 검토 항목으로 정리하였습니다.",
+        "result": "현재 저장소의 검증 범위에 해당 제한을 기록하였습니다."
+      }
+    ],
+    "results": [
+      "발표 자료의 결과 화면에 데이터 비교 5,355건, 불일치 0건, Functional Coverage 100%가 기록되어 있습니다.",
+      "현재 소스와 발표 시나리오 설명은 Random 1,000회입니다. 결과 화면의 실행 횟수와 차이가 있어 동일 실행 결과로 확정하지 않았습니다."
+    ],
+    "sourceNote": "2026_09_06_FIFO_UVM의 소스를 수록하였습니다. 발표 결과 이미지와 현재 소스의 실행 횟수 차이를 기록하였으며, UVM 시뮬레이터를 통한 이번 재실행 결과는 포함하지 않았습니다.",
+    "structure": [
+      {
+        "path": "fifo.sv",
+        "description": "동기식 FIFO RTL"
+      },
+      {
+        "path": "tb_fifo.sv",
+        "description": "Interface 및 UVM 검증 컴포넌트"
+      },
+      {
+        "path": "files.f",
+        "description": "소스 컴파일 순서"
+      },
+      {
+        "path": "README.md",
+        "description": "검증 구성과 발표 결과의 버전 정보"
+      }
+    ],
+    "run": [
+      "UVM 1.2를 지원하는 SystemVerilog 시뮬레이터에서 files.f를 컴파일합니다.",
+      "UVM 패키지와 매크로 include 경로를 설정하고 tb_fifo를 최상위로 지정합니다.",
+      "테스트벤치의 FSDB 출력 함수를 사용하려면 시뮬레이터에 FSDB PLI를 연결하고 build/ 디렉터리를 생성합니다.",
+      "UVM_ERROR·UVM_FATAL, Scoreboard summary, coverage 출력을 확인합니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/fifo-result-slide.png",
+        "caption": "2026.09.07 발표 자료의 검증 결과 화면"
+      }
+    ],
+    "videos": [],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1rK8uxAa0HYDFaz_O0OAxC-YbhmIWZcK8dsZ-IXDrIas/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/fifo-uvm"
+  },
+  {
+    "slug": "fpga-uart-sensors",
+    "title": "UART 센서 통신 시스템",
+    "category": "RTL 설계·검증",
+    "period": "2026.08",
+    "team": "2인 팀",
+    "role": "Top module 통합 설계 및 발표 자료 작성",
+    "summary": "UART 명령으로 온도·습도·거리를 조회하고, 센서 측정값을 PC와 Basys3 FND에 출력하도록 통합하였습니다.",
+    "stack": [
+      "Verilog",
+      "UART",
+      "FIFO",
+      "DHT11",
+      "HC-SR04"
+    ],
+    "highlights": [
+      "UART·센서·시계·스톱워치 통합",
+      "센서 비트 밀림 및 테스트벤치 race condition 분석"
+    ],
+    "goal": "시계·스톱워치와 센서 모듈을 하나의 Top에 통합하고, PC 명령에 따라 센서 값을 읽어 반환하는 통신 경로를 구현하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "UART RX, FIFO, ASCII 명령 해석, 센서 측정, 응답 생성 및 UART TX를 연결하였습니다.",
+      "/get_temp, /get_humid, /get_dist 명령과 FND 표시 선택을 구성하였습니다.",
+      "DHT11 수신 데이터의 40비트 구성 및 체크섬에 따른 valid 출력을 확인하였습니다.",
+      "센서 드라이버 설계는 팀원 김민석이 담당하였으며, 본인은 Top module 통합을 담당하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "DHT11 측정값의 비트 밀림",
+        "observation": "실물 동작에서 측정값이 두 배 단위로 변하는 현상이 발생하였습니다.",
+        "cause": "팀은 SYNC 상태의 펄스 판정 과정에서 비트 경계가 어긋나는 현상으로 분석하였습니다.",
+        "action": "센서 모듈에 Edge detector를 추가하여 신호 전이와 tick count를 함께 판정하였습니다.",
+        "result": "발표 자료에 수정 전후 측정값 영상과 안정된 출력 결과를 기록하였습니다."
+      },
+      {
+        "title": "SR04 테스트벤치의 race condition",
+        "observation": "distance 상태 진입 시 시뮬레이션 상태 천이가 예상과 다르게 관찰되었습니다.",
+        "cause": "echo 하강 에지와 clk 상승 에지가 겹치는 파형을 확인하였습니다.",
+        "action": "테스트벤치 자극이 negedge를 기다리도록 event 구문을 추가하였습니다.",
+        "result": "수정 후 상태 천이가 클럭에 맞추어 진행되는 파형을 확인하였습니다."
+      }
+    ],
+    "results": [
+      "온도·습도·거리 조회 및 FND 출력 동작을 발표 영상으로 기록하였습니다.",
+      "DHT11 체크섬 일치·불일치 조건과 UART·FIFO 경계 동작을 시뮬레이션으로 확인하였습니다."
+    ],
+    "sourceNote": "현재 통합본과 팀 제출 변형을 각각 루트 및 team-submission/에 구성하였습니다. 각 files.f에 필요한 공통 모듈을 포함하였습니다.",
+    "structure": [
+      {
+        "path": "src/top_watch_stopwatch.v",
+        "description": "Top 및 센서 조회 통합 로직"
+      },
+      {
+        "path": "src/uart.v",
+        "description": "UART 송수신"
+      },
+      {
+        "path": "src/ascii_decoder.v",
+        "description": "문자 입력 해석"
+      },
+      {
+        "path": "src/dht11.v",
+        "description": "온습도 센서 인터페이스"
+      },
+      {
+        "path": "src/sr04_controller.v",
+        "description": "초음파 거리 측정"
+      },
+      {
+        "path": "team-submission/",
+        "description": "팀 제출 버전과 독립 파일 목록"
+      }
+    ],
+    "run": [
+      "합성 최상위 모듈은 top_watch_stopwatch로 지정합니다. 파일에 함께 정의된 개별 top_watch·top_stopwatch는 별도 과제용 모듈입니다.",
+      "Vivado에서 files.f의 소스와 constraints/의 보드 핀 정의를 확인합니다.",
+      "최상위 모듈과 사용하는 포트에 맞추어 XDC를 활성화한 후 합성 및 보드 다운로드를 수행합니다.",
+      "9600 baud 설정에서 센서 조회 명령과 FND 출력을 확인합니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/sensor-block.png",
+        "caption": "UART·센서·시계·스톱워치 통합 구조"
+      }
+    ],
+    "videos": [
+      {
+        "id": "JveokxzkBsI",
+        "title": "센서 통신 시스템 동작"
+      },
+      {
+        "id": "Frnncq4ZkU8",
+        "title": "통합 기능 시연"
+      },
+      {
+        "id": "Zye28Xb_3lo",
+        "title": "DHT11 수정 후 출력"
+      }
+    ],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1fx_m2Z3iZAGhJlWcYz796hRYBHJudlQB50N9zZlAVSI/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/fpga-uart-sensors"
+  },
+  {
+    "slug": "fpga-uart-stopwatch",
+    "title": "UART 제어 시계·스톱워치",
+    "category": "RTL 설계·검증",
+    "period": "2026.08",
+    "team": "개인",
+    "role": "UART 제어 경로 확장 및 시뮬레이션",
+    "summary": "PC에서 송신한 ASCII 명령을 시계·스톱워치의 시작, 정지, 초기화 및 시각 조정 신호로 변환하였습니다.",
+    "stack": [
+      "Verilog",
+      "UART",
+      "FSM",
+      "Basys3"
+    ],
+    "highlights": [
+      "9600 baud·16배 tick 기반 UART",
+      "12개 명령 시나리오와 보드 영상"
+    ],
+    "goal": "기존 버튼 기반 시계·스톱워치를 PC의 UART 명령으로 제어하도록 확장하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "100MHz 기준 클럭에서 9600 baud의 16배 tick을 생성하고 UART 송수신 FSM을 구성하였습니다.",
+      "r·s·c·m 명령을 스톱워치 제어에, L·R·U·D 명령을 시계 조정에 연결하였습니다.",
+      "기존 버튼 경로와 UART 경로가 사용하는 제어 신호를 Top에서 통합하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "버튼 토글과 UART 시작·정지 명령의 차이",
+        "observation": "버튼의 run/stop 토글과 UART의 r·s 명령은 입력 의미가 다릅니다.",
+        "cause": "공통 OR 결합만으로는 명령별 시작·정지 상태를 명시하기 어렵습니다.",
+        "action": "UART run 및 stop 신호를 별도 경로로 연결하고 Control Unit의 상태 제어에 반영하였습니다.",
+        "result": "시작·정지·모드·초기화 및 시계 위치 이동·증감의 12개 시나리오를 확인하였습니다."
+      }
+    ],
+    "results": [
+      "발표 자료에 12개 시뮬레이션 시나리오와 Basys3 동작 영상이 수록되어 있습니다."
+    ],
+    "structure": [
+      {
+        "path": "src/uart.v",
+        "description": "UART TX·RX 및 baud tick"
+      },
+      {
+        "path": "src/ascii_decoder.v",
+        "description": "ASCII 제어 명령 해석"
+      },
+      {
+        "path": "src/top_watch_stopwatch.v",
+        "description": "시계·스톱워치 제어 경로 통합"
+      },
+      {
+        "path": "sim/",
+        "description": "기존 시뮬레이션 소스"
+      }
+    ],
+    "run": [
+      "합성 최상위 모듈은 top_watch_stopwatch로 지정합니다. 파일에 함께 정의된 개별 top_watch·top_stopwatch는 별도 과제용 모듈입니다.",
+      "files.f를 기준으로 RTL을 가져오고 사용할 보드 핀을 XDC에 지정합니다.",
+      "PC UART를 9600 baud로 설정한 후 r, s, c, m, L, R, U, D를 송신합니다."
+    ],
+    "images": [],
+    "videos": [
+      {
+        "id": "lRf44Yrbjak",
+        "title": "UART 시계·스톱워치 동작"
+      }
+    ],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1KFO2DHhuy-Bv6-T-DO49XrcA7kDt3f-wE3dZz5YqphA/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/fpga-uart-stopwatch",
+    "sourceNote": "소스 스냅샷과 발표 자료를 기준으로 작성하였습니다. 파일별 원본 경로와 SHA-256은 SOURCE_MANIFEST.json에 기록하였습니다. 공개본 구성 과정에서 uart_run·uart_stop 포트가 있는 후속 센서 프로젝트의 공통 Control Unit을 연결하였습니다. 기존 파일은 docs/original-control_unit.v에 보존하였습니다."
+  },
+  {
+    "slug": "fpga-stopwatch-watch",
+    "title": "FPGA 시계·스톱워치 통합",
+    "category": "RTL 설계·검증",
+    "period": "2026.07–08",
+    "team": "2인 팀",
+    "role": "스톱워치, Top module 및 Block diagram 설계",
+    "summary": "시계와 스톱워치를 통합하고 버튼 디바운스, 표시 선택, 증가·감소 카운터 및 4개 Lap 기록을 구성하였습니다.",
+    "stack": [
+      "Verilog",
+      "FSM",
+      "Debounce",
+      "Basys3"
+    ],
+    "highlights": [
+      "2026년 7월 팀 프로젝트 및 8월 수정본",
+      "4개 Lap 기록·선택·삭제와 경계 카운터 확인"
+    ],
+    "goal": "시계와 스톱워치를 동시에 동작시키면서 선택한 모듈에 버튼 입력과 FND 출력을 연결하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "본인은 스톱워치 및 Top을, 팀원 박율은 시계·DEMUX·FND 제어를 담당하였습니다.",
+      "4개 버튼에 대한 디바운스와 단일 tick 출력을 구성하였습니다.",
+      "시간 단위별 파라미터 카운터와 증가·감소 모드를 사용하였습니다.",
+      "Lap memory에 최대 4개 기록을 저장하고 스위치로 표시 및 삭제 대상을 선택하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "Lap 기록 삭제와 쓰기의 중복 실행",
+        "observation": "스위치 상태에 따른 삭제 처리 뒤에 기록 쓰기가 함께 실행되는 문제가 발생하였습니다.",
+        "cause": "연속된 독립 if문이 한 번의 입력에서 함께 실행되는 구조였습니다.",
+        "action": "조건을 else if로 연결하여 삭제와 쓰기 경로의 실행 관계를 정리하였습니다.",
+        "result": "발표 자료에 Lap 4회 저장, 선택 출력, 기록 삭제 파형을 기록하였습니다."
+      }
+    ],
+    "results": [
+      "시뮬레이션에서 59초 99단위 이후 카운터 전이와 감소 모드의 Underflow를 확인하였습니다.",
+      "Lap 4개 기록, 스위치 선택 표시 및 삭제 동작을 보드에서 시연하였습니다."
+    ],
+    "sourceNote": "루트에는 2026.08 수정본을, archive/2026-07에는 초기 통합본을 구성하였습니다.",
+    "structure": [
+      {
+        "path": "src/stopwatch.v",
+        "description": "Tick generator, 시간 카운터 및 Lap memory"
+      },
+      {
+        "path": "src/control_unit.v",
+        "description": "스톱워치 FSM"
+      },
+      {
+        "path": "src/btn_debounce.v",
+        "description": "버튼 디바운스 및 Edge 처리"
+      },
+      {
+        "path": "src/top_watch_stopwatch.v",
+        "description": "통합 Top"
+      },
+      {
+        "path": "archive/2026-07/",
+        "description": "7월 초기 통합 소스"
+      }
+    ],
+    "run": [
+      "합성 최상위 모듈은 top_watch_stopwatch로 지정합니다. 파일에 함께 정의된 개별 top_watch·top_stopwatch는 별도 과제용 모듈입니다.",
+      "루트 또는 archive/2026-07 중 검토할 버전에서 files.f를 사용합니다.",
+      "시뮬레이션에서는 sim/testbench.v를 추가하고 모드 전환·Lap·카운터 경계 파형을 확인합니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/fpga-stopwatch-watch-structure.png",
+        "caption": "시계·스톱워치 Block diagram · 발표 자료 발췌"
+      }
+    ],
+    "videos": [
+      {
+        "id": "Y4sKckAdjYQ",
+        "title": "시계·스톱워치 및 Lap 기능 시연"
+      }
+    ],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1uPvRbubpczpm4x5vNdt-4z-j7bRWLbvBnR-rEY2rwhM/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/fpga-stopwatch-watch"
+  },
+  {
+    "slug": "stm32-smart-elevator",
+    "title": "STM32 화물용 엘리베이터",
+    "category": "임베디드",
+    "period": "2026.11",
+    "team": "2인 팀",
+    "role": "UART 통신 연동, Application 설계 및 소프트웨어 디버깅",
+    "summary": "버튼과 UART 명령으로 1~3층을 호출하고, 포토센서·스텝모터·상태 표시 장치를 제어하였습니다.",
+    "stack": [
+      "C",
+      "STM32F411RE",
+      "UART",
+      "FSM",
+      "Python"
+    ],
+    "highlights": [
+      "길이·체크섬 기반 UART 패킷 파서",
+      "층 호출 GUI와 펌웨어 동작 영상"
+    ],
+    "goal": "층 호출 입력을 받아 목표 층으로 이동하고, 센서로 도착을 확인한 후 상태를 표시하는 엘리베이터 펌웨어를 구현하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "Application에서 버튼 및 UART 이벤트를 Queue에 등록하고 Elevator_requestFloor로 전달하였습니다.",
+      "HOMING·IDLE·MOVING_UP·MOVING_DOWN 상태로 동작하며 포토센서로 층을 감지합니다.",
+      "UART 프레임은 SOF 0xAA, LEN, CMD, PAYLOAD, CHECKSUM으로 구성됩니다. 체크섬은 LEN부터 PAYLOAD까지 합의 하위 8비트입니다.",
+      "Python GUI에서 층 호출, 현재 층 조회 및 송수신 바이트 확인 기능을 구성하였습니다.",
+      "팀원 이도성은 Elevator·센서 드라이버와 보드 구성을 담당하였습니다. 교육용 드라이버의 기존 작성자 표기를 소스에 보존하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "1층 호출의 인자 매핑",
+        "observation": "btn1stFloor 이벤트를 꺼낸 뒤 requestFloor에 잘못된 인자가 전달되었습니다.",
+        "cause": "버튼 이벤트 번호와 실제 층 번호의 대응을 확인해야 하는 상황이었습니다.",
+        "action": "Application에서 btn1stFloor·btn2ndFloor·btn3rdFloor를 각각 1·2·3층 요청으로 연결하였습니다.",
+        "result": "현재 소스의 해당 매핑과 발표 자료의 동작 영상을 확인할 수 있습니다."
+      }
+    ],
+    "results": [
+      "버튼 호출, 포토센서 정지, LED·FND 갱신 및 UART 제어 영상을 기록하였습니다.",
+      "현재 GUI는 750ms 주기의 층 조회와 송수신 로그를 제공합니다."
+    ],
+    "sourceNote": "이동 중 호출은 펌웨어 상태에 따라 무시될 수 있습니다. UART 응답과 목적 층 도착은 각각 확인해야 합니다.",
+    "structure": [
+      {
+        "path": "Core/Src/ap/ap_main.c",
+        "description": "버튼·UART 이벤트 및 Application"
+      },
+      {
+        "path": "Core/Src/driver/uart_protocol/",
+        "description": "바이트 단위 수신 FSM 및 패킷 송신"
+      },
+      {
+        "path": "Core/Src/driver/",
+        "description": "Elevator·포토센서·표시 장치 드라이버"
+      },
+      {
+        "path": "UART_GUI/app.py",
+        "description": "층 호출 및 조회 GUI"
+      },
+      {
+        "path": "UART_GUI/protocol.py",
+        "description": "PC 패킷 처리"
+      }
+    ],
+    "run": [
+      "STM32CubeIDE에서 .project를 포함한 저장소 루트를 Import합니다.",
+      "NUCLEO-F411RE 배선과 .ioc 설정을 확인한 후 Build 및 Download합니다.",
+      "Python 환경에서 python -m pip install PySide6 pyserial을 실행한 후 UART_GUI/app.py를 실행합니다. 기본 통신 설정은 115200bps, 8-N-1입니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/stm32-smart-elevator-structure.png",
+        "caption": "엘리베이터 하드웨어 구성 · 발표 자료 발췌"
+      }
+    ],
+    "videos": [
+      {
+        "id": "Fw72Q2hcMLE",
+        "title": "엘리베이터 전체 동작"
+      },
+      {
+        "id": "5CW0LF-57x8",
+        "title": "UART 원격 제어"
+      }
+    ],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1vLyiXlRVkP12A95SaMk8M6gW4w5bLE4pu3T644fP3VA/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/stm32-smart-elevator"
+  },
+  {
+    "slug": "stm32-rc-car",
+    "title": "STM32 RC 자동차 제어",
+    "category": "임베디드",
+    "period": "2026.11",
+    "team": "2인 팀",
+    "role": "제어 앱 설계, Bluetooth 통신 및 연속 수동 각도 제어",
+    "summary": "Bluetooth 조이스틱 명령으로 좌우 모터를 제어하고, 초음파 거리 기반 자동 주행을 팀 프로젝트로 구성하였습니다.",
+    "stack": [
+      "C",
+      "STM32F411RE",
+      "FreeRTOS",
+      "Bluetooth",
+      "PWM"
+    ],
+    "highlights": [
+      "통신·모터 Task 및 Queue·Mutex 사용",
+      "통신 Task 스택 부족과 STOP 명령 전달 문제 분석"
+    ],
+    "goal": "Bluetooth 기반 수동 주행과 초음파 센서 기반 자동 주행을 구현하고, 통신 입력을 모터 제어에 연결하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "본인은 RC 제어 앱, Bluetooth 통신 및 연속 수동 각도 제어를 담당하였습니다. 팀원 이도성은 자동 주행과 거리 측정 모듈을 담당하였습니다.",
+      "수동 제어 소스는 X·Y 숫자 필드를 해석하고 Queue를 통해 모터 Task에 전달합니다.",
+      "LCD 접근에는 Mutex를 사용하며 통신·버튼·모터 작업을 분리하였습니다.",
+      "추가 자율주행 버전에는 센서 순차 측정, 유효 시간 검사, 회전 유지 시간과 진입·복귀 임계값을 구성하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "첫 명령 이후 통신 정지",
+        "observation": "한 번 명령을 보낸 뒤 후속 명령이 처리되지 않는 현상을 관찰하였습니다.",
+        "cause": "발표 자료는 문자열 변환 및 LCD 호출 과정의 CommTask 스택 부족을 추정 원인으로 기록하고 있습니다.",
+        "action": "발표에서 스택을 128워드에서 512워드로 확대하였습니다.",
+        "result": "발표 기록에서 후속 명령 처리가 회복되었습니다. 공개된 manual-rtos 스냅샷의 설정은 128워드이므로 수정 전 버전으로 명시하였습니다."
+      },
+      {
+        "title": "조이스틱 해제 시 정지 명령 유실",
+        "observation": "앱에서 한 번 전송한 STOP 명령이 반영되지 않는 경우가 있었습니다.",
+        "cause": "단발 명령 전달 방식에서 정지 상태를 지속적으로 전달할 필요가 있었습니다.",
+        "action": "발표 자료에 조이스틱 해제 상태에서 STOP 명령을 반복 전송하도록 변경한 내용을 기록하였습니다.",
+        "result": "수동 조작 영상과 개선 영상을 발표 자료에 수록하였습니다."
+      }
+    ],
+    "results": [
+      "수동 주행 및 자동 주행 시연 영상이 존재합니다.",
+      "저장소에서 수동 RTOS 제어, 기본 자동 주행, 최대 듀티 자동 주행의 소스를 각각 확인할 수 있습니다.",
+      "2026.11.18 autonomous-maxspeed의 기존 Arm GCC·Unicorn 테스트를 실행하여 상태 전이, 시간 경계, PWM 및 센서 timeout 검사를 통과하였습니다."
+    ],
+    "sourceNote": "각 폴더는 서로 다른 개발 스냅샷입니다. 발표 최종 통합본과 모바일 앱 원본은 확인되지 않았습니다. autonomous-maxspeed의 최대 속도는 PWM 듀티 100%를 의미하며, 해당 추가 버전의 실차 주행 성능은 별도 확인이 필요합니다.",
+    "structure": [
+      {
+        "path": "manual-rtos/Core/Src/ap/task/comm_task/",
+        "description": "Bluetooth 명령 파싱 및 전달"
+      },
+      {
+        "path": "manual-rtos/Core/Src/freertos.c",
+        "description": "Task·Queue·Mutex 생성"
+      },
+      {
+        "path": "autonomous/Core/Src/main.c",
+        "description": "기본 초음파 자동 주행"
+      },
+      {
+        "path": "autonomous-maxspeed/Core/Src/navigation.c",
+        "description": "거리·유효 시간 기반 방향 판단"
+      },
+      {
+        "path": "autonomous-maxspeed/tests/",
+        "description": "C 코드 기반 펌웨어 테스트"
+      }
+    ],
+    "run": [
+      "각 폴더를 별도 STM32CubeIDE 프로젝트로 Import합니다.",
+      "해당 폴더의 .ioc와 배선 설명을 기준으로 하드웨어를 연결합니다.",
+      "manual-rtos 명령은 *로 종료됩니다. 자동 주행 추가 버전은 자체 README와 tests/run_tests.py에 실행 절차가 있습니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/stm32-rc-car-structure.png",
+        "caption": "RC 자동차 하드웨어 구성 · 발표 자료 발췌"
+      }
+    ],
+    "videos": [
+      {
+        "id": "PSv0RurP0Og",
+        "title": "Bluetooth 수동 주행"
+      },
+      {
+        "id": "nSet8mlpK6E",
+        "title": "팀 자동 주행 시연"
+      }
+    ],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1PTB3ovCwl-OSSKuT2UqVhh27Gt-OEVEujULe4K4Zsnk/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/stm32-rc-car"
+  },
+  {
+    "slug": "stm32-analog-watch",
+    "title": "STM32 아날로그 시계·스톱워치",
+    "category": "임베디드",
+    "period": "2026.10",
+    "team": "개인",
+    "role": "시각 데이터 연동 및 표시·스텝모터 Application 구성",
+    "summary": "RTC 시각과 스톱워치 값을 LCD·FND에 표시하고, 스텝모터 3개로 시침·분침·초침 위치를 제어하였습니다.",
+    "stack": [
+      "C",
+      "STM32F411RE",
+      "I2C",
+      "Timer",
+      "Step Motor"
+    ],
+    "highlights": [
+      "DS3231·LCD·FND·스텝모터 통합",
+      "시각 데이터와 모터 목표 위치 변환"
+    ],
+    "goal": "디지털 시각 데이터와 물리적인 시계 바늘을 연결하여 현재 시각 및 스톱워치 시간을 표시하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "DS3231 레지스터를 I2C로 읽고 BCD·십진수 변환을 적용하였습니다.",
+      "FND의 자리 선택을 주기적으로 변경하고 LCD에 시각 정보를 표시하였습니다.",
+      "시·분·초 값을 모터 회전 스텝으로 변환하고 각 바늘의 현재 위치와 목표 위치를 관리하였습니다.",
+      "Application을 ClockHands·Display·StopWatch·TimeClock 모듈로 구성하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "모터 구동 주기 및 초기 위치 검토",
+        "observation": "모터가 목표 위치로 이동하는 주기와 전원 인가 시 기준 위치를 정의해야 합니다.",
+        "cause": "현재 소스는 전원 인가 시 세 바늘이 12시 방향에 있다고 가정하며, 구동 주기가 너무 짧으면 탈조 가능성이 있습니다.",
+        "action": "ClockHands 모듈에서 2ms 스텝 주기와 현재·목표 위치를 관리하도록 구현하였습니다.",
+        "result": "초기 바늘 정렬은 실행 전 확인 항목으로 기록하였습니다. 발표 자료에는 별도의 정량 오차 측정 결과가 없습니다."
+      }
+    ],
+    "results": [
+      "LCD·FND 시각 출력과 아날로그 바늘 동작을 시연 영상으로 기록하였습니다."
+    ],
+    "structure": [
+      {
+        "path": "Core/Src/ap/ClockHands/",
+        "description": "모터 3개 목표 위치 및 이동 제어"
+      },
+      {
+        "path": "Core/Src/ap/TimeClock/",
+        "description": "현재 시각 관리"
+      },
+      {
+        "path": "Core/Src/ap/StopWatch/",
+        "description": "스톱워치 관리"
+      },
+      {
+        "path": "Core/Src/ap/Display/",
+        "description": "LCD·FND 출력"
+      },
+      {
+        "path": "Core/Src/driver/",
+        "description": "RTC·표시 장치·모터 드라이버"
+      }
+    ],
+    "run": [
+      "STM32CubeIDE에서 저장소 루트를 Import하고 .ioc의 핀 및 타이머 구성을 확인합니다.",
+      "보드 다운로드 전 바늘의 초기 위치와 모터 배선을 확인합니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/stm32-analog-watch-structure.png",
+        "caption": "아날로그 시계 하드웨어 구성 · 발표 자료 발췌"
+      }
+    ],
+    "videos": [
+      {
+        "id": "htJ-XKtOes8",
+        "title": "아날로그 시계·스톱워치 동작"
+      }
+    ],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1VLAkIOdrnwaiuhC7mJxGrKz0auzhg2lnHmrIdwkciWk/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/stm32-analog-watch",
+    "sourceNote": "소스 스냅샷과 발표 자료를 기준으로 작성하였습니다. 파일별 원본 경로와 SHA-256은 SOURCE_MANIFEST.json에 기록하였습니다."
+  },
+  {
+    "slug": "hand-gesture-game",
+    "title": "Raspberry Pi 손동작 입력 시스템",
+    "category": "임베디드",
+    "period": "2026.09–10",
+    "team": "3인 팀",
+    "role": "게임 제작·UI, 입력 연동, 시연 및 학습 데이터 촬영 도구 개발",
+    "summary": "카메라 손동작 분류 결과에 신뢰도·유지 시간·재입력 조건을 적용하여 게임 입력으로 전달하였습니다.",
+    "stack": [
+      "Python",
+      "Raspberry Pi 5",
+      "TFLite",
+      "OpenCV",
+      "Pygame"
+    ],
+    "highlights": [
+      "0.35초 유지 및 0.3초 재입력 조건",
+      "손 존재 확인과 클래스별 신뢰도 기준"
+    ],
+    "goal": "손동작 분류 결과를 안정된 단일 입력으로 변환하여 Raspberry Pi에서 실행되는 게임에 연결하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "카메라 입력, 손 위치 확인, 이미지 분류, 입력 안정화 및 게임 Action Queue를 연결하였습니다.",
+      "일반 동작은 85%, 주먹은 95% 신뢰도 기준을 적용하고 같은 동작을 0.35초 유지하도록 구성하였습니다.",
+      "동작 해제 0.3초, 짧은 결과 변동 0.1초에 대한 조건을 사용하였습니다.",
+      "본인은 게임 제작·시연·데이터 촬영 도구를 담당하였습니다. 조수현은 모델 학습·최적화, 김해랑은 게임 흐름·튜토리얼 및 데이터 확보를 담당하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "손이 없는 화면의 주먹 오인식",
+        "observation": "손이 보이지 않는 화면에서도 주먹으로 분류되어 입력 게이지가 증가하였습니다.",
+        "cause": "분류 결과만으로 입력을 확정하던 경로를 검토하였습니다.",
+        "action": "인식 영역 안의 손 존재 확인과 주먹 신뢰도 95% 조건을 추가하였습니다.",
+        "result": "발표 자료에 수정 후 입력 판정 결과를 기록하였습니다."
+      },
+      {
+        "title": "동작 전환 과정의 오입력",
+        "observation": "손 모양을 바꾸는 도중 다른 동작이 먼저 입력되는 문제가 발생하였습니다.",
+        "cause": "순간 분류 결과가 게임 입력으로 전달되는 경로였습니다.",
+        "action": "0.35초 유지 조건과 동일 입력의 재활성 조건을 적용하고, 튜토리얼 건너뛰기에는 별도 1초 조건을 사용하였습니다.",
+        "result": "원하지 않는 중간 동작 입력을 줄인 사례를 발표 자료에 기록하였습니다."
+      }
+    ],
+    "results": [
+      "Raspberry Pi 5에서 손동작 분류와 게임을 연동하였습니다.",
+      "게임에 5개 인, 6개 술법, 8단계를 구성하였습니다.",
+      "모델 학습 결과는 팀원의 담당 결과이며, 본인의 담당 범위는 게임 및 입력 연동으로 명시하였습니다."
+    ],
+    "structure": [
+      {
+        "path": "start_game.py",
+        "description": "실행 진입점"
+      },
+      {
+        "path": "engine/game/cv_source.py",
+        "description": "카메라·분류·입력 안정화"
+      },
+      {
+        "path": "engine/game/input_source.py",
+        "description": "Action 정의"
+      },
+      {
+        "path": "engine/game/scenes.py",
+        "description": "장면 및 진행 제어"
+      },
+      {
+        "path": "engine/game/combat.py",
+        "description": "전투 계산"
+      },
+      {
+        "path": "models/",
+        "description": "추론 모델"
+      }
+    ],
+    "run": [
+      "Python 환경에 requirements.txt를 설치합니다.",
+      "카메라 및 모델 경로를 확인한 뒤 python start_game.py로 실행합니다.",
+      "Raspberry Pi에서 사용한 카메라와 런타임 구성에 따라 TensorFlow Lite 의존성을 확인합니다."
+    ],
+    "images": [
+      {
+        "src": "/projects/hand-gesture-game-structure.png",
+        "caption": "손동작 입력 및 게임 소스 구조 · 발표 자료 발췌"
+      }
+    ],
+    "videos": [],
+    "references": [
+      {
+        "label": "발표 자료",
+        "href": "https://docs.google.com/presentation/d/1OUQDwSETtZgkQXFphdtln5xhXGBq-5b5bsO8MhggjVo/edit"
+      }
+    ],
+    "repo": "https://github.com/eugeneson3/hand-gesture-game",
+    "sourceNote": "소스 스냅샷과 발표 자료를 기준으로 작성하였습니다. 파일별 원본 경로와 SHA-256은 SOURCE_MANIFEST.json에 기록하였습니다."
+  },
+  {
+    "slug": "sv-guard",
+    "title": "SV-Guard 검증 지원 IDE",
+    "category": "개발 도구",
+    "period": "2026.11 기준",
+    "team": "개인",
+    "role": "SystemVerilog 검사 흐름, 진단 표시 및 편집기 기능 구성",
+    "summary": "SystemVerilog 파일 저장 시 pyslang 검사를 실행하고, 오류 위치와 진단 내용을 편집기 및 Problems 패널에 표시하는 도구입니다.",
+    "stack": [
+      "Python",
+      "PySide6",
+      "pyslang",
+      "pytest"
+    ],
+    "highlights": [
+      "별도 프로세스 검사 및 저장 요청 병합",
+      "오류 위치·이전 진단 상태·키보드 탐색"
+    ],
+    "goal": "SystemVerilog 학습 및 RTL 편집 과정에서 저장 후 진단 확인과 오류 위치 이동을 반복할 수 있는 로컬 개발 환경을 구성하는 것을 목표로 하였습니다.",
+    "implementation": [
+      "파일 저장 이벤트에서 프로젝트 검사를 실행하고 파일별 진단 정보를 편집기에 반영합니다.",
+      "pyslang 컴파일은 Worker process에서 실행하며, 검사 중 추가 저장 요청은 다음 실행으로 병합합니다.",
+      "편집 이후 이전 진단을 stale 상태로 표시하고 다음 검사에서 갱신합니다.",
+      "Problems 패널, Vim 키 입력, 명령 팔레트 및 세션 복원을 구성하였습니다."
+    ],
+    "troubleshooting": [
+      {
+        "title": "검사 중 편집기 응답성",
+        "observation": "컴파일 작업 중 편집기 입력과 화면 갱신이 영향을 받을 수 있습니다.",
+        "cause": "기존 README는 pyslang 컴파일이 Python GIL을 유지하는 점을 설계 근거로 기록하고 있습니다.",
+        "action": "검사를 별도 프로세스에서 실행하고 Worker 종료 후 다음 저장에서 재실행하도록 구성하였습니다.",
+        "result": "검사 상태와 진단 결과를 GUI 이벤트 흐름에 연결하였습니다."
+      }
+    ],
+    "results": [
+      "현재 구현 단계는 저장 시 검사와 진단 표시입니다.",
+      "저장소에 편집기·검사기 테스트 및 Windows·Ubuntu CI 설정이 포함되어 있습니다.",
+      "2026.11.18 공개 스냅샷의 기존 테스트를 Windows·Python 3.12·Qt offscreen 환경에서 실행하여 507개 통과, 2개 건너뜀을 확인하였습니다."
+    ],
+    "sourceNote": "현재 구현 범위와 향후 기능은 원본 README 및 ROADMAP에 기재되어 있습니다. 이번 공개본의 소스는 easySV 작업 폴더를 기준으로 구성하였습니다.",
+    "structure": [
+      {
+        "path": "app/",
+        "description": "PySide6 편집기 및 진단 UI"
+      },
+      {
+        "path": "svguard/",
+        "description": "pyslang 검사 및 CLI"
+      },
+      {
+        "path": "vimcore/",
+        "description": "Vim 입력 처리"
+      },
+      {
+        "path": "tests/",
+        "description": "기존 테스트"
+      },
+      {
+        "path": "pyproject.toml",
+        "description": "의존성 및 실행 진입점"
+      }
+    ],
+    "run": [
+      "Python 3.11 이상 환경에서 python tasks.py setup으로 가상환경과 의존성을 설치합니다.",
+      "python tasks.py run으로 GUI를 실행하거나 python tasks.py check로 예제 검사를 수행합니다.",
+      "python tasks.py test로 기존 테스트를 실행합니다."
+    ],
+    "images": [],
+    "videos": [],
+    "references": [],
+    "repo": "https://github.com/eugeneson3/sv-guard"
+  }
+]
