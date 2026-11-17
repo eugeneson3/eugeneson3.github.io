@@ -3,15 +3,12 @@
 export const profile = {
   name: '손승원',
   role: 'Digital Design & Verification Engineer (신입)',
-  tagline: 'RTL을 직접 설계하고, UVM으로 버그를 찾아 숫자로 증명하는 검증 엔지니어를 목표로 합니다.',
+  tagline: '시스템베릴로그 RTL 설계, UVM검증, 임베디드C 프로그래밍을 합니다.',
   location: 'Korea',
   email: 'davison2500@gmail.com',
   links: [{ label: 'GitHub', href: 'https://github.com/eugeneson3' }],
   resume: '', // public/resume.pdf 를 넣고 '/resume.pdf' 로 바꾸면 이력서 버튼이 생깁니다.
-  about: [
-    '전자정보통신공학을 전공하고, PVD 장비 업체에서 반도체 장비 운영·유지보수를 경험했습니다. 이후 AI 캠퍼스 반도체설계 과정에서 Verilog/SystemVerilog로 FIFO, UART, 센서 컨트롤러, RISC-V CPU까지 직접 설계하고 FPGA에서 동작을 확인했습니다.',
-    'UVM 테스트벤치로 9만 개 이상의 명령을 자동 검사해 시프트 연산 버그를 찾아낸 경험을 계기로, 칩이 "왜 맞는지"를 증명하는 검증(DV) 직무를 목표로 하고 있습니다.',
-  ],
+  
 };
 
 export const skills: { group: string; items: string[] }[] = [
@@ -177,7 +174,4 @@ export const experience: {
   },
 ];
 
-export const certs: { title: string; date: string }[] = [
-  { title: 'OPIc IH', date: '2024.09' },
-  { title: '통계적 공정관리 전문가', date: '2024.04' },
-];
+;
