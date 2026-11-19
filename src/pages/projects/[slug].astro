@@ -2,47 +2,182 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ArchitectureDiagram from '../../components/ArchitectureDiagram.astro';
 import { projects, type Project } from '../../data/profile';
+
 export function getStaticPaths() {
   return projects.map(project => ({ params: { slug: project.slug }, props: { project } }));
 }
+
 interface Props { project: Project }
 const { project } = Astro.props;
+const configurationImages = project.images.filter(image => !image.src.includes('result'));
+const resultImages = project.images.filter(image => image.src.includes('result'));
 const sections = [
   { id: 'goal', label: '프로젝트 목표' },
-  { id: 'implementation', label: '설계 및 구현' },
+  { id: 'configuration', label: project.configurationTitle },
+  { id: 'source', label: project.architectureTitle },
+  { id: 'operation', label: '동작 흐름' },
   { id: 'troubleshooting', label: 'Troubleshooting' },
   { id: 'results', label: '검증 및 결과' },
   ...(project.videos.length ? [{ id: 'video', label: '동작 동영상' }] : []),
-  { id: 'source', label: '소스코드 구조' },
-  { id: 'run', label: '실행 방법' },
-  ...(project.references.length ? [{ id: 'references', label: '참고 자료' }] : []),
+  { id: 'resources', label: '소스코드 및 자료' },
 ];
 ---
 <BaseLayout title={project.title + ' | 손승원'} description={project.summary}>
   <Header />
   <main id="main" class="container project-page">
-    <a class="back-link" href="/#projects">← 프로젝트 목록</a>
-    <header class="project-heading">
+    <a class="back-link" href="/#projects">프로젝트 목록</a>
+    <header class="project-heading case-heading">
       <p class="eyebrow">{project.category} · {project.period} · {project.team}</p>
       <h1>{project.title}</h1>
       <p class="lead">{project.summary}</p>
       <div class="tags">{project.stack.map(tag => <span class="tag">{tag}</span>)}</div>
-      <div class="contribution"><span>담당 범위</span><p>{project.role}</p></div>
-      <div class="actions"><a class="button primary" href={project.repo} target="_blank" rel="noopener noreferrer">GitHub 소스코드 ↗</a>{project.videos.length > 0 && <a class="button" href="#video">동작 동영상</a>}</div>
+      <div class="contribution"><span>담당 업무</span><p>{project.role}</p></div>
+      <ul class="project-outcomes" aria-label="주요 구현 및 결과">
+        {project.highlights.map(highlight => <li>{highlight}</li>)}
+      </ul>
+      <div class="actions">
+        <a class="button primary" href={project.repo} target="_blank" rel="noopener noreferrer">GitHub 소스코드</a>
+        {project.videos.length > 0 && <a class="button" href="#video">동작 동영상</a>}
+        <a class="button" href="#source">{project.architectureTitle}</a>
+      </div>
     </header>
+
     <div class="article-layout">
-      <nav class="toc" aria-label="프로젝트 목차">{sections.map(section => <a href={'#' + section.id}>{section.label}</a>)}</nav>
+      <nav class="toc" aria-label="프로젝트 목차">
+        {sections.map(section => <a href={'#' + section.id}>{section.label}</a>)}
+      </nav>
       <article class="project-body">
-        <section id="goal"><h2>프로젝트 목표</h2><p>{project.goal}</p></section>
-        <section id="implementation"><h2>설계 및 구현</h2><ul>{project.implementation.map(item => <li>{item}</li>)}</ul></section>
-        <section id="troubleshooting"><h2>Troubleshooting</h2><div class="issue-list">{project.troubleshooting.map(issue => <article class="issue"><h3>{issue.title}</h3><dl><div><dt>현상</dt><dd>{issue.observation}</dd></div><div><dt>분석</dt><dd>{issue.cause}</dd></div><div><dt>조치</dt><dd>{issue.action}</dd></div><div><dt>결과·범위</dt><dd>{issue.result}</dd></div></dl></article>)}</div></section>
-        <section id="results"><h2>검증 및 결과</h2><ul>{project.results.map(item => <li>{item}</li>)}</ul>{project.images.length > 0 && <div class="gallery">{project.images.map(image => <figure><a href={image.src} target="_blank" rel="noopener noreferrer" aria-label={image.caption + ' 원본 보기'}><img src={image.src} alt={image.caption} loading="lazy" /></a><figcaption>{image.caption}</figcaption></figure>)}</div>}</section>
-        {/* 영상이 등록된 프로젝트에 동작 동영상 항목을 표시합니다. */}
-        {project.videos.length > 0 && <section id="video"><h2>동작 동영상</h2><div class="video-list">{project.videos.map(video => <figure><div class="video"><iframe src={'https://www.youtube-nocookie.com/embed/' + video.id} title={video.title} loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen /></div><figcaption>{video.title} · <a href={'https://www.youtube.com/watch?v=' + video.id} target="_blank" rel="noopener noreferrer">YouTube에서 보기 ↗</a></figcaption></figure>)}</div></section>}
-        <section id="source"><h2>소스코드 구조</h2><p class="version-note">{project.sourceNote}</p><div class="source-tree">{project.structure.map(item => <div><a href={project.repo + '/tree/main/' + item.path} target="_blank" rel="noopener noreferrer"><code>{item.path}</code></a><span>{item.description}</span></div>)}</div><a class="detail-link" href={project.repo} target="_blank" rel="noopener noreferrer">저장소 전체 보기 ↗</a></section>
-        <section id="run"><h2>실행 방법</h2><ol>{project.run.map(item => <li>{item}</li>)}</ol></section>
-        {project.references.length > 0 && <section id="references"><h2>참고 자료</h2><ul class="reference-list">{project.references.map(reference => <li><a href={reference.href} target="_blank" rel="noopener noreferrer">{reference.label} ↗</a></li>)}</ul></section>}
+        <section id="goal">
+          <h2>프로젝트 목표</h2>
+          <p>{project.goal}</p>
+        </section>
+
+        <section id="configuration">
+          <h2>{project.configurationTitle}</h2>
+          {configurationImages.length > 0 && (
+            <div class="gallery configuration-gallery">
+              {configurationImages.map(image => (
+                <figure>
+                  <a href={image.src} target="_blank" rel="noopener noreferrer" aria-label={image.caption + ' 크게 보기'}>
+                    <img src={image.src} alt={image.caption} loading="lazy" />
+                  </a>
+                  <figcaption>{image.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+          <div class="technical-table-wrap">
+            <table class="technical-table component-table">
+              <caption>구성 요소와 역할</caption>
+              <thead><tr><th scope="col">구성 요소</th><th scope="col">수량·환경</th><th scope="col">역할</th></tr></thead>
+              <tbody>
+                {project.components.map(item => (
+                  <tr><th scope="row">{item.name}</th><td>{item.quantity}</td><td>{item.purpose}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {project.wiring.map(group => (
+            <div class="technical-table-wrap">
+              <table class="technical-table wiring-table">
+                <caption>{group.title}</caption>
+                <thead><tr><th scope="col">장치·신호</th><th scope="col">연결</th><th scope="col">동작</th></tr></thead>
+                <tbody>
+                  {group.rows.map(row => (
+                    <tr><th scope="row">{row.device}</th><td>{row.connection}</td><td>{row.function}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </section>
+
+        <section id="source">
+          <h2>{project.architectureTitle}</h2>
+          {project.architectures.map(diagram => <ArchitectureDiagram diagram={diagram} repository={project.repo} />)}
+        </section>
+
+        <section id="operation">
+          <h2>동작 흐름</h2>
+          <ol class="operation-flow">
+            {project.operation.map(step => (
+              <li><h3>{step.title}</h3><p>{step.description}</p></li>
+            ))}
+          </ol>
+          <details class="implementation-details">
+            <summary>세부 구현 사항</summary>
+            <ul>{project.implementation.map(item => <li>{item}</li>)}</ul>
+          </details>
+        </section>
+
+        <section id="troubleshooting">
+          <h2>Troubleshooting</h2>
+          <div class="issue-list">
+            {project.troubleshooting.map(issue => (
+              <article class="issue">
+                <h3>{issue.title}</h3>
+                <dl>
+                  <div><dt>현상</dt><dd>{issue.observation}</dd></div>
+                  <div><dt>원인 분석</dt><dd>{issue.cause}</dd></div>
+                  <div><dt>조치</dt><dd>{issue.action}</dd></div>
+                  <div><dt>결과</dt><dd>{issue.result}</dd></div>
+                </dl>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="results">
+          <h2>검증 및 결과</h2>
+          <ul>{project.results.map(item => <li>{item}</li>)}</ul>
+          {resultImages.length > 0 && (
+            <div class="gallery">
+              {resultImages.map(image => (
+                <figure>
+                  <a href={image.src} target="_blank" rel="noopener noreferrer" aria-label={image.caption + ' 크게 보기'}>
+                    <img src={image.src} alt={image.caption} loading="lazy" />
+                  </a>
+                  <figcaption>{image.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* 영상이 등록된 프로젝트에만 표시합니다. */}
+        {project.videos.length > 0 && (
+          <section id="video">
+            <h2>동작 동영상</h2>
+            <div class="video-list">
+              {project.videos.map(video => (
+                <figure>
+                  <div class="video">
+                    <iframe src={'https://www.youtube-nocookie.com/embed/' + video.id} title={video.title} loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+                  </div>
+                  <figcaption>{video.title}</figcaption>
+                  <a class="video-source" href={'https://www.youtube.com/watch?v=' + video.id} target="_blank" rel="noopener noreferrer">YouTube에서 보기</a>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section id="resources">
+          <h2>소스코드 및 자료</h2>
+          <div class="resource-links">
+            <a class="button primary" href={project.repo} target="_blank" rel="noopener noreferrer">GitHub 저장소</a>
+            {project.references.map(reference => (
+              <a class="button" href={reference.href} target="_blank" rel="noopener noreferrer">{reference.label}</a>
+            ))}
+          </div>
+          {project.sourceNote && <p class="source-version">{project.sourceNote}</p>}
+          <details id="run" class="implementation-details">
+            <summary>실행 방법</summary>
+            <ol>{project.run.map(item => <li>{item}</li>)}</ol>
+          </details>
+        </section>
       </article>
     </div>
   </main>

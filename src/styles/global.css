@@ -129,11 +129,54 @@ summary::-webkit-details-marker { display: none; }
 .video { width: 100%; aspect-ratio: 16 / 9; background: #101722; }
 .video iframe { display: block; width: 100%; height: 100%; border: 0; }
 .version-note { border-left: 3px solid var(--border); padding-left: 18px; color: var(--muted); }
-.source-tree { border: 1px solid var(--border); background: var(--surface); margin: 24px 0; }
-.source-tree > div { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; padding: 15px 18px; border-bottom: 1px solid var(--border); font-size: .85rem; }
-.source-tree > div:last-child { border: 0; }
-.source-tree code { overflow-wrap: anywhere; font-size: .82rem; }
-.source-tree span { color: var(--muted); }
+.case-heading { max-width: 960px; padding-bottom: 52px; }
+.case-heading .lead { max-width: 850px; }
+.project-outcomes { display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 0; margin: 25px 0 28px; list-style: none; }
+.project-outcomes li { margin: 0; padding-left: 14px; border-left: 3px solid var(--accent); font-size: .95rem; }
+.project-body p, .project-body li { font-size: 1rem; }
+.toc { font-size: .875rem; }
+.contribution { font-size: 1rem; }
+.configuration-gallery { margin: 0 0 30px; }
+.technical-table-wrap { overflow-x: auto; margin-top: 30px; }
+.technical-table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .95rem; line-height: 1.65; }
+.technical-table caption { text-align: left; font-weight: 650; font-size: 1.05rem; color: var(--text); margin-bottom: 12px; }
+.technical-table th, .technical-table td { text-align: left; vertical-align: top; padding: 16px 14px; border-bottom: 1px solid var(--border); }
+.technical-table thead th { background: var(--accent-soft); font-size: .875rem; color: var(--muted); font-weight: 600; }
+.technical-table tbody th { width: 24%; font-weight: 600; }
+.component-table td:nth-child(2) { width: 16%; }
+.wiring-table td:nth-child(2) { width: 37%; font-variant-numeric: tabular-nums; }
+.architecture { margin-top: 28px; padding: 26px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.architecture + .architecture { margin-top: 32px; }
+.architecture-heading { margin: 0 0 20px; }
+.architecture-heading h3 { color: var(--text); margin-bottom: 8px; }
+.architecture-heading p { color: var(--muted); margin-bottom: 0; }
+.architecture-flow-label { color: var(--accent); font-size: .875rem; font-weight: 600; margin-bottom: 18px; }
+.architecture-layers { list-style: none; padding: 0; margin: 0; }
+.architecture-layer { position: relative; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; align-items: stretch; padding: 18px; border: 1px solid var(--border); border-radius: 7px; background: var(--bg); }
+.architecture-layers .architecture-layer + .architecture-layer { margin-top: 30px; }
+.architecture-layer:not(:last-child)::after { content: ''; position: absolute; height: 18px; width: 2px; background: var(--accent); bottom: -20px; left: calc(50% + 55px); }
+.architecture-layer:not(:last-child)::before { content: ''; position: absolute; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--accent); bottom: -26px; left: calc(50% + 51px); }
+.layer-label { display: flex; align-items: center; font-weight: 700; font-size: .9rem; line-height: 1.5; }
+.layer-nodes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; min-width: 0; }
+.architecture-node { padding: 12px 14px; border: 1px solid var(--border); background: var(--surface); border-radius: 5px; line-height: 1.55; min-width: 0; }
+.architecture-node a, .architecture-node strong { display: block; font-size: .875rem; font-weight: 650; overflow-wrap: anywhere; }
+.architecture-node > span { display: block; color: var(--muted); font-size: .875rem; margin-top: 5px; }
+.architecture-layer.is-application { background: var(--accent-soft); border-color: var(--accent); }
+.architecture-layer.is-hardware { border-top: 3px solid var(--accent); }
+.operation-flow { list-style: none; padding: 0; margin: 0; }
+.operation-flow > li { position: relative; padding: 0 0 24px 24px; border-left: 2px solid var(--border); margin: 0; }
+.operation-flow > li::before { content: ''; position: absolute; left: -5px; top: 8px; width: 8px; height: 8px; background: var(--accent); }
+.operation-flow > li:last-child { padding-bottom: 0; }
+.operation-flow h3 { margin-bottom: 8px; }
+.operation-flow p { margin: 0; }
+.implementation-details { margin-top: 26px; border-top: 1px solid var(--border); padding-top: 18px; }
+.implementation-details summary { cursor: pointer; font-size: .95rem; font-weight: 600; }
+.implementation-details ul, .implementation-details ol { margin-top: 18px; }
+.resource-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.source-version { color: var(--muted); margin-top: 22px; }
+.video-source { display: inline-block; margin-top: 8px; font-size: .875rem; }
+.issue dl > div { font-size: 1rem; grid-template-columns: 80px minmax(0, 1fr); }
+.issue dt { font-size: .875rem; }
 .reference-list { list-style: none; padding: 0; }
 .course-nav { display: flex; gap: 25px; padding-bottom: 24px; font-size: .9rem; }
 .course-row { display: grid; grid-template-columns: 100px 1fr 95px; gap: 25px; padding: 25px 0; border-bottom: 1px solid var(--border); }
@@ -172,7 +215,12 @@ summary::-webkit-details-marker { display: none; }
   .contribution { flex-direction: column; gap: 4px; }
   .issue { padding: 20px 16px; }
   .issue dl > div { grid-template-columns: 1fr; gap: 3px; }
-  .source-tree > div { grid-template-columns: 1fr; gap: 4px; }
+  .architecture { padding: 18px 12px; }
+  .architecture-layer { grid-template-columns: 1fr; gap: 10px; padding: 14px; }
+  .layer-nodes { grid-template-columns: 1fr; }
+  .architecture-layer:not(:last-child)::after { left: 50%; }
+  .architecture-layer:not(:last-child)::before { left: calc(50% - 4px); }
+  .project-outcomes { flex-direction: column; gap: 14px; }
   .course-row { grid-template-columns: 1fr; gap: 7px; }
   .course-links { flex-direction: row; gap: 20px; margin-top: 8px; }
   .project-heading { padding-top: 0; }

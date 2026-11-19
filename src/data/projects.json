@@ -28,23 +28,23 @@
       {
         "title": "시프트 연산의 이동량 해석",
         "observation": "팀 UVM 검증에서 SLL·SRL·SRA 연산의 기대값과 실제값이 불일치하였습니다.",
-        "cause": "발표 자료는 rs2 데이터 전체를 이동량으로 사용한 RTL을 원인으로 기록하고 있습니다.",
+        "cause": "rs2의 32비트 전체를 이동량으로 사용하여 RV32I 시프트 명령의 하위 5비트 규칙과 불일치하였습니다.",
         "action": "팀 수정본에서 이동량을 rs2[4:0]로 제한하였습니다. SLL의 rs1=5, rs2=0xffffffff 사례에서 기대값 0x80000000을 확인하였습니다.",
-        "result": "발표 기록에서 FAIL 4,072건이 0건으로 감소하였습니다. 공개된 CPU 스냅샷에는 수정 전 연산식이 보존되어 있습니다."
+        "result": "팀 검증에서 실패 4,072건이 0건으로 감소하였습니다. 공개 저장소의 cpu/는 수정 전 연산식을 포함합니다."
       },
       {
         "title": "미실행 커버리지 조합",
         "observation": "팀 UVM 발표 결과의 Functional Coverage는 99.56%입니다.",
         "cause": "ADD의 첫 번째 피연산자 최댓값 조건과 AND·XOR의 두 번째 피연산자 최댓값 조건이 남아 있습니다.",
-        "action": "발표 자료에 준비 레지스터를 유지한 Directed 시나리오 3개 및 주기적 레지스터 재초기화 방안을 정리하였습니다.",
-        "result": "보강 방안은 후속 검증 항목으로 기록하였습니다."
+        "action": "준비 레지스터를 유지하는 Directed 시나리오 3개와 주기적인 레지스터 재초기화를 후속 검증 방안으로 설계하였습니다.",
+        "result": "최종 Functional Coverage는 99.56%이며, 남은 조합은 후속 Directed 검증 대상으로 정리하였습니다."
       }
     ],
     "results": [
-      "본인 담당 결과는 CPU RTL 및 누적합 프로그램 동작 확인입니다.",
+      "CPU RTL 설계와 누적합 프로그램 실행을 담당하여 최종 i=10, sum=55를 확인하였습니다.",
       "김민석은 UVM 검증, 강건은 APB 연결, 정성하는 소프트웨어 흐름 설명을 담당하였습니다.",
       "팀 UVM 검증 범위는 R형 10개와 I형 ALU 9개입니다. 준비 명령 144개, Directed 26개, Random 90,000개를 포함하여 총 90,170개를 검사하였습니다.",
-      "팀 발표 자료에 APB를 통한 Load/Store와 Basys3 ILA 관측 결과가 수록되어 있습니다."
+      "APB를 통한 Load/Store와 Basys3 ILA 관측으로 버스 및 GPIO 동작을 확인하였습니다."
     ],
     "sourceNote": "cpu/는 TEAMPJ4_rv32i의 RTL 및 클럭·리셋 테스트벤치 스냅샷입니다. apb/는 GPIO 프로젝트에서 확인한 버전입니다. 발표의 CPU UVM 테스트벤치와 최종 시프트 수정본은 현재 공개 소스에서 확인되지 않아, 발표 수치는 팀 수행 기록으로 표기하였습니다.",
     "structure": [
@@ -81,11 +81,11 @@
     "images": [
       {
         "src": "/projects/rv32i-apb-block.png",
-        "caption": "팀 발표 자료의 CPU·APB 시스템 구성"
+        "caption": "RV32I CPU·APB 시스템 구성"
       },
       {
         "src": "/projects/rv32i-uvm-result.png",
-        "caption": "팀 UVM 발표 결과. 공개 소스 스냅샷과 실행 버전이 다릅니다."
+        "caption": "RV32I 팀 UVM 검증 결과"
       }
     ],
     "videos": [],
@@ -95,7 +95,165 @@
         "href": "https://docs.google.com/presentation/d/1rQOqn0zb5K-6F9mSDNCq0MLXzXdX3Gpm/edit"
       }
     ],
-    "repo": "https://github.com/eugeneson3/rv32i-cpu"
+    "repo": "https://github.com/eugeneson3/rv32i-cpu",
+    "components": [
+      {
+        "name": "Basys3 FPGA 보드",
+        "quantity": "1",
+        "purpose": "CPU와 APB 주변장치를 구현하고 스위치·LED로 입출력을 확인합니다."
+      },
+      {
+        "name": "Multi-cycle CPU",
+        "quantity": "RTL",
+        "purpose": "PC, 레지스터 파일, ALU 및 Control Unit을 구성합니다."
+      },
+      {
+        "name": "Instruction ROM·Data Memory",
+        "quantity": "RTL",
+        "purpose": "프로그램 명령과 실행 데이터를 저장합니다."
+      },
+      {
+        "name": "APB Master·RAM·GPIO",
+        "quantity": "RTL",
+        "purpose": "Load/Store 요청을 주변장치 접근으로 연결합니다."
+      },
+      {
+        "name": "시뮬레이터·Vivado ILA",
+        "quantity": "개발 환경",
+        "purpose": "레지스터·메모리와 버스 동작을 관측합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "CPU 및 APB 신호",
+        "rows": [
+          {
+            "device": "명령어 경로",
+            "connection": "PC → Instruction ROM → Control Unit·Datapath",
+            "function": "명령어를 가져와 opcode·funct 필드에 따라 실행 경로를 선택합니다."
+          },
+          {
+            "device": "데이터 메모리 경로",
+            "connection": "주소·쓰기 데이터·읽기 데이터·Write Enable",
+            "function": "Load/Store와 누적합 계산의 메모리 접근을 수행합니다."
+          },
+          {
+            "device": "APB 요청",
+            "connection": "PADDR / PWDATA / PWRITE / PSEL / PENABLE",
+            "function": "IDLE·SETUP·ACCESS 순서로 주변장치 접근을 진행합니다."
+          },
+          {
+            "device": "APB 응답 및 GPIO",
+            "connection": "PRDATA / PREADY / sw / led",
+            "function": "응답을 CPU에 전달하고 스위치 입력과 LED 출력을 연결합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "프로그램 실행",
+        "description": "Instruction ROM의 명령을 PC로 선택합니다. 누적합 프로그램의 반복문과 함수 호출을 어셈블리 흐름 및 레지스터 변화로 확인합니다."
+      },
+      {
+        "title": "Multi-cycle 제어",
+        "description": "Control Unit은 명령어별 상태 전이에 따라 레지스터 읽기, ALU 연산, 메모리 접근, Write-back을 제어합니다. 중간 연산 결과는 Datapath 레지스터에 저장합니다."
+      },
+      {
+        "title": "주변장치 접근",
+        "description": "APB 확장에서는 CPU의 메모리 요청을 버스 전송으로 변환하고 ready 응답을 확인합니다. APB RAM과 GPIO를 연결하여 Load/Store 결과를 관측합니다."
+      },
+      {
+        "title": "팀 검증",
+        "description": "R형 10개와 I형 ALU 9개에 대한 Directed·Random 명령을 비교하였습니다. 시프트 연산의 피연산자 처리 오류를 분석하고 수정 전후 결과를 확인하였습니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "CPU·APB 확장 구조",
+        "description": "프로그램 명령이 CPU 제어기와 Datapath에서 실행되고, 메모리 접근은 APB를 통해 RAM 및 GPIO로 전달됩니다.",
+        "flow": "명령 실행 및 버스 접근",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "rom_code_2.mem",
+                "detail": "실행할 명령어 이미지",
+                "path": "apb/rom_code_2.mem"
+              }
+            ]
+          },
+          {
+            "name": "CPU Control",
+            "nodes": [
+              {
+                "name": "rv32i_cpu.sv",
+                "detail": "CPU 및 주변장치 연결",
+                "path": "apb/rtl/rv32i_cpu.sv"
+              },
+              {
+                "name": "control_unit.sv",
+                "detail": "명령어 Decode 및 상태 제어",
+                "path": "apb/rtl/control_unit.sv"
+              }
+            ]
+          },
+          {
+            "name": "Datapath",
+            "nodes": [
+              {
+                "name": "datapath.sv",
+                "detail": "레지스터 파일·ALU·PC 갱신",
+                "path": "apb/rtl/datapath.sv"
+              },
+              {
+                "name": "instruction_rom.sv",
+                "detail": "PC 주소에 따른 명령 공급",
+                "path": "apb/rtl/instruction_rom.sv"
+              }
+            ]
+          },
+          {
+            "name": "Bus / Peripheral RTL",
+            "nodes": [
+              {
+                "name": "apb_master.sv",
+                "detail": "APB 전송 상태 제어",
+                "path": "apb/rtl/apb_master.sv"
+              },
+              {
+                "name": "apb_ram.sv",
+                "detail": "버스 연결 메모리",
+                "path": "apb/rtl/apb_ram.sv"
+              },
+              {
+                "name": "apb_gpio.sv",
+                "detail": "GPIO 레지스터 접근",
+                "path": "apb/rtl/apb_gpio.sv"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "Basys3 FPGA",
+                "detail": "클럭 · 리셋 · 로직 · 메모리",
+                "path": ""
+              },
+              {
+                "name": "GPIO",
+                "detail": "스위치 입력 · LED 출력",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "시스템 구성 및 인터페이스",
+    "architectureTitle": "프로그램·RTL·하드웨어 구조"
   },
   {
     "slug": "fifo-uvm",
@@ -128,21 +286,21 @@
         "observation": "DUT 갱신 시점과 테스트벤치 구동·관측 시점을 정의해야 합니다.",
         "cause": "같은 클럭 에지에서 신호 구동과 샘플링을 수행하면 시뮬레이션 스케줄링의 영향을 받을 수 있습니다.",
         "action": "소스에서 Driver의 output #1과 Monitor의 input #1step clocking block을 사용하였습니다.",
-        "result": "구동·관측 시점과 Scoreboard의 이전 상태 기반 비교 순서를 명시하였습니다."
+        "result": "구동·샘플링 시점을 지정하고 이전 full·empty 상태를 기준으로 기대 Queue를 갱신하도록 구성하였습니다."
       },
       {
         "title": "X 상태 처리와 검사 범위",
         "observation": "현재 Scoreboard는 reset 또는 full·empty의 X 상태에서 예상 Queue를 초기화합니다.",
         "cause": "초기 상태 처리 경로에 실행 중 X 상태가 포함되어 있습니다.",
         "action": "실행 중 X 발생의 독립 오류 판정과 종료 시 잔여 데이터 검사를 후속 검토 항목으로 정리하였습니다.",
-        "result": "현재 저장소의 검증 범위에 해당 제한을 기록하였습니다."
+        "result": "종료 시 잔여 Queue를 비우고 비교하는 drain 검사는 후속 보완 항목입니다."
       }
     ],
     "results": [
-      "발표 자료의 결과 화면에 데이터 비교 5,355건, 불일치 0건, Functional Coverage 100%가 기록되어 있습니다.",
+      "검증 결과는 데이터 비교 5,355건, 불일치 0건, Functional Coverage 100%입니다.",
       "현재 소스와 발표 시나리오 설명은 Random 1,000회입니다. 결과 화면의 실행 횟수와 차이가 있어 동일 실행 결과로 확정하지 않았습니다."
     ],
-    "sourceNote": "2026_09_06_FIFO_UVM의 소스를 수록하였습니다. 발표 결과 이미지와 현재 소스의 실행 횟수 차이를 기록하였으며, UVM 시뮬레이터를 통한 이번 재실행 결과는 포함하지 않았습니다.",
+    "sourceNote": "위 검증 수치는 프로젝트 발표 당시의 결과입니다. 공개 소스는 Random 1,000회 설정으로 실행 횟수가 다르며, 종료 시 drain 검사는 보완 항목입니다.",
     "structure": [
       {
         "path": "fifo.sv",
@@ -170,7 +328,7 @@
     "images": [
       {
         "src": "/projects/fifo-result-slide.png",
-        "caption": "2026.09.07 발표 자료의 검증 결과 화면"
+        "caption": "FIFO Scoreboard 및 Coverage 결과"
       }
     ],
     "videos": [],
@@ -180,7 +338,136 @@
         "href": "https://docs.google.com/presentation/d/1rK8uxAa0HYDFaz_O0OAxC-YbhmIWZcK8dsZ-IXDrIas/edit"
       }
     ],
-    "repo": "https://github.com/eugeneson3/fifo-uvm"
+    "repo": "https://github.com/eugeneson3/fifo-uvm",
+    "components": [
+      {
+        "name": "동기식 FIFO",
+        "quantity": "DUT 1",
+        "purpose": "16개 데이터 슬롯과 읽기·쓰기 포인터를 검증합니다."
+      },
+      {
+        "name": "UVM Testbench",
+        "quantity": "SystemVerilog",
+        "purpose": "Sequence, Driver, Monitor, Scoreboard 및 Coverage를 구성합니다."
+      },
+      {
+        "name": "SystemVerilog Interface",
+        "quantity": "fifo_if",
+        "purpose": "클럭 기준의 입력 구동과 출력 관측을 연결합니다."
+      },
+      {
+        "name": "UVM 시뮬레이터·FSDB",
+        "quantity": "실행 환경",
+        "purpose": "테스트 로그·Coverage·파형을 확인합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "테스트벤치와 DUT 연결",
+        "rows": [
+          {
+            "device": "입력 구동",
+            "connection": "clk / reset / push / pop / wdata",
+            "function": "Driver가 Sequence item을 신호로 변환합니다."
+          },
+          {
+            "device": "출력 관측",
+            "connection": "rdata / full / empty",
+            "function": "Monitor가 데이터를 수집하여 Scoreboard와 Coverage에 전달합니다."
+          },
+          {
+            "device": "Clocking block",
+            "connection": "drv_cb / mon_cb",
+            "function": "구동·샘플링 시점을 지정하여 클럭 경계의 신호를 처리합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "시나리오 생성",
+        "description": "Reset, 연속 Write, 연속 Read 및 Random Sequence를 실행합니다. Depth 16의 경계를 넘는 17회 Write·Read로 full·empty 상태를 확인합니다."
+      },
+      {
+        "title": "DUT 구동과 관측",
+        "description": "Driver가 transaction을 interface 신호로 전달하고 Monitor가 클럭 기준으로 입력·출력을 관측합니다. UVM analysis port를 통해 검증 컴포넌트에 결과를 배포합니다."
+      },
+      {
+        "title": "정합성 및 커버리지 확인",
+        "description": "Scoreboard는 Queue에 저장한 기대 데이터와 FIFO 출력 순서를 비교합니다. Coverage는 입력 조합과 상태 도달 여부를 수집하여 검증 범위를 확인합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "Sequence에서 FIFO 검증까지",
+        "description": "Driver가 DUT를 구동하고, Monitor의 관측 결과가 Scoreboard와 Coverage로 전달됩니다. 검증 클래스는 tb_fifo.sv에 정의되어 있습니다.",
+        "flow": "입력 구동 ↓ · 결과 관측 ↑",
+        "layers": [
+          {
+            "name": "Test / Application",
+            "nodes": [
+              {
+                "name": "fifo_test · Sequence",
+                "detail": "Reset·Write·Read·Random 시나리오",
+                "path": "tb_fifo.sv"
+              }
+            ]
+          },
+          {
+            "name": "Environment",
+            "nodes": [
+              {
+                "name": "fifo_env · fifo_agent",
+                "detail": "검증 컴포넌트 구성과 연결",
+                "path": "tb_fifo.sv"
+              },
+              {
+                "name": "Scoreboard · Coverage",
+                "detail": "기대값 비교 및 검증 범위 수집",
+                "path": "tb_fifo.sv"
+              }
+            ]
+          },
+          {
+            "name": "Driver / Monitor",
+            "nodes": [
+              {
+                "name": "fifo_driver",
+                "detail": "Transaction을 DUT 입력으로 구동",
+                "path": "tb_fifo.sv"
+              },
+              {
+                "name": "fifo_monitor",
+                "detail": "신호를 관측하여 검증 계층으로 전달",
+                "path": "tb_fifo.sv"
+              }
+            ]
+          },
+          {
+            "name": "Interface",
+            "nodes": [
+              {
+                "name": "fifo_if",
+                "detail": "Clocking block · push/pop · data · flags",
+                "path": "tb_fifo.sv"
+              }
+            ]
+          },
+          {
+            "name": "Hardware / DUT",
+            "nodes": [
+              {
+                "name": "fifo.sv",
+                "detail": "메모리 · 포인터 · full/empty 생성",
+                "path": "fifo.sv"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "검증 환경 및 신호 구성",
+    "architectureTitle": "UVM 검증 구조"
   },
   {
     "slug": "fpga-uart-sensors",
@@ -206,7 +493,7 @@
       "UART RX, FIFO, ASCII 명령 해석, 센서 측정, 응답 생성 및 UART TX를 연결하였습니다.",
       "/get_temp, /get_humid, /get_dist 명령과 FND 표시 선택을 구성하였습니다.",
       "DHT11 수신 데이터의 40비트 구성 및 체크섬에 따른 valid 출력을 확인하였습니다.",
-      "센서 드라이버 설계는 팀원 김민석이 담당하였으며, 본인은 Top module 통합을 담당하였습니다."
+      "센서 드라이버 설계는 팀원 김민석이 담당하였으며, Top module 통합을 담당하였습니다."
     ],
     "troubleshooting": [
       {
@@ -214,7 +501,7 @@
         "observation": "실물 동작에서 측정값이 두 배 단위로 변하는 현상이 발생하였습니다.",
         "cause": "팀은 SYNC 상태의 펄스 판정 과정에서 비트 경계가 어긋나는 현상으로 분석하였습니다.",
         "action": "센서 모듈에 Edge detector를 추가하여 신호 전이와 tick count를 함께 판정하였습니다.",
-        "result": "발표 자료에 수정 전후 측정값 영상과 안정된 출력 결과를 기록하였습니다."
+        "result": "에지 검출 수정 후 온습도 측정값과 출력 안정성을 확인하였습니다."
       },
       {
         "title": "SR04 테스트벤치의 race condition",
@@ -225,7 +512,7 @@
       }
     ],
     "results": [
-      "온도·습도·거리 조회 및 FND 출력 동작을 발표 영상으로 기록하였습니다.",
+      "UART를 통한 온도·습도·거리 조회와 FND 출력을 확인하였습니다.",
       "DHT11 체크섬 일치·불일치 조건과 UART·FIFO 경계 동작을 시뮬레이션으로 확인하였습니다."
     ],
     "sourceNote": "현재 통합본과 팀 제출 변형을 각각 루트 및 team-submission/에 구성하였습니다. 각 files.f에 필요한 공통 모듈을 포함하였습니다.",
@@ -287,7 +574,176 @@
         "href": "https://docs.google.com/presentation/d/1fx_m2Z3iZAGhJlWcYz796hRYBHJudlQB50N9zZlAVSI/edit"
       }
     ],
-    "repo": "https://github.com/eugeneson3/fpga-uart-sensors"
+    "repo": "https://github.com/eugeneson3/fpga-uart-sensors",
+    "components": [
+      {
+        "name": "Basys3 FPGA 보드",
+        "quantity": "1",
+        "purpose": "100MHz 클럭에서 제어 FSM과 Datapath를 실행합니다."
+      },
+      {
+        "name": "온보드 버튼·스위치",
+        "quantity": "보드 내장",
+        "purpose": "시계·스톱워치 모드와 동작을 선택합니다."
+      },
+      {
+        "name": "온보드 4자리 FND·LED",
+        "quantity": "보드 내장",
+        "purpose": "시간과 모드·Lap 상태를 표시합니다."
+      },
+      {
+        "name": "PC·USB UART",
+        "quantity": "1",
+        "purpose": "9600 baud의 ASCII 명령으로 장치를 제어합니다."
+      },
+      {
+        "name": "DHT11",
+        "quantity": "1",
+        "purpose": "단일 데이터선으로 온도와 습도를 측정합니다."
+      },
+      {
+        "name": "HC-SR04",
+        "quantity": "1",
+        "purpose": "Trigger·Echo 펄스로 거리를 측정합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "외부 센서 및 UART 연결",
+        "rows": [
+          {
+            "device": "DHT11 DATA",
+            "connection": "JXADC4 / FPGA N2 / dht11_io",
+            "function": "양방향 데이터선과 Pull-up 설정을 사용합니다."
+          },
+          {
+            "device": "HC-SR04 TRIG",
+            "connection": "JA3 / FPGA J2 / trig",
+            "function": "측정 시작 펄스를 출력합니다."
+          },
+          {
+            "device": "HC-SR04 ECHO",
+            "connection": "JA4 / FPGA G2 / echo",
+            "function": "수신 펄스 폭을 측정합니다."
+          },
+          {
+            "device": "USB UART",
+            "connection": "FPGA B18 rx / A18 tx",
+            "function": "PC 터미널과 9600 baud로 통신합니다."
+          },
+          {
+            "device": "FND·버튼·스위치",
+            "connection": "Basys3 온보드 I/O",
+            "function": "센서값 표시와 시계·스톱워치 동작을 제어합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "요청 해석",
+        "description": "UART 명령을 parser에서 분류하여 센서 읽기 또는 시계·스톱워치 제어 경로로 전달합니다. periodic reader는 주기 측정 요청을 생성합니다."
+      },
+      {
+        "title": "센서 측정",
+        "description": "DHT11 제어기는 응답 에지와 데이터 펄스를 구분하고 체크섬을 확인합니다. SR04 제어기는 Trigger를 출력한 뒤 Echo의 High 구간을 계수하여 거리를 계산합니다."
+      },
+      {
+        "title": "결과 출력",
+        "description": "유효한 측정값을 FND 표시 경로와 UART reporter에 전달합니다. 통신 시점과 센서 완료 시점을 분리하여 이전 값과 새 측정값의 경계를 관리합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "FPGA 입력·제어·출력 계층",
+        "description": "최상위 모듈에서 명령과 버튼 입력을 연결하고, 제어 FSM과 시간 Datapath를 거쳐 표시부를 구동합니다.",
+        "flow": "제어 신호 및 데이터 전달",
+        "layers": [
+          {
+            "name": "Application / Top",
+            "nodes": [
+              {
+                "name": "top_watch_stopwatch.v",
+                "detail": "입력 선택 및 전체 모듈 연결",
+                "path": "src/top_watch_stopwatch.v"
+              }
+            ]
+          },
+          {
+            "name": "Command / Input",
+            "nodes": [
+              {
+                "name": "uart.v · ascii_decoder.v",
+                "detail": "UART 수신 및 명령 변환",
+                "path": "src/ascii_decoder.v"
+              },
+              {
+                "name": "btn_debounce.v",
+                "detail": "버튼 안정화 및 1-cycle 입력",
+                "path": "src/btn_debounce.v"
+              }
+            ]
+          },
+          {
+            "name": "Control / Datapath",
+            "nodes": [
+              {
+                "name": "control_unit.v",
+                "detail": "Run·Stop·Clear 및 시각 선택 FSM",
+                "path": "src/control_unit.v"
+              },
+              {
+                "name": "stopwatch.v · watch.v",
+                "detail": "시간 카운터 및 Lap 저장",
+                "path": "src/stopwatch.v"
+              }
+            ]
+          },
+          {
+            "name": "Sensor / Display RTL",
+            "nodes": [
+              {
+                "name": "dht11.v",
+                "detail": "온습도 통신 및 데이터 수신",
+                "path": "src/dht11.v"
+              },
+              {
+                "name": "sr04_controller.v",
+                "detail": "Trigger 및 Echo 폭 측정",
+                "path": "src/sr04_controller.v"
+              },
+              {
+                "name": "fnd_controller.v",
+                "detail": "시간·센서값 표시",
+                "path": "src/fnd_controller.v"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "FPGA I/O",
+                "detail": "DHT11 · HC-SR04",
+                "path": ""
+              },
+              {
+                "name": "USB UART",
+                "detail": "PC 터미널",
+                "path": ""
+              },
+              {
+                "name": "GPIO · 표시 출력",
+                "detail": "버튼 · 스위치 · FND · LED",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "하드웨어 구성 및 배선",
+    "architectureTitle": "RTL 제어 계층"
   },
   {
     "slug": "fpga-uart-stopwatch",
@@ -323,7 +779,7 @@
       }
     ],
     "results": [
-      "발표 자료에 12개 시뮬레이션 시나리오와 Basys3 동작 영상이 수록되어 있습니다."
+      "12개 시나리오로 명령별 상태 전이를 검사하고 Basys3에서 동작을 확인하였습니다."
     ],
     "structure": [
       {
@@ -362,7 +818,141 @@
       }
     ],
     "repo": "https://github.com/eugeneson3/fpga-uart-stopwatch",
-    "sourceNote": "소스 스냅샷과 발표 자료를 기준으로 작성하였습니다. 파일별 원본 경로와 SHA-256은 SOURCE_MANIFEST.json에 기록하였습니다. 공개본 구성 과정에서 uart_run·uart_stop 포트가 있는 후속 센서 프로젝트의 공통 Control Unit을 연결하였습니다. 기존 파일은 docs/original-control_unit.v에 보존하였습니다."
+    "sourceNote": "UART 명령 포트를 지원하는 후속 센서 프로젝트의 공통 Control Unit을 연결한 소스입니다. 이전 Control Unit은 docs/original-control_unit.v에 수록하였습니다.",
+    "components": [
+      {
+        "name": "Basys3 FPGA 보드",
+        "quantity": "1",
+        "purpose": "100MHz 클럭에서 제어 FSM과 Datapath를 실행합니다."
+      },
+      {
+        "name": "온보드 버튼·스위치",
+        "quantity": "보드 내장",
+        "purpose": "시계·스톱워치 모드와 동작을 선택합니다."
+      },
+      {
+        "name": "온보드 4자리 FND·LED",
+        "quantity": "보드 내장",
+        "purpose": "시간과 모드·Lap 상태를 표시합니다."
+      },
+      {
+        "name": "PC·USB UART",
+        "quantity": "1",
+        "purpose": "9600 baud의 ASCII 명령으로 장치를 제어합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "PC와 FPGA 연결",
+        "rows": [
+          {
+            "device": "USB UART",
+            "connection": "PC 터미널 ↔ rx / tx",
+            "function": "9600 baud로 명령을 송수신합니다."
+          },
+          {
+            "device": "버튼·스위치",
+            "connection": "Basys3 온보드 입력",
+            "function": "UART 명령과 버튼 입력을 동일 제어 경로에 연결합니다."
+          },
+          {
+            "device": "FND·LED",
+            "connection": "fnd_com / fnd_data / led",
+            "function": "시간·모드·Lap 상태를 표시합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "UART 명령 수신",
+        "description": "UART RX가 직렬 비트를 바이트로 복원합니다. ASCII decoder가 r·s·c·m을 시작·정지·초기화·모드 전환 신호로 변환합니다."
+      },
+      {
+        "title": "입력 의미에 따른 제어",
+        "description": "Run/Stop 버튼은 토글 입력으로 처리하고, UART의 r·s 명령은 시작과 정지를 각각 지정하도록 Control Unit에 연결합니다."
+      },
+      {
+        "title": "시각 조정 및 표시",
+        "description": "L·R로 수정 위치를 선택하고 U·D로 값을 변경합니다. 변경 결과와 스톱워치 계측값을 FND 표시 경로에 전달합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "FPGA 입력·제어·출력 계층",
+        "description": "최상위 모듈에서 명령과 버튼 입력을 연결하고, 제어 FSM과 시간 Datapath를 거쳐 표시부를 구동합니다.",
+        "flow": "제어 신호 및 데이터 전달",
+        "layers": [
+          {
+            "name": "Application / Top",
+            "nodes": [
+              {
+                "name": "top_watch_stopwatch.v",
+                "detail": "입력 선택 및 전체 모듈 연결",
+                "path": "src/top_watch_stopwatch.v"
+              }
+            ]
+          },
+          {
+            "name": "Command / Input",
+            "nodes": [
+              {
+                "name": "uart.v · ascii_decoder.v",
+                "detail": "UART 수신 및 명령 변환",
+                "path": "src/ascii_decoder.v"
+              },
+              {
+                "name": "btn_debounce.v",
+                "detail": "버튼 안정화 및 1-cycle 입력",
+                "path": "src/btn_debounce.v"
+              }
+            ]
+          },
+          {
+            "name": "Control / Datapath",
+            "nodes": [
+              {
+                "name": "control_unit.v",
+                "detail": "Run·Stop·Clear 및 시각 선택 FSM",
+                "path": "src/control_unit.v"
+              },
+              {
+                "name": "stopwatch.v · watch.v",
+                "detail": "시간 카운터 및 Lap 저장",
+                "path": "src/stopwatch.v"
+              }
+            ]
+          },
+          {
+            "name": "Output RTL",
+            "nodes": [
+              {
+                "name": "fnd_controller.v",
+                "detail": "자리 분리·선택·7-segment 디코딩",
+                "path": "src/fnd_controller.v"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "FPGA I/O",
+                "detail": "버튼 · 스위치",
+                "path": ""
+              },
+              {
+                "name": "7-segment · LED",
+                "detail": "시간 및 동작 상태",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "하드웨어 구성 및 배선",
+    "architectureTitle": "RTL 제어 계층"
   },
   {
     "slug": "fpga-stopwatch-watch",
@@ -384,7 +974,7 @@
     ],
     "goal": "시계와 스톱워치를 동시에 동작시키면서 선택한 모듈에 버튼 입력과 FND 출력을 연결하는 것을 목표로 하였습니다.",
     "implementation": [
-      "본인은 스톱워치 및 Top을, 팀원 박율은 시계·DEMUX·FND 제어를 담당하였습니다.",
+      "스톱워치 및 Top을, 팀원 박율은 시계·DEMUX·FND 제어를 담당하였습니다.",
       "4개 버튼에 대한 디바운스와 단일 tick 출력을 구성하였습니다.",
       "시간 단위별 파라미터 카운터와 증가·감소 모드를 사용하였습니다.",
       "Lap memory에 최대 4개 기록을 저장하고 스위치로 표시 및 삭제 대상을 선택하였습니다."
@@ -395,7 +985,7 @@
         "observation": "스위치 상태에 따른 삭제 처리 뒤에 기록 쓰기가 함께 실행되는 문제가 발생하였습니다.",
         "cause": "연속된 독립 if문이 한 번의 입력에서 함께 실행되는 구조였습니다.",
         "action": "조건을 else if로 연결하여 삭제와 쓰기 경로의 실행 관계를 정리하였습니다.",
-        "result": "발표 자료에 Lap 4회 저장, 선택 출력, 기록 삭제 파형을 기록하였습니다."
+        "result": "Lap 4회 저장, 기록 선택 출력 및 삭제 동작을 파형으로 확인하였습니다."
       }
     ],
     "results": [
@@ -433,7 +1023,7 @@
     "images": [
       {
         "src": "/projects/fpga-stopwatch-watch-structure.png",
-        "caption": "시계·스톱워치 Block diagram · 발표 자료 발췌"
+        "caption": "시계·스톱워치 블록 구성"
       }
     ],
     "videos": [
@@ -448,7 +1038,136 @@
         "href": "https://docs.google.com/presentation/d/1uPvRbubpczpm4x5vNdt-4z-j7bRWLbvBnR-rEY2rwhM/edit"
       }
     ],
-    "repo": "https://github.com/eugeneson3/fpga-stopwatch-watch"
+    "repo": "https://github.com/eugeneson3/fpga-stopwatch-watch",
+    "components": [
+      {
+        "name": "Basys3 FPGA 보드",
+        "quantity": "1",
+        "purpose": "100MHz 클럭에서 제어 FSM과 Datapath를 실행합니다."
+      },
+      {
+        "name": "온보드 버튼·스위치",
+        "quantity": "보드 내장",
+        "purpose": "시계·스톱워치 모드와 동작을 선택합니다."
+      },
+      {
+        "name": "온보드 4자리 FND·LED",
+        "quantity": "보드 내장",
+        "purpose": "시간과 모드·Lap 상태를 표시합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "Basys3 온보드 연결",
+        "rows": [
+          {
+            "device": "100MHz 클럭",
+            "connection": "clk / FPGA W5",
+            "function": "Tick 생성기와 순차회로의 기준 클럭입니다."
+          },
+          {
+            "device": "버튼 입력",
+            "connection": "btn_L / btn_R / btn_U / btn_D",
+            "function": "디바운스 회로를 거쳐 모드별 제어 입력으로 전달합니다."
+          },
+          {
+            "device": "스위치",
+            "connection": "sw",
+            "function": "시계·스톱워치 선택과 표시 상태를 제어합니다."
+          },
+          {
+            "device": "FND",
+            "connection": "fnd_com[3:0] / fnd_data[7:0]",
+            "function": "4자리 공통 선택선과 세그먼트 출력을 연결합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "버튼 입력 안정화",
+        "description": "기계식 버튼의 변동을 디바운스하고 한 클럭 길이의 입력으로 변환합니다. 모드 선택 신호에 따라 시계 또는 스톱워치 제어기로 전달합니다."
+      },
+      {
+        "title": "계측 및 Lap 저장",
+        "description": "Run·Stop·Clear FSM이 카운터를 제어합니다. 실행 중 Lap 입력 시 시간을 저장하고 4개 기록 중 선택한 값을 표시합니다."
+      },
+      {
+        "title": "시간 표시",
+        "description": "밀리초·초·분·시 데이터를 표시 모드에 따라 선택합니다. 자리 분리, MUX, 7-segment 디코더 및 자리 스캔을 통해 FND에 출력합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "FPGA 입력·제어·출력 계층",
+        "description": "최상위 모듈에서 명령과 버튼 입력을 연결하고, 제어 FSM과 시간 Datapath를 거쳐 표시부를 구동합니다.",
+        "flow": "제어 신호 및 데이터 전달",
+        "layers": [
+          {
+            "name": "Application / Top",
+            "nodes": [
+              {
+                "name": "top_watch_stopwatch.v",
+                "detail": "입력 선택 및 전체 모듈 연결",
+                "path": "src/top_watch_stopwatch.v"
+              }
+            ]
+          },
+          {
+            "name": "Input",
+            "nodes": [
+              {
+                "name": "btn_debounce.v · demux_1x2.v",
+                "detail": "입력 안정화 및 모드별 전달",
+                "path": "src/btn_debounce.v"
+              }
+            ]
+          },
+          {
+            "name": "Control / Datapath",
+            "nodes": [
+              {
+                "name": "control_unit.v",
+                "detail": "Run·Stop·Clear 및 시각 선택 FSM",
+                "path": "src/control_unit.v"
+              },
+              {
+                "name": "stopwatch.v · watch.v",
+                "detail": "시간 카운터 및 Lap 저장",
+                "path": "src/stopwatch.v"
+              }
+            ]
+          },
+          {
+            "name": "Output RTL",
+            "nodes": [
+              {
+                "name": "fnd_controller.v",
+                "detail": "자리 분리·선택·7-segment 디코딩",
+                "path": "src/fnd_controller.v"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "FPGA I/O",
+                "detail": "버튼 · 스위치",
+                "path": ""
+              },
+              {
+                "name": "7-segment · LED",
+                "detail": "시간 및 동작 상태",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "하드웨어 구성 및 배선",
+    "architectureTitle": "RTL 제어 계층"
   },
   {
     "slug": "stm32-smart-elevator",
@@ -457,7 +1176,7 @@
     "period": "2026.11",
     "team": "2인 팀",
     "role": "UART 통신 연동, Application 설계 및 소프트웨어 디버깅",
-    "summary": "버튼과 UART 명령으로 1~3층을 호출하고, 포토센서·스텝모터·상태 표시 장치를 제어하였습니다.",
+    "summary": "버튼 또는 PC 명령으로 1~3층을 호출하는 화물용 엘리베이터입니다. 스텝모터로 이동하고 층별 포토센서로 도착을 판정하며, UART GUI에서 층 호출과 현재 상태 조회를 수행합니다.",
     "stack": [
       "C",
       "STM32F411RE",
@@ -475,7 +1194,7 @@
       "HOMING·IDLE·MOVING_UP·MOVING_DOWN 상태로 동작하며 포토센서로 층을 감지합니다.",
       "UART 프레임은 SOF 0xAA, LEN, CMD, PAYLOAD, CHECKSUM으로 구성됩니다. 체크섬은 LEN부터 PAYLOAD까지 합의 하위 8비트입니다.",
       "Python GUI에서 층 호출, 현재 층 조회 및 송수신 바이트 확인 기능을 구성하였습니다.",
-      "팀원 이도성은 Elevator·센서 드라이버와 보드 구성을 담당하였습니다. 교육용 드라이버의 기존 작성자 표기를 소스에 보존하였습니다."
+      "UART 통신과 Application을 담당하고, Elevator·센서 드라이버 및 보드 구성은 팀에서 분담하였습니다."
     ],
     "troubleshooting": [
       {
@@ -483,11 +1202,11 @@
         "observation": "btn1stFloor 이벤트를 꺼낸 뒤 requestFloor에 잘못된 인자가 전달되었습니다.",
         "cause": "버튼 이벤트 번호와 실제 층 번호의 대응을 확인해야 하는 상황이었습니다.",
         "action": "Application에서 btn1stFloor·btn2ndFloor·btn3rdFloor를 각각 1·2·3층 요청으로 연결하였습니다.",
-        "result": "현재 소스의 해당 매핑과 발표 자료의 동작 영상을 확인할 수 있습니다."
+        "result": "버튼 이벤트를 실제 층 번호로 변환하여 1·2·3층 호출 경로를 일치시켰습니다."
       }
     ],
     "results": [
-      "버튼 호출, 포토센서 정지, LED·FND 갱신 및 UART 제어 영상을 기록하였습니다.",
+      "버튼·UART 호출, 목표 층의 포토센서 정지 및 LED·FND 갱신을 확인하였습니다.",
       "현재 GUI는 750ms 주기의 층 조회와 송수신 로그를 제공합니다."
     ],
     "sourceNote": "이동 중 호출은 펌웨어 상태에 따라 무시될 수 있습니다. UART 응답과 목적 층 도착은 각각 확인해야 합니다.",
@@ -521,7 +1240,7 @@
     "images": [
       {
         "src": "/projects/stm32-smart-elevator-structure.png",
-        "caption": "엘리베이터 하드웨어 구성 · 발표 자료 발췌"
+        "caption": "엘리베이터 하드웨어 구성"
       }
     ],
     "videos": [
@@ -540,7 +1259,210 @@
         "href": "https://docs.google.com/presentation/d/1vLyiXlRVkP12A95SaMk8M6gW4w5bLE4pu3T644fP3VA/edit"
       }
     ],
-    "repo": "https://github.com/eugeneson3/stm32-smart-elevator"
+    "repo": "https://github.com/eugeneson3/stm32-smart-elevator",
+    "components": [
+      {
+        "name": "NUCLEO-F411RE",
+        "quantity": "1",
+        "purpose": "엘리베이터 상태 전이, 인터럽트 및 UART를 처리합니다."
+      },
+      {
+        "name": "28BYJ-48·모터 구동 모듈",
+        "quantity": "1세트",
+        "purpose": "상승·하강을 위한 스텝 구동을 수행합니다."
+      },
+      {
+        "name": "EE-SV3 포토센서",
+        "quantity": "3",
+        "purpose": "각 층의 도착 위치를 감지합니다."
+      },
+      {
+        "name": "호출 버튼·층 표시 LED",
+        "quantity": "각 3",
+        "purpose": "층 호출을 입력하고 현재 층을 표시합니다."
+      },
+      {
+        "name": "4자리 FND·16×2 LCD",
+        "quantity": "각 1",
+        "purpose": "층 및 상태 정보를 표시합니다."
+      },
+      {
+        "name": "DS3231·DHT11·부저",
+        "quantity": "각 1",
+        "purpose": "시각·온습도 표시 및 동작 알림에 사용합니다."
+      },
+      {
+        "name": "PC·USB 연결",
+        "quantity": "1",
+        "purpose": "Python GUI와 USART2 통신을 연결합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "층 제어 및 상태 표시",
+        "rows": [
+          {
+            "device": "1·2·3층 호출 버튼",
+            "connection": "PC0 / PC1 / PC3",
+            "function": "버튼 이벤트를 목표 층 요청으로 변환합니다."
+          },
+          {
+            "device": "1·2·3층 포토센서",
+            "connection": "PB1 / PB2 / PB12",
+            "function": "각 층 센서의 활성 상태를 감지합니다."
+          },
+          {
+            "device": "스텝모터",
+            "connection": "PC10 / PC11 / PC12 / PD2",
+            "function": "드라이버 입력 4개에 스텝 패턴을 출력합니다."
+          },
+          {
+            "device": "층 표시 LED",
+            "connection": "PB15 / PB14 / PB13",
+            "function": "현재 층을 표시합니다."
+          },
+          {
+            "device": "PC 통신",
+            "connection": "PA2 USART2_TX / PA3 USART2_RX",
+            "function": "115200 baud, 8-N-1로 패킷을 교환합니다."
+          },
+          {
+            "device": "LCD·RTC",
+            "connection": "PB8 I2C1_SCL / PB9 I2C1_SDA",
+            "function": "LCD와 DS3231이 I2C1 버스를 공유합니다."
+          },
+          {
+            "device": "온습도·알림",
+            "connection": "DHT11 PC8 / 부저 PA11 TIM1_CH4",
+            "function": "센서 데이터 수신 및 PWM 알림 출력을 수행합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "호출 입력 통합",
+        "description": "버튼 이벤트와 UART의 층 호출 패킷을 동일한 Queue에 넣습니다. Application은 이벤트를 1·2·3층으로 변환하여 Elevator_requestFloor를 호출합니다."
+      },
+      {
+        "title": "위치 확인 및 이동",
+        "description": "Elevator 드라이버는 HOMING·IDLE·MOVING_UP·MOVING_DOWN 상태로 동작합니다. TIM9 인터럽트가 스텝 구동과 센서 처리를 진행하며 목표 층 감지 시 정지합니다."
+      },
+      {
+        "title": "상태 표시 및 조회",
+        "description": "현재 층을 LED·FND에 반영하고 LCD와 부저를 갱신합니다. PC GUI는 750ms 주기로 현재 층을 조회하고 송수신 바이트를 표시합니다."
+      },
+      {
+        "title": "패킷 검증",
+        "description": "SOF 0xAA, LEN, CMD, PAYLOAD, CHECKSUM으로 프레임을 구성합니다. 수신 FSM은 길이와 체크섬을 확인한 후 명령을 Application에 전달합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "층 호출부터 모터 구동까지",
+        "description": "Application의 층 요청이 Elevator 드라이버와 스텝모터 드라이버를 거쳐 하드웨어 출력으로 전달됩니다. 센서 입력은 현재 층 판정에 반영됩니다.",
+        "flow": "함수 호출 및 주변장치 제어",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "ap_main.c",
+                "detail": "버튼·UART 이벤트 통합 및 층 요청",
+                "path": "Core/Src/ap/ap_main.c"
+              },
+              {
+                "name": "UART_GUI/app.py",
+                "detail": "PC 층 호출 및 상태 조회",
+                "path": "UART_GUI/app.py"
+              }
+            ]
+          },
+          {
+            "name": "Service",
+            "nodes": [
+              {
+                "name": "watch.c · sound.c",
+                "detail": "시각 표시 및 알림",
+                "path": "Core/Src/ap/service/"
+              },
+              {
+                "name": "que_buffer.c",
+                "detail": "호출 이벤트 Queue",
+                "path": "Core/Src/common/queue/que_buffer.c"
+              }
+            ]
+          },
+          {
+            "name": "Driver / Control",
+            "nodes": [
+              {
+                "name": "Elevator.c",
+                "detail": "층 위치 및 이동 상태 전이",
+                "path": "Core/Src/driver/Elevator/Elevator.c"
+              },
+              {
+                "name": "uart_protocol.c",
+                "detail": "패킷 수신 FSM 및 응답",
+                "path": "Core/Src/driver/uart_protocol/uart_protocol.c"
+              }
+            ]
+          },
+          {
+            "name": "Device Driver",
+            "nodes": [
+              {
+                "name": "stepmotor · PhotoSensor",
+                "detail": "스텝 패턴과 층 감지",
+                "path": "Core/Src/driver/stepmotor/stepmotor.c"
+              },
+              {
+                "name": "button · led · fnd",
+                "detail": "호출 입력 및 층 표시",
+                "path": "Core/Src/driver/"
+              },
+              {
+                "name": "lcd · ds3231 · DHT11 · buzzer",
+                "detail": "정보 표시 및 알림",
+                "path": "Core/Src/driver/"
+              }
+            ]
+          },
+          {
+            "name": "HAL",
+            "nodes": [
+              {
+                "name": "GPIO · TIM · I2C · UART",
+                "detail": "주변장치 초기화 및 인터럽트",
+                "path": "Core/Src/main.c"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "GPIO · TIM9",
+                "detail": "28BYJ-48 · 포토센서 · 버튼",
+                "path": ""
+              },
+              {
+                "name": "GPIO · TIM2 · TIM1",
+                "detail": "LED · FND · 부저",
+                "path": ""
+              },
+              {
+                "name": "I2C1 · USART2",
+                "detail": "LCD · DS3231 · PC",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "하드웨어 구성 및 배선",
+    "architectureTitle": "SW STACK"
   },
   {
     "slug": "stm32-rc-car",
@@ -549,7 +1471,7 @@
     "period": "2026.11",
     "team": "2인 팀",
     "role": "제어 앱 설계, Bluetooth 통신 및 연속 수동 각도 제어",
-    "summary": "Bluetooth 조이스틱 명령으로 좌우 모터를 제어하고, 초음파 거리 기반 자동 주행을 팀 프로젝트로 구성하였습니다.",
+    "summary": "스마트폰의 조이스틱 명령을 좌우 모터의 방향과 PWM 출력으로 변환하는 RC 자동차입니다. Bluetooth 수동 제어와 초음파 센서 기반 자율주행을 구현하였습니다.",
     "stack": [
       "C",
       "STM32F411RE",
@@ -563,7 +1485,7 @@
     ],
     "goal": "Bluetooth 기반 수동 주행과 초음파 센서 기반 자동 주행을 구현하고, 통신 입력을 모터 제어에 연결하는 것을 목표로 하였습니다.",
     "implementation": [
-      "본인은 RC 제어 앱, Bluetooth 통신 및 연속 수동 각도 제어를 담당하였습니다. 팀원 이도성은 자동 주행과 거리 측정 모듈을 담당하였습니다.",
+      "RC 제어 앱, Bluetooth 통신 및 연속 수동 각도 제어를 담당하였습니다. 팀원 이도성은 자동 주행과 거리 측정 모듈을 담당하였습니다.",
       "수동 제어 소스는 X·Y 숫자 필드를 해석하고 Queue를 통해 모터 Task에 전달합니다.",
       "LCD 접근에는 Mutex를 사용하며 통신·버튼·모터 작업을 분리하였습니다.",
       "추가 자율주행 버전에는 센서 순차 측정, 유효 시간 검사, 회전 유지 시간과 진입·복귀 임계값을 구성하였습니다."
@@ -572,24 +1494,24 @@
       {
         "title": "첫 명령 이후 통신 정지",
         "observation": "한 번 명령을 보낸 뒤 후속 명령이 처리되지 않는 현상을 관찰하였습니다.",
-        "cause": "발표 자료는 문자열 변환 및 LCD 호출 과정의 CommTask 스택 부족을 추정 원인으로 기록하고 있습니다.",
-        "action": "발표에서 스택을 128워드에서 512워드로 확대하였습니다.",
-        "result": "발표 기록에서 후속 명령 처리가 회복되었습니다. 공개된 manual-rtos 스냅샷의 설정은 128워드이므로 수정 전 버전으로 명시하였습니다."
+        "cause": "문자열 변환과 LCD 호출 시 사용하는 CommTask의 스택 크기를 점검하고 스택 부족을 원인 후보로 판단하였습니다.",
+        "action": "CommTask의 스택을 128워드에서 512워드로 확대하였습니다.",
+        "result": "수정 후 후속 명령 처리가 회복되었습니다. 공개 저장소의 manual-rtos는 128워드 설정의 이전 버전입니다."
       },
       {
         "title": "조이스틱 해제 시 정지 명령 유실",
         "observation": "앱에서 한 번 전송한 STOP 명령이 반영되지 않는 경우가 있었습니다.",
         "cause": "단발 명령 전달 방식에서 정지 상태를 지속적으로 전달할 필요가 있었습니다.",
-        "action": "발표 자료에 조이스틱 해제 상태에서 STOP 명령을 반복 전송하도록 변경한 내용을 기록하였습니다.",
-        "result": "수동 조작 영상과 개선 영상을 발표 자료에 수록하였습니다."
+        "action": "조이스틱 해제 상태에서 STOP 명령을 반복 전송하도록 앱의 송신 동작을 변경하였습니다.",
+        "result": "조이스틱 해제 후 정지 명령이 전달되는 동작을 시연으로 확인하였습니다."
       }
     ],
     "results": [
-      "수동 주행 및 자동 주행 시연 영상이 존재합니다.",
-      "저장소에서 수동 RTOS 제어, 기본 자동 주행, 최대 듀티 자동 주행의 소스를 각각 확인할 수 있습니다.",
+      "Bluetooth 수동 주행과 초음파 센서 기반 자동 주행을 시연하였습니다.",
+      "수동 RTOS 제어와 기본 자율주행을 구현하고, 최대 PWM 듀티를 사용하는 자율주행 버전으로 확장하였습니다.",
       "2026.11.18 autonomous-maxspeed의 기존 Arm GCC·Unicorn 테스트를 실행하여 상태 전이, 시간 경계, PWM 및 센서 timeout 검사를 통과하였습니다."
     ],
-    "sourceNote": "각 폴더는 서로 다른 개발 스냅샷입니다. 발표 최종 통합본과 모바일 앱 원본은 확인되지 않았습니다. autonomous-maxspeed의 최대 속도는 PWM 듀티 100%를 의미하며, 해당 추가 버전의 실차 주행 성능은 별도 확인이 필요합니다.",
+    "sourceNote": "manual-rtos, autonomous, autonomous-maxspeed는 개발 단계별 버전입니다. 최종 통합 펌웨어와 모바일 앱 원본은 공개 저장소에 포함되어 있지 않습니다. autonomous-maxspeed는 PWM 듀티 100%를 사용하는 확장 버전이며 실차 주행 성능은 별도 검증 대상입니다.",
     "structure": [
       {
         "path": "manual-rtos/Core/Src/ap/task/comm_task/",
@@ -620,7 +1542,7 @@
     "images": [
       {
         "src": "/projects/stm32-rc-car-structure.png",
-        "caption": "RC 자동차 하드웨어 구성 · 발표 자료 발췌"
+        "caption": "RC 자동차 하드웨어 구성"
       }
     ],
     "videos": [
@@ -639,7 +1561,297 @@
         "href": "https://docs.google.com/presentation/d/1PTB3ovCwl-OSSKuT2UqVhh27Gt-OEVEujULe4K4Zsnk/edit"
       }
     ],
-    "repo": "https://github.com/eugeneson3/stm32-rc-car"
+    "repo": "https://github.com/eugeneson3/stm32-rc-car",
+    "components": [
+      {
+        "name": "NUCLEO-F411RE",
+        "quantity": "1",
+        "purpose": "100MHz MCU에서 통신, 주행 판단 및 모터 출력을 처리합니다."
+      },
+      {
+        "name": "HC-06",
+        "quantity": "1",
+        "purpose": "스마트폰의 Bluetooth 명령을 USART6로 전달합니다."
+      },
+      {
+        "name": "L298N·좌우 DC 모터",
+        "quantity": "드라이버 1·모터 2",
+        "purpose": "좌우 바퀴의 방향과 PWM을 독립적으로 제어합니다."
+      },
+      {
+        "name": "HC-SR04",
+        "quantity": "3",
+        "purpose": "전방과 좌우 방향의 장애물 거리를 측정합니다."
+      },
+      {
+        "name": "16×2 I2C LCD",
+        "quantity": "1",
+        "purpose": "주행 상태와 모터 출력 정보를 표시합니다."
+      },
+      {
+        "name": "버튼·방향 표시 LED",
+        "quantity": "버튼 2·LED 4",
+        "purpose": "모드 입력과 전진·후진·좌회전·우회전 표시를 담당합니다."
+      },
+      {
+        "name": "18650 배터리",
+        "quantity": "2",
+        "purpose": "차량 구동 전원으로 사용합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "Bluetooth 수동 제어",
+        "rows": [
+          {
+            "device": "HC-06",
+            "connection": "PA11 USART6_TX → RXD / PA12 USART6_RX ← TXD",
+            "function": "9600 baud로 조이스틱 명령을 수신합니다."
+          },
+          {
+            "device": "왼쪽 모터",
+            "connection": "PC6 TIM3_CH1 / PB6·PA7",
+            "function": "PC6에서 PWM을 출력하고 PB6·PA7로 회전 방향을 지정합니다."
+          },
+          {
+            "device": "오른쪽 모터",
+            "connection": "PC8 TIM3_CH3 / PA6·PA5",
+            "function": "PC8에서 PWM을 출력하고 PA6·PA5로 회전 방향을 지정합니다."
+          },
+          {
+            "device": "LCD",
+            "connection": "PB8 I2C1_SCL / PB9 I2C1_SDA",
+            "function": "I2C로 상태 문자열을 출력합니다."
+          },
+          {
+            "device": "방향 LED",
+            "connection": "PC11 전진 / PC3 후진 / PC10 좌회전 / PC12 우회전",
+            "function": "좌우 모터 출력의 합과 차를 표시 상태에 반영합니다."
+          }
+        ]
+      },
+      {
+        "title": "자율주행 확장 버전",
+        "rows": [
+          {
+            "device": "왼쪽 초음파 센서",
+            "connection": "TRIG PA8 / ECHO PB10",
+            "function": "왼쪽 대각선 거리를 측정합니다."
+          },
+          {
+            "device": "전방 초음파 센서",
+            "connection": "TRIG PB4 / ECHO PB5",
+            "function": "전방 장애물 거리를 측정합니다."
+          },
+          {
+            "device": "오른쪽 초음파 센서",
+            "connection": "TRIG PA10 / ECHO PB3",
+            "function": "오른쪽 대각선 거리를 측정합니다."
+          },
+          {
+            "device": "시작·정지 버튼",
+            "connection": "PC0 / 내부 Pull-up / 누르면 GND",
+            "function": "30ms 디바운스를 적용한 시작·정지 입력입니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "명령 수신",
+        "description": "앱에서 X·Y 좌표를 전송하면 USART6 수신 경로가 * 문자를 기준으로 명령을 구분합니다. comm_task가 X%dY%d 형식을 해석하고 모터 제어 Queue에 전달합니다."
+      },
+      {
+        "title": "좌우 모터 출력 계산",
+        "description": "motor_control_task가 명령을 꺼내 motor_set_speed를 호출합니다. y+x와 y−x로 좌우 출력을 계산하고 범위를 정규화하여 전진·후진·곡선 주행을 구성합니다."
+      },
+      {
+        "title": "주행 상태 표시",
+        "description": "dcmotor 드라이버가 방향 GPIO와 TIM3 PWM을 갱신합니다. 방향 LED와 LCD에는 제어 상태를 표시합니다. LCD의 모터 출력값은 PWM 명령값입니다."
+      },
+      {
+        "title": "거리 기반 자율주행",
+        "description": "별도 자율주행 펌웨어에서는 센서 3개의 거리로 직진·회전·정지를 결정합니다. autonomous-maxspeed 버전은 거리값 유효시간, 전환 기준의 히스테리시스, 방향 전환 시 deadtime을 적용합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "Bluetooth 수동 제어",
+        "description": "통신 Task가 해석한 명령을 Queue로 전달하고, 모터 Task가 드라이버를 호출하여 GPIO와 PWM을 갱신합니다.",
+        "flow": "함수 호출 및 주변장치 제어",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "comm_task.c",
+                "detail": "명령 파싱 및 Queue 전달",
+                "path": "manual-rtos/Core/Src/ap/task/comm_task/comm_task.c"
+              },
+              {
+                "name": "motor_control_task.c",
+                "detail": "명령 소비 및 주행 제어",
+                "path": "manual-rtos/Core/Src/ap/task/motor_control_task/motor_control_task.c"
+              },
+              {
+                "name": "button_task.c",
+                "detail": "버튼 입력 처리",
+                "path": "manual-rtos/Core/Src/ap/task/button_task/button_task.c"
+              }
+            ]
+          },
+          {
+            "name": "RTOS / Common",
+            "nodes": [
+              {
+                "name": "freertos.c",
+                "detail": "Task·Queue·Mutex 구성",
+                "path": "manual-rtos/Core/Src/freertos.c"
+              },
+              {
+                "name": "message.c",
+                "detail": "Task 간 메시지 전달",
+                "path": "manual-rtos/Core/Src/ap/message.c"
+              }
+            ]
+          },
+          {
+            "name": "Driver",
+            "nodes": [
+              {
+                "name": "dcmotor.c",
+                "detail": "방향 및 PWM 출력",
+                "path": "manual-rtos/Core/Src/driver/DC_Motor/dcmotor.c"
+              },
+              {
+                "name": "button.c",
+                "detail": "버튼 상태 판정",
+                "path": "manual-rtos/Core/Src/driver/button/button.c"
+              },
+              {
+                "name": "lcd.c",
+                "detail": "LCD 명령 및 문자열 출력",
+                "path": "manual-rtos/Core/Src/driver/lcd/lcd.c"
+              }
+            ]
+          },
+          {
+            "name": "HAL",
+            "nodes": [
+              {
+                "name": "usart.c",
+                "detail": "USART6 수신",
+                "path": "manual-rtos/Core/Src/usart.c"
+              },
+              {
+                "name": "tim.c",
+                "detail": "TIM3 PWM",
+                "path": "manual-rtos/Core/Src/tim.c"
+              },
+              {
+                "name": "gpio.c · i2c.c",
+                "detail": "디지털 I/O 및 I2C1",
+                "path": "manual-rtos/Core/Src/gpio.c"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "USART6 · GPIO",
+                "detail": "HC-06 · 버튼 · 방향 LED",
+                "path": ""
+              },
+              {
+                "name": "TIM3 · GPIO",
+                "detail": "L298N · 좌우 DC 모터",
+                "path": ""
+              },
+              {
+                "name": "I2C1",
+                "detail": "16×2 LCD",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "자율주행 확장",
+        "description": "main.c가 Autonomous_Update를 호출합니다. autonomous.c는 센서 측정값을 navigation.c에 전달하고, 반환된 주행 명령을 모터 출력에 반영합니다.",
+        "flow": "함수 호출 및 주변장치 제어",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "main.c",
+                "detail": "주기 실행 및 시작·정지 처리",
+                "path": "autonomous-maxspeed/Core/Src/main.c"
+              }
+            ]
+          },
+          {
+            "name": "Control / Service",
+            "nodes": [
+              {
+                "name": "Autonomous_Update",
+                "detail": "측정 → 주행 판단 → 출력 순서 조정",
+                "path": "autonomous-maxspeed/Core/Src/autonomous.c"
+              },
+              {
+                "name": "navigation.c",
+                "detail": "거리 기반 주행 상태 전이",
+                "path": "autonomous-maxspeed/Core/Src/navigation.c"
+              }
+            ]
+          },
+          {
+            "name": "Driver",
+            "nodes": [
+              {
+                "name": "sensors_update · motor_update",
+                "detail": "autonomous.c의 센서 측정 및 모터 구동 함수",
+                "path": "autonomous-maxspeed/Core/Src/autonomous.c"
+              }
+            ]
+          },
+          {
+            "name": "HAL",
+            "nodes": [
+              {
+                "name": "GPIO · TIM",
+                "detail": "Trigger/Echo 입력 및 PWM 출력",
+                "path": "autonomous-maxspeed/Core/Src/main.c"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "HC-SR04 ×3",
+                "detail": "전방 · 왼쪽 · 오른쪽",
+                "path": ""
+              },
+              {
+                "name": "L298N · DC 모터",
+                "detail": "좌우 바퀴",
+                "path": ""
+              },
+              {
+                "name": "GPIO 버튼",
+                "detail": "시작 · 정지",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "하드웨어 구성 및 배선",
+    "architectureTitle": "SW STACK"
   },
   {
     "slug": "stm32-analog-watch",
@@ -648,7 +1860,7 @@
     "period": "2026.10",
     "team": "개인",
     "role": "시각 데이터 연동 및 표시·스텝모터 Application 구성",
-    "summary": "RTC 시각과 스톱워치 값을 LCD·FND에 표시하고, 스텝모터 3개로 시침·분침·초침 위치를 제어하였습니다.",
+    "summary": "RTC 시각과 스톱워치 시간을 디지털 표시부와 아날로그 바늘에 함께 표시하는 시계입니다. 스텝모터 3개를 독립적으로 구동하며 시계 모드와 스톱워치 모드를 전환합니다.",
     "stack": [
       "C",
       "STM32F411RE",
@@ -673,11 +1885,11 @@
         "observation": "모터가 목표 위치로 이동하는 주기와 전원 인가 시 기준 위치를 정의해야 합니다.",
         "cause": "현재 소스는 전원 인가 시 세 바늘이 12시 방향에 있다고 가정하며, 구동 주기가 너무 짧으면 탈조 가능성이 있습니다.",
         "action": "ClockHands 모듈에서 2ms 스텝 주기와 현재·목표 위치를 관리하도록 구현하였습니다.",
-        "result": "초기 바늘 정렬은 실행 전 확인 항목으로 기록하였습니다. 발표 자료에는 별도의 정량 오차 측정 결과가 없습니다."
+        "result": "초기 바늘을 12시 방향에 맞춘 뒤 시각을 목표 스텝 위치로 변환합니다. 절대 위치 센서를 사용하는 원점 검출은 구현 범위에 포함되지 않습니다."
       }
     ],
     "results": [
-      "LCD·FND 시각 출력과 아날로그 바늘 동작을 시연 영상으로 기록하였습니다."
+      "LCD·FND의 디지털 시각과 세 바늘의 아날로그 동작을 함께 확인하였습니다."
     ],
     "structure": [
       {
@@ -708,7 +1920,7 @@
     "images": [
       {
         "src": "/projects/stm32-analog-watch-structure.png",
-        "caption": "아날로그 시계 하드웨어 구성 · 발표 자료 발췌"
+        "caption": "아날로그 시계 하드웨어 구성"
       }
     ],
     "videos": [
@@ -724,7 +1936,185 @@
       }
     ],
     "repo": "https://github.com/eugeneson3/stm32-analog-watch",
-    "sourceNote": "소스 스냅샷과 발표 자료를 기준으로 작성하였습니다. 파일별 원본 경로와 SHA-256은 SOURCE_MANIFEST.json에 기록하였습니다."
+    "sourceNote": "",
+    "components": [
+      {
+        "name": "NUCLEO-F411RE",
+        "quantity": "1",
+        "purpose": "모드 전환, 표시 갱신 및 모터 주기를 제어합니다."
+      },
+      {
+        "name": "DS3231 RTC",
+        "quantity": "1",
+        "purpose": "I2C로 시각을 읽고 설정합니다."
+      },
+      {
+        "name": "28BYJ-48·모터 구동 모듈",
+        "quantity": "3세트",
+        "purpose": "시침·분침·초침을 각각 구동합니다."
+      },
+      {
+        "name": "4자리 FND·I2C LCD",
+        "quantity": "각 1",
+        "purpose": "현재 시각과 스톱워치 상태를 표시합니다."
+      },
+      {
+        "name": "택트 스위치·LED",
+        "quantity": "버튼 3·LED 4",
+        "purpose": "모드·실행·초기화 입력과 상태 표시를 담당합니다."
+      },
+      {
+        "name": "MB102 전원 모듈",
+        "quantity": "1",
+        "purpose": "실습 회로의 전원을 공급합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "시각 입력 및 바늘 구동",
+        "rows": [
+          {
+            "device": "시침 모터 IN1~IN4",
+            "connection": "PA0 / PA1 / PA4 / PB0",
+            "function": "시침의 목표 스텝 위치를 출력합니다."
+          },
+          {
+            "device": "분침 모터 IN1~IN4",
+            "connection": "PC10 / PC11 / PC12 / PD2",
+            "function": "분침의 목표 스텝 위치를 출력합니다."
+          },
+          {
+            "device": "초침 모터 IN1~IN4",
+            "connection": "PC9 / PC8 / PC6 / PC5",
+            "function": "초침의 목표 스텝 위치를 출력합니다."
+          },
+          {
+            "device": "모드·Run/Stop·Clear 버튼",
+            "connection": "PC0 / PC1 / PC3",
+            "function": "모드 전환, 계측 시작·정지, 초기화를 입력합니다."
+          },
+          {
+            "device": "RTC·LCD",
+            "connection": "PB8 I2C1_SCL / PB9 I2C1_SDA · RTC 0x68 / LCD 0x27",
+            "function": "같은 I2C 버스에서 시각을 읽고 표시합니다."
+          },
+          {
+            "device": "FND 자리 선택",
+            "connection": "PA5 / PB6 / PC7 / PA10",
+            "function": "TIM3 주기에 따라 표시 자리를 순환합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "시각 및 계측 상태 관리",
+        "description": "TimeClock이 DS3231의 BCD 데이터를 변환하고, StopWatch가 실행·정지·초기화 상태와 계측값을 관리합니다. ap_main은 버튼 입력에 따라 표시 모드를 선택합니다."
+      },
+      {
+        "title": "디지털 표시",
+        "description": "Display는 시계·스톱워치 데이터를 받아 LCD와 FND에 전달합니다. FND 스캔을 TIM3 인터럽트에서 수행하여 메인 루프와 표시 주기를 분리합니다."
+      },
+      {
+        "title": "목표 각도 계산",
+        "description": "ClockHands는 시·분·초를 모터 한 바퀴의 스텝 수로 환산합니다. 시침에는 분·초를, 분침에는 초를 반영하여 연속적인 위치를 계산합니다."
+      },
+      {
+        "title": "모터 주기 제어",
+        "description": "TIM9의 2ms 주기마다 목표 위치까지 가까운 방향으로 한 스텝 이동합니다. 목표에 도착하면 코일 출력을 해제합니다. 초기 위치는 세 바늘의 12시 방향을 기준으로 합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "시각 데이터에서 디지털·아날로그 출력까지",
+        "description": "Application이 시각과 계측 상태를 선택하고, 표시·바늘 제어 계층이 각 장치 드라이버를 호출합니다.",
+        "flow": "함수 호출 및 주변장치 제어",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "ap_main.c",
+                "detail": "시계·스톱워치 모드 선택",
+                "path": "Core/Src/ap/ap_main.c"
+              }
+            ]
+          },
+          {
+            "name": "Service",
+            "nodes": [
+              {
+                "name": "TimeClock.c · StopWatch.c",
+                "detail": "RTC 시각 및 계측 상태",
+                "path": "Core/Src/ap/TimeClock/TimeClock.c"
+              },
+              {
+                "name": "Display.c",
+                "detail": "LCD·FND 표시 데이터",
+                "path": "Core/Src/ap/Display/Display.c"
+              },
+              {
+                "name": "ClockHands.c",
+                "detail": "목표 위치 계산 및 주기 제어",
+                "path": "Core/Src/ap/ClockHands/ClockHands.c"
+              }
+            ]
+          },
+          {
+            "name": "Driver",
+            "nodes": [
+              {
+                "name": "ds3231 · button",
+                "detail": "시각 읽기 및 버튼 판정",
+                "path": "Core/Src/driver/ds3231/ds3231.c"
+              },
+              {
+                "name": "lcd · fnd · led",
+                "detail": "표시 장치 제어",
+                "path": "Core/Src/driver/"
+              },
+              {
+                "name": "stepmotor.c",
+                "detail": "8단계 Half-step 패턴",
+                "path": "Core/Src/driver/stepmotor/stepmotor.c"
+              }
+            ]
+          },
+          {
+            "name": "HAL",
+            "nodes": [
+              {
+                "name": "GPIO · I2C · TIM",
+                "detail": "버스 접근 및 타이머 인터럽트",
+                "path": "Core/Src/main.c"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "I2C1",
+                "detail": "DS3231 · LCD",
+                "path": ""
+              },
+              {
+                "name": "GPIO · TIM3",
+                "detail": "버튼 · LED · FND",
+                "path": ""
+              },
+              {
+                "name": "GPIO · TIM9",
+                "detail": "시침 · 분침 · 초침 모터",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "하드웨어 구성 및 배선",
+    "architectureTitle": "SW STACK"
   },
   {
     "slug": "hand-gesture-game",
@@ -750,7 +2140,7 @@
       "카메라 입력, 손 위치 확인, 이미지 분류, 입력 안정화 및 게임 Action Queue를 연결하였습니다.",
       "일반 동작은 85%, 주먹은 95% 신뢰도 기준을 적용하고 같은 동작을 0.35초 유지하도록 구성하였습니다.",
       "동작 해제 0.3초, 짧은 결과 변동 0.1초에 대한 조건을 사용하였습니다.",
-      "본인은 게임 제작·시연·데이터 촬영 도구를 담당하였습니다. 조수현은 모델 학습·최적화, 김해랑은 게임 흐름·튜토리얼 및 데이터 확보를 담당하였습니다."
+      "게임 제작, 입력 연동, 시연 및 데이터 촬영 도구를 담당하였습니다. 모델 학습·최적화와 튜토리얼·데이터 확보는 팀에서 분담하였습니다."
     ],
     "troubleshooting": [
       {
@@ -758,20 +2148,20 @@
         "observation": "손이 보이지 않는 화면에서도 주먹으로 분류되어 입력 게이지가 증가하였습니다.",
         "cause": "분류 결과만으로 입력을 확정하던 경로를 검토하였습니다.",
         "action": "인식 영역 안의 손 존재 확인과 주먹 신뢰도 95% 조건을 추가하였습니다.",
-        "result": "발표 자료에 수정 후 입력 판정 결과를 기록하였습니다."
+        "result": "손 존재 여부와 신뢰도 조건을 함께 확인하여 입력 게이지를 갱신하도록 수정하였습니다."
       },
       {
         "title": "동작 전환 과정의 오입력",
         "observation": "손 모양을 바꾸는 도중 다른 동작이 먼저 입력되는 문제가 발생하였습니다.",
         "cause": "순간 분류 결과가 게임 입력으로 전달되는 경로였습니다.",
         "action": "0.35초 유지 조건과 동일 입력의 재활성 조건을 적용하고, 튜토리얼 건너뛰기에는 별도 1초 조건을 사용하였습니다.",
-        "result": "원하지 않는 중간 동작 입력을 줄인 사례를 발표 자료에 기록하였습니다."
+        "result": "동작 유지와 재활성 조건을 적용하여 전환 중간의 분류 결과가 단일 입력으로 확정되는 경로를 보완하였습니다."
       }
     ],
     "results": [
       "Raspberry Pi 5에서 손동작 분류와 게임을 연동하였습니다.",
       "게임에 5개 인, 6개 술법, 8단계를 구성하였습니다.",
-      "모델 학습 결과는 팀원의 담당 결과이며, 본인의 담당 범위는 게임 및 입력 연동으로 명시하였습니다."
+      "손 존재 확인, 신뢰도와 유지 시간 조건을 게임 입력 경로에 적용하였습니다."
     ],
     "structure": [
       {
@@ -807,7 +2197,7 @@
     "images": [
       {
         "src": "/projects/hand-gesture-game-structure.png",
-        "caption": "손동작 입력 및 게임 소스 구조 · 발표 자료 발췌"
+        "caption": "손동작 인식 및 게임 구성"
       }
     ],
     "videos": [],
@@ -818,7 +2208,141 @@
       }
     ],
     "repo": "https://github.com/eugeneson3/hand-gesture-game",
-    "sourceNote": "소스 스냅샷과 발표 자료를 기준으로 작성하였습니다. 파일별 원본 경로와 SHA-256은 SOURCE_MANIFEST.json에 기록하였습니다."
+    "sourceNote": "",
+    "components": [
+      {
+        "name": "Raspberry Pi 5",
+        "quantity": "1",
+        "purpose": "손동작 추론과 Pygame을 실행합니다."
+      },
+      {
+        "name": "카메라",
+        "quantity": "1",
+        "purpose": "손 영역을 포함한 영상을 OpenCV로 입력합니다."
+      },
+      {
+        "name": "화면·입력 장치",
+        "quantity": "실행 환경",
+        "purpose": "게임 장면, 인식 상태 및 튜토리얼을 표시합니다."
+      },
+      {
+        "name": "TFLite 모델·Hand Landmarker",
+        "quantity": "추론 리소스",
+        "purpose": "손 존재와 동작 클래스를 판정합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "카메라부터 게임 입력까지",
+        "rows": [
+          {
+            "device": "카메라",
+            "connection": "OpenCV VideoCapture / camera_index",
+            "function": "영상 프레임을 읽고 인식 영역을 추출합니다."
+          },
+          {
+            "device": "추론 엔진",
+            "connection": "LiteRT 또는 TFLite Runtime / models/",
+            "function": "손동작 클래스와 신뢰도를 계산합니다."
+          },
+          {
+            "device": "게임 입력",
+            "connection": "CVInputSource → Action Queue → 게임 상태",
+            "function": "확정된 동작을 단일 Action으로 전달합니다."
+          },
+          {
+            "device": "화면",
+            "connection": "Pygame display",
+            "function": "전투·튜토리얼·인식 게이지를 표시합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "영상 및 손 영역 확인",
+        "description": "카메라 프레임에서 손 존재를 확인하고 분류 입력을 구성합니다. 손이 없는 화면을 입력 확정 대상에서 제외합니다."
+      },
+      {
+        "title": "입력 안정화",
+        "description": "일반 동작 85%, 주먹 95%의 신뢰도 기준과 0.35초 유지 조건을 적용합니다. 동작 해제 0.3초와 짧은 변동 0.1초 조건으로 연속 오입력을 제어합니다."
+      },
+      {
+        "title": "게임 연동",
+        "description": "확정된 Action을 게임 진행 경로로 전달합니다. 장면 전환, 전투 계산, 입력 게이지 및 튜토리얼을 연결하여 5개 인·6개 술법·8단계를 구성하였습니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "손동작 인식과 게임 실행",
+        "description": "게임 Application은 입력 모듈에서 확정한 Action을 사용합니다. 입력 모듈은 카메라·추론 라이브러리를 통해 하드웨어에 접근합니다.",
+        "flow": "함수 호출 및 주변장치 제어",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "start_game.py · app.py",
+                "detail": "게임 실행 및 메인 루프",
+                "path": "start_game.py"
+              },
+              {
+                "name": "scenes.py · combat.py",
+                "detail": "장면 진행 및 전투 계산",
+                "path": "engine/game/scenes.py"
+              }
+            ]
+          },
+          {
+            "name": "Input / Service",
+            "nodes": [
+              {
+                "name": "cv_source.py",
+                "detail": "손 인식·추론·신뢰도·유지 시간",
+                "path": "engine/game/cv_source.py"
+              },
+              {
+                "name": "input_source.py",
+                "detail": "Action 및 입력 인터페이스",
+                "path": "engine/game/input_source.py"
+              }
+            ]
+          },
+          {
+            "name": "Library / Driver",
+            "nodes": [
+              {
+                "name": "OpenCV · MediaPipe",
+                "detail": "카메라 입력 및 손 존재 확인",
+                "path": "requirements.txt"
+              },
+              {
+                "name": "TFLite · Pygame",
+                "detail": "분류 추론 및 화면 출력",
+                "path": "requirements.txt"
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "Raspberry Pi 5",
+                "detail": "CPU · 메모리",
+                "path": ""
+              },
+              {
+                "name": "카메라 · 디스플레이",
+                "detail": "영상 입력 · 게임 화면",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "장치 구성 및 입력 경로",
+    "architectureTitle": "SW STACK"
   },
   {
     "slug": "sv-guard",
@@ -849,7 +2373,7 @@
       {
         "title": "검사 중 편집기 응답성",
         "observation": "컴파일 작업 중 편집기 입력과 화면 갱신이 영향을 받을 수 있습니다.",
-        "cause": "기존 README는 pyslang 컴파일이 Python GIL을 유지하는 점을 설계 근거로 기록하고 있습니다.",
+        "cause": "pyslang 컴파일 중 Python GIL이 유지되어 GUI와 검사 작업의 실행을 분리할 필요가 있었습니다.",
         "action": "검사를 별도 프로세스에서 실행하고 Worker 종료 후 다음 저장에서 재실행하도록 구성하였습니다.",
         "result": "검사 상태와 진단 결과를 GUI 이벤트 흐름에 연결하였습니다."
       }
@@ -857,9 +2381,9 @@
     "results": [
       "현재 구현 단계는 저장 시 검사와 진단 표시입니다.",
       "저장소에 편집기·검사기 테스트 및 Windows·Ubuntu CI 설정이 포함되어 있습니다.",
-      "2026.11.18 공개 스냅샷의 기존 테스트를 Windows·Python 3.12·Qt offscreen 환경에서 실행하여 507개 통과, 2개 건너뜀을 확인하였습니다."
+      "Windows·Python 3.12 환경에서 기존 자동화 테스트 507개가 통과하였으며, 2개 항목은 건너뛰었습니다."
     ],
-    "sourceNote": "현재 구현 범위와 향후 기능은 원본 README 및 ROADMAP에 기재되어 있습니다. 이번 공개본의 소스는 easySV 작업 폴더를 기준으로 구성하였습니다.",
+    "sourceNote": "구현 범위와 향후 개발 항목은 저장소의 README와 ROADMAP에서 확인할 수 있습니다.",
     "structure": [
       {
         "path": "app/",
@@ -890,6 +2414,150 @@
     "images": [],
     "videos": [],
     "references": [],
-    "repo": "https://github.com/eugeneson3/sv-guard"
+    "repo": "https://github.com/eugeneson3/sv-guard",
+    "components": [
+      {
+        "name": "Python 3.11 이상",
+        "quantity": "런타임",
+        "purpose": "편집기와 검사 프로세스를 실행합니다."
+      },
+      {
+        "name": "PySide6",
+        "quantity": "GUI",
+        "purpose": "편집기·파일 탐색기·Problems 패널을 구성합니다."
+      },
+      {
+        "name": "pyslang 12",
+        "quantity": "검사 엔진",
+        "purpose": "SystemVerilog 구문 및 의미 분석을 수행합니다."
+      },
+      {
+        "name": "Windows·Ubuntu PC",
+        "quantity": "실행 환경",
+        "purpose": "파일 편집, 검사 및 세션 저장을 수행합니다."
+      }
+    ],
+    "wiring": [
+      {
+        "title": "파일 및 프로세스 연결",
+        "rows": [
+          {
+            "device": "편집기 저장 이벤트",
+            "connection": "Code Editor → Analysis Service",
+            "function": "저장한 파일을 기준으로 프로젝트 검사를 요청합니다."
+          },
+          {
+            "device": "별도 검사 프로세스",
+            "connection": "Analysis Service → svguard.runner → pyslang",
+            "function": "GUI와 검사 작업의 실행을 분리합니다."
+          },
+          {
+            "device": "검사 결과",
+            "connection": "Finding → Problems 패널·에디터 표시",
+            "function": "파일·줄·열 정보를 사용하여 오류 위치로 이동합니다."
+          }
+        ]
+      }
+    ],
+    "operation": [
+      {
+        "title": "파일 편집과 저장",
+        "description": "프로젝트 파일을 열고 편집합니다. 저장 이벤트가 발생하면 Analysis Service가 검사 요청을 구성합니다."
+      },
+      {
+        "title": "프로젝트 검사",
+        "description": "Worker process에서 파일과 include 경로를 해석한 뒤 pyslang 분석을 실행합니다. 검사 중 추가 저장 요청은 다음 검사로 병합합니다."
+      },
+      {
+        "title": "결과 탐색",
+        "description": "진단을 파일·줄·열 단위로 Problems 패널과 편집기에 표시합니다. 편집 이후에는 이전 진단을 stale 상태로 표시하고 다음 검사에서 갱신합니다."
+      }
+    ],
+    "architectures": [
+      {
+        "title": "편집기에서 검사 엔진까지",
+        "description": "Application이 검사 서비스를 호출하고, 별도 프로세스의 분석 결과를 진단 UI에 반영합니다.",
+        "flow": "함수 호출 및 주변장치 제어",
+        "layers": [
+          {
+            "name": "Application",
+            "nodes": [
+              {
+                "name": "main_window.py",
+                "detail": "프로젝트·편집기·패널 연결",
+                "path": "app/main_window.py"
+              },
+              {
+                "name": "code_editor.py",
+                "detail": "코드 편집 및 저장",
+                "path": "app/editor/code_editor.py"
+              }
+            ]
+          },
+          {
+            "name": "Service",
+            "nodes": [
+              {
+                "name": "analysis_service.py",
+                "detail": "Worker 실행 및 검사 요청 병합",
+                "path": "app/services/analysis_service.py"
+              },
+              {
+                "name": "session_service.py",
+                "detail": "편집 세션 저장 및 복원",
+                "path": "app/services/session_service.py"
+              }
+            ]
+          },
+          {
+            "name": "Engine",
+            "nodes": [
+              {
+                "name": "runner.py · parser.py",
+                "detail": "프로젝트 검사 및 pyslang 연결",
+                "path": "svguard/runner.py"
+              },
+              {
+                "name": "model.py",
+                "detail": "진단 결과 구조",
+                "path": "svguard/model.py"
+              }
+            ]
+          },
+          {
+            "name": "Runtime / OS",
+            "nodes": [
+              {
+                "name": "pyslang · PySide6",
+                "detail": "컴파일 분석 및 GUI 이벤트",
+                "path": ""
+              },
+              {
+                "name": "프로세스 · 파일 시스템",
+                "detail": "검사 실행 · 소스 파일 접근",
+                "path": ""
+              }
+            ]
+          },
+          {
+            "name": "Hardware",
+            "nodes": [
+              {
+                "name": "개발 PC",
+                "detail": "CPU · 메모리 · 저장 장치",
+                "path": ""
+              },
+              {
+                "name": "입출력 장치",
+                "detail": "키보드 · 디스플레이",
+                "path": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationTitle": "실행 환경 및 구성 요소",
+    "architectureTitle": "SW STACK"
   }
 ]
